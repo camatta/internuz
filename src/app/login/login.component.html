@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="wrapper">
+    <h1>Login</h1>
+
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+  
+      <div class="row-form">
+        <label for="email">E-mail</label>
+        <input type="email" name="email" [(ngModel)]="email" id="email" required>
+      </div>
+  
+      <div class="row-form">
+        <label for="password">Senha:</label>
+        <input type="password" name="password" [(ngModel)]="password" id="password" required>
+      </div>
+  
+      <button class="submit-login" type="submit">Entrar</button>
+  
+    </form>
+    <div class="cadastrar-login">
+      <p>Ainda não possui cadastro?</p>
+      <button routerLink="/cadastro">Cadastre-se</button>
+    </div>
+  </div>
+</div>

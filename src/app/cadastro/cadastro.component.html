@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="wrapper">
+    <h1>Cadastro Funcionairuz</h1>
+
+    <form (ngSubmit)="cadastrarUsuario()">
+      <div class="row-form">
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="email" name="email" required>
+      </div>
+      <div class="row-form">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" [(ngModel)]="nome" name="name" required>
+      </div>
+      <div class="row-form">
+        <label for="password">Senha:</label>
+        <input type="password" id="password" [(ngModel)]="senha" name="password" required>
+      </div>
+      <button type="submit" class="submit-cadastro">Cadastrar</button>
+    </form>
+  </div>
+</div>
