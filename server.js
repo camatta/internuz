@@ -7,6 +7,7 @@ app.use(cors());
 const authRoutes = require('./src/app/routes/auth');
 
 const mongoose = require('mongoose');
+const User = require('./src/app/models/User');
 
 const MONGODB_URI = 'mongodb+srv://desenvolvimento:7CSJ5iTVgPxXeA1t@cluster0.wxdwjbm.mongodb.net/internuz'
 // Conexão com banco de dados
@@ -56,7 +57,7 @@ app.post('/api/auth/cadastro', async (req, res) => {
       password
     });
 
-    // Salve o novo usuário no banco de dados
+    // Salvar o novo usuário no banco de dados
 
     await newUser.save();
 

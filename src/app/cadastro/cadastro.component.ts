@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cadastro',
@@ -20,7 +21,7 @@ export class CadastroComponent {
       senha: this.senha
     };
 
-    this.http.post('/api/auth/cadastro', novoUsuario)
+    this.http.post(environment.URL_API + '/api/auth/cadastro', novoUsuario)
       .subscribe(
         (res) => {
           console.log('Usuário cadastrado com sucesso!', res);
