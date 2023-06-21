@@ -18,6 +18,16 @@ const userSchema = new mongoose.Schema ({
     type: String,
     required: true,
   },
+  accessLevel: {
+    type: String,
+    enum: ['Administrador', 'Líder de Equipe', 'Funcionário'],
+    required: false,
+  },
+  team: {
+    type: String,
+    enum: ['Desenvolvimento', 'Design UI/UX', 'Design Publicitário', 'Marketing'],
+    required: false,
+  },
 });
 
 // Criptografar senha do usuário

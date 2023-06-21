@@ -1,0 +1,21 @@
+<h1>Lista de Usuários:</h1>
+
+<div class="wrapper-table">
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Time</th>
+        <th>Função</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.name }}</td>
+        <td>{{ user.team }}</td>
+        <td>{{ user.accessLevel }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+

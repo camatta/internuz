@@ -1,0 +1,38 @@
+<p>Selecione um <span>Funcionairuz</span> para realizar a avaliação de desempenho.</p>
+<select class="form-select" name="select">
+  <option value="" disabled selected>Selecione um Funcionairuz</option>
+  <option *ngFor="let user of users" value="{{ user.name }}">{{ user.name }}</option>
+</select>
+
+<div class="table-avaliacao">
+  <table>
+    <thead>
+      <tr>
+        <th>Competências</th>
+        <th>Requisitos</th>
+        <th>Avaliação</th>
+        <th>Nota</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td>{{ item.competencia }}</td>
+        <td>{{ item.requisito }}</td>
+        <td>
+          <select [(ngModel)]="item.avaliacao" (ngModelChange)="calculateGrade(item)">
+            <option value="Muito Bom">Muito Bom</option>
+            <option value="Bom">Bom</option>
+            <option value="Regular">Regular</option>
+            <option value="Insatisfatório">Insatisfatório</option>
+            <option value="Não Consta">Não Consta</option>
+          </select>
+        </td>
+        <td>{{ item.nota }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="enviar-avaliacao">
+    <button (click)="enviarAvaliacao()">Enviar Avaliação</button>
+  </div>
+   
+</div>

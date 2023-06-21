@@ -1,1 +1,14 @@
-<h1>Bem vindo ao Painel Nairuz</h1>
+<div class="container-fluid" id="dashboard">
+    <div class="row">
+      <div class="col-3">
+        <div class="lateral">
+          <app-menu-lateral></app-menu-lateral>
+        </div>
+      </div>
+      <div class="col-9">
+        <div class="conteudo">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+</div>

@@ -25,27 +25,24 @@ router.post('/cadastro', async (req, res) => {
   }
 });
 
-// Rota de Login
+// Rota de login
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({email});
+    // Verifique se o usuário existe no banco de dados
+    const user = await User.findOne({ email, password });
+
     if (!user) {
-      return res.status(400).json({message: 'E-mail ou senha inválidos'});
+      return res.status(401).json({ message: 'Credenciais inválidas.' });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({message: 'Email ou senha inválidos'});
-    }
-
-    const token = jwt.sign({ userId: user._id}, 'chave-secreta-do-jwt');
-
-    res.json({token});
+    // Autenticação bem-sucedida
+    res.status(200).json({ message: 'Autenticação bem-sucedida.', user });
   } catch (error) {
-    res.status(500).json({message: 'Erro ao realizar login'});
+    console.error(error);
+    res.status(500).json({ message: 'Ocorreu um erro durante a autenticação.' });
   }
-})
+});
 
 module.exports = router;

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <div class="wrapper">
     <h1>Cadastro Funcionairuz</h1>
 
@@ -13,9 +13,13 @@
       </div>
       <div class="row-form">
         <label for="password">Senha:</label>
-        <input type="password" id="password" [(ngModel)]="senha" name="password" required>
+        <input type="password" id="password" [(ngModel)]="password" name="password" required>
       </div>
       <button type="submit" class="submit-cadastro">Cadastrar</button>
     </form>
+    <div class="login-cadastro">
+      <p>Já possui um cadastro?</p>
+      <button routerLink="/">Fazer login</button>
+    </div>
   </div>
 </div>

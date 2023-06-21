@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class CadastroComponent {
   nome: string = '';
   email: string = '';
-  senha: string = '';
+  password: string = '';
 
   constructor(private http: HttpClient) {}
 
@@ -18,7 +18,7 @@ export class CadastroComponent {
     const novoUsuario = {
       name: this.nome,
       email: this.email,
-      senha: this.senha
+      password: this.password
     };
 
     this.http.post(environment.URL_API + '/api/auth/cadastro', novoUsuario)

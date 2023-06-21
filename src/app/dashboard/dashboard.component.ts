@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 @Component({
   selector: 'app-dashboard',

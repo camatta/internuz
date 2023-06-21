@@ -1,4 +1,4 @@
-.container {
+.container-fluid {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,22 +46,23 @@ input {
   cursor: pointer;
 }
 
-.cadastrar-login {
+.login-cadastro {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-.cadastrar-login p {
+.login-cadastro p {
   font-size: 14px;
   color: #fff;
+  margin-bottom: 0;
 }
 
 .wrapper {
   width: 25%;
 }
 
-.cadastrar-login button {
+.login-cadastro button {
   background: unset;
   border: unset;
   text-decoration: underline;

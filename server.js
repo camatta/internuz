@@ -34,7 +34,7 @@ app.listen(port, () => {
 });
 
 // Configuração de roteamento
-app.use('/api/auth', authRoutes);
+// app.use('/api/auth', authRoutes);
 
 // Rota de Cadastro
 app.post('/api/auth/cadastro', async (req, res) => {
@@ -54,7 +54,7 @@ app.post('/api/auth/cadastro', async (req, res) => {
     const newUser = new User({
       name,
       email,
-      password
+      password,
     });
 
     // Salvar o novo usuário no banco de dados
@@ -65,5 +65,48 @@ app.post('/api/auth/cadastro', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Ocorreu um erro ao cadastrar o usuário.' });
+  }
+});
+
+// Rota de Login
+app.post('/api/auth/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Verifique se o usuário existe no banco de dados
+    const existingUser = await User.findOne({ email });
+
+    if (!existingUser) {
+      return res.status(400).json({ message: 'Usuário não encontrado.' });
+    }
+
+    // Verifique se a senha está correta
+    const isPasswordValid = await bcrypt.compare(password, existingUser.password);
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: 'Senha incorreta.' });
+    }
+
+    // Autenticação bem-sucedida
+
+    res.status(200).json({ message: 'Login bem-sucedido.' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Ocorreu um erro durante o login.' });
+  }
+});
+
+
+// Rota para obter todos os usuários
+app.get('/api/users', async (req, res) => {
+  try {
+    // Obtenha todos os usuários do banco de dados
+    const users = await User.find();
+
+    // Retorne a lista de usuários como resposta
+    res.status(200).json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Ocorreu um erro ao obter os usuários.' });
   }
 });
