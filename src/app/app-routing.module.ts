@@ -5,13 +5,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { UsuariosComponent } from './dashboard/usuarios/usuarios.component';
 import { AvaliacoesComponent } from './dashboard/avaliacoes/avaliacoes.component';
+import { PerfilComponent } from './dashboard/perfil/perfil.component';
 
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, children: [
     { path: 'usuarios', component: UsuariosComponent },
-    { path: 'avaliacoes', component: AvaliacoesComponent }
+    { path: 'avaliacoes', component: AvaliacoesComponent },
+    { path: 'perfil', component: PerfilComponent }
   ]},
   { path: 'cadastro', component: CadastroComponent },
 ];

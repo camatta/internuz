@@ -1,11 +1,11 @@
 <p>Selecione um <span>Funcionairuz</span> para realizar a avaliação de desempenho.</p>
 <select class="form-select" name="select">
-  <option value="" disabled selected>Selecione um Funcionairuz</option>
+  <option value="" disabled selected>Selecione um Funcionário</option>
   <option *ngFor="let user of users" value="{{ user.name }}">{{ user.name }}</option>
 </select>
 
 <div class="table-avaliacao">
-  <table>
+  <table class="tabela-competencias">
     <thead>
       <tr>
         <th>Competências</th>
@@ -16,21 +16,111 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of items">
-        <td>{{ item.competencia }}</td>
-        <td>{{ item.requisito }}</td>
-        <td>
-          <select [(ngModel)]="item.avaliacao" (ngModelChange)="calculateGrade(item)">
-            <option value="Muito Bom">Muito Bom</option>
-            <option value="Bom">Bom</option>
-            <option value="Regular">Regular</option>
-            <option value="Insatisfatório">Insatisfatório</option>
-            <option value="Não Consta">Não Consta</option>
-          </select>
-        </td>
-        <td>{{ item.nota }}</td>
+        <ng-container *ngIf="item.tipo === 'competencia'">
+          <td class="avaliacao-nome">{{ item.nome }}</td>
+          <td>{{ item.requisito }}</td>
+          <td>
+            <select [(ngModel)]="item.avaliacao" (ngModelChange)="calculateGrade(item)">
+              <option value="Muito Bom">Muito Bom</option>
+              <option value="Bom">Bom</option>
+              <option value="Regular">Regular</option>
+              <option value="Insatisfatório">Insatisfatório</option>
+              <option value="Não Consta">Não Consta</option>
+            </select>
+          </td>
+          <td>{{ item.nota }}</td>
+        </ng-container>
       </tr>
     </tbody>
   </table>
+
+  <table class="tabela-qualificacoes">
+    <thead>
+      <tr>
+        <th>Qualificações</th>
+        <th>Requisitos</th>
+        <th>Avaliação</th>
+        <th>Nota</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <ng-container *ngIf="item.tipo === 'qualificacao'">
+          <td class="avaliacao-nome">{{ item.nome }}</td>
+          <td>{{ item.requisito }}</td>
+          <td>
+            <select [(ngModel)]="item.avaliacao" (ngModelChange)="calculateGrade(item)">
+              <option value="Muito Bom">Muito Bom</option>
+              <option value="Bom">Bom</option>
+              <option value="Regular">Regular</option>
+              <option value="Insatisfatório">Insatisfatório</option>
+              <option value="Não Consta">Não Consta</option>
+            </select>
+          </td>
+          <td>{{ item.nota }}</td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="tabela-ferramentas">
+    <thead>
+      <tr>
+        <th>Ferramentas</th>
+        <th>Requisitos</th>
+        <th>Avaliação</th>
+        <th>Nota</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <ng-container *ngIf="item.tipo === 'ferramenta'">
+          <td class="avaliacao-nome">{{ item.nome }}</td>
+          <td>{{ item.requisito }}</td>
+          <td>
+            <select [(ngModel)]="item.avaliacao" (ngModelChange)="calculateGrade(item)">
+              <option value="Muito Bom">Muito Bom</option>
+              <option value="Bom">Bom</option>
+              <option value="Regular">Regular</option>
+              <option value="Insatisfatório">Insatisfatório</option>
+              <option value="Não Consta">Não Consta</option>
+            </select>
+          </td>
+          <td>{{ item.nota }}</td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="tabela-comportamental">
+    <thead>
+      <tr>
+        <th>Comportamental</th>
+        <th>Requisitos</th>
+        <th>Avaliação</th>
+        <th>Nota</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <ng-container *ngIf="item.tipo === 'comportamental'">
+          <td class="avaliacao-nome">{{ item.nome }}</td>
+          <td>{{ item.requisito }}</td>
+          <td>
+            <select [(ngModel)]="item.avaliacao" (ngModelChange)="calculateGrade(item)">
+              <option value="Muito Bom">Muito Bom</option>
+              <option value="Bom">Bom</option>
+              <option value="Regular">Regular</option>
+              <option value="Insatisfatório">Insatisfatório</option>
+              <option value="Não Consta">Não Consta</option>
+            </select>
+          </td>
+          <td>{{ item.nota }}</td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+
   <div class="enviar-avaliacao">
     <button (click)="enviarAvaliacao()">Enviar Avaliação</button>
   </div>

@@ -1,5 +1,10 @@
 <div class="container-fluid">
   <div class="wrapper">
+    <div class="sucesso-return">
+      <div *ngIf="mensagemAviso" class="alert alert-success">
+        {{ mensagemAviso }}
+      </div>
+    </div>
     <h1>Login</h1>
 
     <form (ngSubmit)="login()" #loginForm="ngForm">
@@ -20,6 +25,11 @@
     <div class="cadastrar-login">
       <p>Ainda não possui cadastro?</p>
       <button routerLink="/cadastro">Cadastre-se</button>
+    </div>
+    <div class="erro-return">
+      <div class="error-message" *ngIf="errorMessage">
+        <p>{{ errorMessage }}</p>
+      </div>
     </div>
   </div>
 </div>

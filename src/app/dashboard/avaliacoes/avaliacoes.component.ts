@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-avaliacoes',
@@ -10,10 +12,14 @@ import { UserService } from '../../services/user.service';
 export class AvaliacoesComponent implements OnInit {
   users: any[] = [];
 
-  constructor(private userService: UserService) {}
+  selectedUser: string = '';
+  selectedUserNote: string = '';
+
+  constructor(private userService: UserService, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.getUsers();
+    this.calculateMaxPoints();
   }
 
   getUsers(): void {
@@ -29,44 +35,86 @@ export class AvaliacoesComponent implements OnInit {
 
 
   items: any[] = [
-    { competencia: 'Atualização', requisito: 'Obrigatório' },
-    { competencia: 'Comunicação verbal', requisito: 'Desejado' },
-    { competencia: 'Disponibilidade', requisito: 'Diferencial' },
-    { competencia: 'Gestão de tarefas', requisito: 'Diferencial' },
-    { competencia: 'Ser prestativo', requisito: 'Diferencial' },
-    { competencia: 'Flexibilidade', requisito: 'Diferencial' },
-    { competencia: 'Saber ouvir', requisito: 'Desejado' },
-    { competencia: 'Comprometimento', requisito: 'Obrigatório' },
-    { competencia: 'Trabalho em equipe', requisito: 'Diferencial' },
-    { competencia: 'Persuasão', requisito: 'Diferencial' },
-    { competencia: 'Discrição', requisito: 'Diferencial' },
-    { competencia: 'Criatividade', requisito: 'Diferencial' },
-    { competencia: 'Liderança', requisito: 'Diferencial' },
-    { competencia: 'Autonomia', requisito: 'Diferencial' },
-    { competencia: 'Controle emocional', requisito: 'Diferencial' },
-    { competencia: 'Visão holística', requisito: 'Diferencial' },
-    { competencia: 'Postura', requisito: 'Diferencial' },
-    { competencia: 'Relação interpessoal', requisito: 'Diferencial' },
-    { competencia: 'Análise de métricas', requisito: 'Diferencial' },
-    { competencia: 'Análise de dados', requisito: 'Diferencial' },
-    { competencia: 'Técnica de execução', requisito: 'Diferencial' },
-    { competencia: 'Interpretação de demanda', requisito: 'Diferencial' },
-    { competencia: 'Organização', requisito: 'Diferencial' },
-    { competencia: 'Gestão de pessoas', requisito: 'Diferencial' },
-    { competencia: 'Usabilidade de ferramentas', requisito: 'Diferencial' },
-    { competencia: 'Planejamento estratégico', requisito: 'Diferencial' },
-    { competencia: 'Análise de riscos', requisito: 'Diferencial' },
-    { competencia: 'Formação e desenvolvimento', requisito: 'Diferencial' },
-    { competencia: 'Análise de performance', requisito: 'Diferencial' },
-    { competencia: 'Relacionamento com cliente', requisito: 'Diferencial' },
-    { competencia: 'Comunicação escrita', requisito: 'Diferencial' },
-    { competencia: 'Tomada de decisão', requisito: 'Diferencial' },
-    { competencia: 'Abordagem', requisito: 'Diferencial' },
-    { competencia: 'Resolução de problemas', requisito: 'Diferencial' },
-    { competencia: 'Padronização', requisito: 'Diferencial' },
-    { competencia: 'Pesquisa', requisito: 'Diferencial' }
-  
+    { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório' },
+    { tipo: 'competencia', nome: 'Comunicação verbal', requisito: 'Desejado' },
+    { tipo: 'competencia', nome: 'Disponibilidade', requisito: 'Obrigatório' },
+    { tipo: 'competencia', nome: 'Gestão de tarefas', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Ser prestativo', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Flexibilidade', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Saber ouvir', requisito: 'Desejado' },
+    { tipo: 'competencia', nome: 'Comprometimento', requisito: 'Obrigatório' },
+    { tipo: 'competencia', nome: 'Trabalho em equipe', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Persuasão', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Discrição', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Criatividade', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Liderança', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Autonomia', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Controle emocional', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Visão holística', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Postura', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Relação interpessoal', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Análise de métricas', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Análise de dados', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Técnica de execução', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Interpretação de demanda', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Organização', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Gestão de pessoas', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Usabilidade de ferramentas', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Planejamento estratégico', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Análise de riscos', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Formação e desenvolvimento', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Análise de performance', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Relacionamento com cliente', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Comunicação escrita', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Tomada de decisão', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Abordagem', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Resolução de problemas', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Padronização', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Pesquisa', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Inovação', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Confiabilidade', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Técnicas de redação', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Produção de texto', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Domínio da gramática', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Concordância (gramática)', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Negociação', requisito: 'Diferencial' },
+    { tipo: 'competencia', nome: 'Ética de trabalho', requisito: 'Diferencial' },
+    { tipo: 'qualificacao', nome: 'Graduação', requisito: 'Diferencial' },
+    { tipo: 'qualificacao', nome: 'Pós-graduação', requisito: 'Diferencial' },
+    { tipo: 'qualificacao', nome: 'Especialização', requisito: 'Diferencial' },
+    { tipo: 'qualificacao', nome: 'Treinamentos de ferramentas', requisito: 'Diferencial' },
+    { tipo: 'qualificacao', nome: 'Cursos de ferramentas', requisito: 'Diferencial' },
+    { tipo: 'qualificacao', nome: 'Certificações de ferramentas', requisito: 'Diferencial' },
+    { tipo: 'qualificacao', nome: 'Certificações de área de atuação', requisito: 'Diferencial' },
+    { tipo: 'qualificacao', nome: 'Cursos/treinamentos da área de atuação', requisito: 'Diferencial' },
+    { tipo: 'qualificacao', nome: 'Cursos / treinamentos sobre gestão', requisito: 'Diferencial' },
+    { tipo: 'qualificacao', nome: 'Atualização de cursos / treinamentos', requisito: 'Diferencial' },
+    { tipo: 'qualificacao', nome: 'Cursos/treinamentos sobre postura profissional', requisito: 'Diferencial' },
+    { tipo: 'qualificacao', nome: 'Participação em feiras', requisito: 'Diferencial' },
+    { tipo: 'qualificacao', nome: 'Participação em eventos', requisito: 'Diferencial' },
+    { tipo: 'qualificacao', nome: 'Participação em workshops', requisito: 'Diferencial' },
+    { tipo: 'ferramenta', nome: 'Windows', requisito: 'Diferencial' },
+    { tipo: 'ferramenta', nome: 'Microsoft Office (pacote)', requisito: 'Diferencial' },
+    { tipo: 'ferramenta', nome: 'Teams', requisito: 'Diferencial' },
+    { tipo: 'ferramenta', nome: 'ClickUp', requisito: 'Diferencial' },
+    { tipo: 'ferramenta', nome: 'Mywork', requisito: 'Diferencial' },
+    { tipo: 'ferramenta', nome: 'Google Analytics', requisito: 'Diferencial' },
+    { tipo: 'ferramenta', nome: 'WordPress', requisito: 'Diferencial' },
+    { tipo: 'ferramenta', nome: 'Magento', requisito: 'Diferencial' },
+    { tipo: 'ferramenta', nome: 'Plataforma Magento', requisito: 'Diferencial' },
+    { tipo: 'ferramenta', nome: 'Plataforma Linx', requisito: 'Diferencial' },
+    { tipo: 'ferramenta', nome: 'Plataforma Vtex', requisito: 'Diferencial' },
+    { tipo: 'ferramenta', nome: 'Yoast', requisito: 'Diferencial' },
+    { tipo: 'ferramenta', nome: 'SEMRush', requisito: 'Diferencial' },
+    { tipo: 'ferramenta', nome: 'Moz', requisito: 'Diferencial' },
+    { tipo: 'ferramenta', nome: 'Campaign URL Builder', requisito: 'Diferencial' },
+    { tipo: 'ferramenta', nome: 'Envato Elements', requisito: 'Diferencial' },
+    { tipo: 'comportamental', nome: 'Absenteísmo', requisito: 'Diferencial' },
+    { tipo: 'comportamental', nome: 'Comprometimento', requisito: 'Diferencial' },
+    { tipo: 'comportamental', nome: 'Inovação', requisito: 'Diferencial' },
   ];
+
+  
 
   calculateGrade(item: any) {
     switch (item.requisito) {
@@ -130,6 +178,27 @@ export class AvaliacoesComponent implements OnInit {
     }
   }
 
+  calculateMaxPoints() {
+    let maxPoints = 0;
+  
+    for (const item of this.items) {
+      switch (item.requisito) {
+        case 'Obrigatório':
+          maxPoints += 10;
+          break;
+        case 'Desejado':
+          maxPoints += 0.75;
+          break;
+        case 'Diferencial':
+          maxPoints += 1;
+          break;
+        default:
+          break;
+      }
+    }
+    return maxPoints;
+  }
+
   notaSomada: number = 0;
 
   enviarAvaliacao() {
@@ -145,10 +214,14 @@ export class AvaliacoesComponent implements OnInit {
     }
   
     if (notasPreenchidas) {
-      alert('Nota somada: ' + this.notaSomada);
+      const maxPoints = this.calculateMaxPoints();
+      const media = (this.notaSomada / maxPoints) * 10;
+      const mensagem = `Sua nota foi ${this.notaSomada.toFixed(2)}, e sua média foi ${media.toFixed(2)}.`;
+      alert(mensagem);
     } else {
       alert('Preencha todas as notas antes de enviar a avaliação.');
     }
   }
-  
+
+ 
 }

@@ -8,7 +8,7 @@
   border-radius: 5px;
   border: unset;
   padding: 10px;
-  width: 70%;
+  width: 80%;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   font-weight: 600;
 }
@@ -18,7 +18,7 @@
 }
 
 .table-avaliacao {
-  width: 70%;
+  width: 80%;
   margin-top: 2rem;
   background-color: #ffffff30;
   color: #080b2c;
@@ -70,4 +70,14 @@ span {
   background-color: #080b2c;
   font-weight: 500;
   border-radius: 5px;
+}
+
+.tabela-qualificacoes,
+.tabela-ferramentas,
+.tabela-comportamental  {
+  margin-top: 4rem;
+}
+
+.avaliacao-nome {
+  width: 50%;
 }

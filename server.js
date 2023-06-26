@@ -1,10 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const app = express(); 
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const authMiddleware = require('./src/app/middleware/auth');
 
 app.use(cors());
-
-const authRoutes = require('./src/app/routes/auth');
 
 const mongoose = require('mongoose');
 const User = require('./src/app/models/User');
@@ -32,9 +33,6 @@ const port = 3000;
 app.listen(port, () => {
   console.log(`Servidor express iniciado na porta ${port}`);
 });
-
-// Configuração de roteamento
-// app.use('/api/auth', authRoutes);
 
 // Rota de Cadastro
 app.post('/api/auth/cadastro', async (req, res) => {
@@ -87,9 +85,13 @@ app.post('/api/auth/login', async (req, res) => {
       return res.status(401).json({ message: 'Senha incorreta.' });
     }
 
-    // Autenticação bem-sucedida
+    // Gerar token
+    const token = jwt.sign({ userId: existingUser._id }, 'ef1c8080fd1db32bf420fac3bc22bc567b6c25d41d17eef10e3e4f54becc31aa');
 
-    res.status(200).json({ message: 'Login bem-sucedido.' });
+    // Autenticação bem-sucedida
+    const { name } = existingUser;
+
+    res.status(200).json({ message: 'Login bem-sucedido.', user: { name }, token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Ocorreu um erro durante o login.' });
@@ -110,3 +112,28 @@ app.get('/api/users', async (req, res) => {
     res.status(500).json({ message: 'Ocorreu um erro ao obter os usuários.' });
   }
 });
+
+// Rota para obter informações do usuário logado
+app.get('/api/users/me', authMiddleware, async (req, res) => {
+  try {
+
+    // Verifique se o usuário está autenticado
+    if (!req.user) {
+      return res.status(401).json({ message: 'Usuário não autenticado.' });
+    }
+
+    // Obtenha as informações do usuário logado
+    const userInfo = {
+      name: req.user.name,
+      email: req.user.email,
+      time: req.user.team,
+      funcao: req.user.accessLevel
+    };
+
+    res.status(200).json(userInfo);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Ocorreu um erro ao obter as informações do usuário.' });
+  }
+});
+

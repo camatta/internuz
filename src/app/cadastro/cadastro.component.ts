@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -12,7 +13,7 @@ export class CadastroComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   cadastrarUsuario() {
     const novoUsuario = {
@@ -25,7 +26,8 @@ export class CadastroComponent {
       .subscribe(
         (res) => {
           console.log('Usuário cadastrado com sucesso!', res);
-          // Redirecionar para a página de login ou fazer alguma ação adicional
+          const mensagem = 'Cadastro realizado com sucesso, aguarde a aprovação para realizar o login.';
+          this.router.navigate(['/'], { queryParams: { mensagem } });
         },
         (error) => {
           console.error('Erro ao cadastrar usuário', error);

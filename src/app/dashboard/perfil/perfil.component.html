@@ -1,0 +1,9 @@
+<div class="perfil">
+  <h2>Perfil do Usuário</h2>
+  <div *ngIf="userInfo">
+    <p>Nome: {{ userInfo.name }}</p>
+    <p>Email: {{ userInfo.email }}</p>
+    <p>Time: {{ userInfo.team }}</p>
+    <p>Função: {{ userInfo.role }}</p>
+  </div>
+</div>

@@ -1,5 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+  color: #fff;
+}
+
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+h1 {
+  font-weight: 700 !important;
+}
+
+span {
+  font-weight: 600 !important;
 }

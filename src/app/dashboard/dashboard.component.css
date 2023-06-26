@@ -13,6 +13,12 @@ h1 {
   color: #fff;
 }
 
+.lateral {
+  height: 100vh;
+  padding: 2rem;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
 .conteudo {
   padding: 2rem;
   height: 100vh;
@@ -22,4 +28,10 @@ h1 {
 /*SCROLL */
 *::-webkit-scrollbar {
   width: 0px;
+}
+
+.saudacao p {
+  color: #fff;
+  padding-left: 6px;
+  font-size: 20px;
 }

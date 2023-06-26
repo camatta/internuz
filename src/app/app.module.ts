@@ -12,6 +12,8 @@ import { LoginComponent } from './login/login.component';
 import { MenuLateralComponent } from './dashboard/menu-lateral/menu-lateral.component';
 import { UsuariosComponent } from './dashboard/usuarios/usuarios.component';
 import { AvaliacoesComponent } from './dashboard/avaliacoes/avaliacoes.component';
+import { PerfilComponent } from './dashboard/perfil/perfil.component';
+import { HistoricoComponent } from './dashboard/historico/historico.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { AvaliacoesComponent } from './dashboard/avaliacoes/avaliacoes.component
     LoginComponent,
     MenuLateralComponent,
     UsuariosComponent,
-    AvaliacoesComponent
+    AvaliacoesComponent,
+    PerfilComponent,
+    HistoricoComponent
   ],
   imports: [
     BrowserModule,
