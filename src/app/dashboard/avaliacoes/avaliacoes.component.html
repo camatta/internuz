@@ -1,7 +1,7 @@
 <p>Selecione um <span>Funcionairuz</span> para realizar a avaliação de desempenho.</p>
 <select class="form-select" name="select" id="usuario-avaliado" (change)="atualizarUsuarioSelecionado($event)">
   <option value="" disabled selected>Selecione um Funcionário</option>
-  <option *ngFor="let user of users" [value]="user.name">{{ user.name }}</option>
+  <option *ngFor="let user of users" [value]="user.name" [attr.data-setor]="user.setor">{{ user.name }}</option>
 </select>
 
 <div class="table-avaliacao">
