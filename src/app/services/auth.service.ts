@@ -40,6 +40,29 @@ export class AuthService {
 
   clearUserData(): void {
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     // Outros itens armazenados relacionados ao usuário, se houver
   }
+
+  getAccessLevel(): string {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user).accessLevel : '';
+  }
+
+  getSetor(): string {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user).setor : '';
+  }
+
+  hasPermission(): boolean {
+    const user = this.getUser();
+    return user?.accessLevel === 'Administrador' || user?.accessLevel === 'Líder de Equipe';
+  }
+
+  isLoggedIn(): boolean {
+    const token = this.getToken();
+    // Verifica se o token está presente e não expirou
+    return !!token;
+  }
+  
 }

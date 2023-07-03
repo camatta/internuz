@@ -4,6 +4,7 @@ const app = express();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const authMiddleware = require('./src/app/middleware/auth');
+const bodyParser = require('body-parser');
 
 app.use(cors());
 
@@ -28,6 +29,52 @@ mongoose.connect(MONGODB_URI, {
 // Configuração do midddleware para permitir o uso de JSON nas requisições
 app.use(express.json());
 
+// Middleware para analisar o corpo das solicitações como JSON
+app.use(bodyParser.json());
+
+// Importe o modelo de Avaliacao
+const Avaliacao = require('./src/app/models/Avaliacao');
+
+// Rota para salvar a avaliação
+app.post('/api/avaliacao', async (req, res) => {
+  const avaliacaoData = req.body; // Dados da avaliação enviados pelo Angular
+
+  console.log('Notas recebidas:', avaliacaoData.notas);
+
+  // Cria uma nova instância do modelo Avaliacao com os dados recebidos
+  const novaAvaliacao = new Avaliacao({
+    funcionario: avaliacaoData.usuario,
+    mediaFinal: avaliacaoData.mediaFinal,
+    performance: avaliacaoData.performance,
+    dataAvaliacao: avaliacaoData.dataAvaliacao,
+    avaliador: avaliacaoData.avaliador,
+    notas: avaliacaoData.notas // Adiciona as notas à avaliação
+  });
+
+  try {
+    // Salva a nova avaliação no banco de dados
+    await novaAvaliacao.save();
+    res.status(200).json({ message: 'Avaliação salva com sucesso!' });
+  } catch (error) {
+    console.error('Erro ao salvar a avaliação:', error);
+    res.status(500).json({ message: 'Erro ao salvar a avaliação' });
+  }
+});
+
+app.get('/api/avaliacoes', async (req, res) => {
+  const nomeUsuario = req.query.nomeUsuario; // Obtém o nome de usuário dos parâmetros da consulta
+
+  try {
+    // Consulta as avaliações filtrando pelo nome do usuário
+    const avaliacoes = await Avaliacao.find({ funcionario: nomeUsuario });
+
+    res.status(200).json(avaliacoes);
+  } catch (error) {
+    console.error('Erro ao obter as avaliações:', error);
+    res.status(500).json({ message: 'Erro ao obter as avaliações' });
+  }
+});
+
 // Inicialização do servidor
 const port = 3000;
 app.listen(port, () => {
@@ -37,7 +84,7 @@ app.listen(port, () => {
 // Rota de Cadastro
 app.post('/api/auth/cadastro', async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, team, accessLevel, setor } = req.body;
 
     // Verifique se o usuário já existe no banco de dados
 
@@ -53,6 +100,9 @@ app.post('/api/auth/cadastro', async (req, res) => {
       name,
       email,
       password,
+      team,
+      accessLevel,
+      setor
     });
 
     // Salvar o novo usuário no banco de dados
@@ -89,9 +139,9 @@ app.post('/api/auth/login', async (req, res) => {
     const token = jwt.sign({ userId: existingUser._id }, 'ef1c8080fd1db32bf420fac3bc22bc567b6c25d41d17eef10e3e4f54becc31aa');
 
     // Autenticação bem-sucedida
-    const { name } = existingUser;
+    const { name, team, accessLevel, setor } = existingUser;
 
-    res.status(200).json({ message: 'Login bem-sucedido.', user: { name }, token });
+    res.status(200).json({ message: 'Login bem-sucedido.', user: { name, email, team, accessLevel, setor }, token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Ocorreu um erro durante o login.' });
@@ -127,7 +177,8 @@ app.get('/api/users/me', authMiddleware, async (req, res) => {
       name: req.user.name,
       email: req.user.email,
       time: req.user.team,
-      funcao: req.user.accessLevel
+      funcao: req.user.accessLevel,
+      setor: req.user.setor
     };
 
     res.status(200).json(userInfo);

@@ -7,7 +7,7 @@ p, li, h1 {
 }
 
 .wrapper-table {
-  width: 70%;
+  width: 90%;
   margin-top: 2rem;
   background-color: #ffffff30;
   color: #fff;
@@ -31,4 +31,23 @@ tbody tr:last-child {
 
 td {
   height: 50px;
+}
+
+select {
+  background-color: #40ca9438;
+  color: #fff;
+  border-radius: 5px;
+  border: unset;
+  padding: 10px;
+}
+
+button {
+  margin-top: 1rem;
+  padding: 10px;
+  border: unset;
+  background-color: #080b2c;
+  font-weight: 500;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 1rem
 }

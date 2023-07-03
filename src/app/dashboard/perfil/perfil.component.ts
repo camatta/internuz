@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-perfil',
@@ -9,20 +9,14 @@ import { UserService } from 'src/app/services/user.service';
 export class PerfilComponent implements OnInit {
   userInfo: any; // Variável para armazenar as informações do usuário
 
-  constructor(private userService: UserService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.getUserInfo();
   }
 
   getUserInfo(): void {
-    this.userService.getUserInfo().subscribe(
-      (userInfo: any) => {
-        this.userInfo = userInfo;
-      },
-      (error: any) => {
-        console.error('Erro ao obter informações do usuário', error);
-      }
-    );
+    this.userInfo = this.authService.getUser();
+    console.log(this.userInfo);
   }
 }

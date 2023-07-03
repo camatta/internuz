@@ -74,10 +74,42 @@ span {
 
 .tabela-qualificacoes,
 .tabela-ferramentas,
-.tabela-comportamental  {
+.tabela-comportamental,
+.tabela-individual,
+.tabela-time,
+.tabela-empresa  {
   margin-top: 4rem;
 }
 
 .avaliacao-nome {
   width: 50%;
+}
+
+.text-info {
+  margin-top: 2rem;
+}
+
+.text-info p {
+  font-weight: 600;
+}
+
+.lista-criterios {
+  list-style-type: decimal;
+}
+
+.lista-criterios > li {
+  margin-bottom: 30px;
+}
+
+.lista-criterios ul {
+  list-style-type: disc;
+}
+
+.lista-criterios ul > li {
+  margin-bottom: 20px;
+}
+
+.hidden {
+  opacity: 0;
+  width: 22%;
 }

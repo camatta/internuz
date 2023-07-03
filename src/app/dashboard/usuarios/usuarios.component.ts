@@ -11,6 +11,18 @@ import { UserService } from '../../services/user.service';
 export class UsuariosComponent implements OnInit {
   users: any[] = [];
 
+  userSectorOptions: { [key: string]: string[] } = {};
+
+  teamOptions: string[] = ['Tecnologia', 'Marketing', 'Administrativo', 'Comercial', 'Customer Success'];
+
+  sectorOptions: { [key: string]: string[] } = {
+    Tecnologia: ['Design UX/UI', 'Desenvolvimento'],
+    Marketing: ['Design Publicitário', 'Inbound Marketing', 'Mídias Pagas', 'Redação', 'SEO'],
+    Administrativo: ['Administrativo', 'Financeiro', 'Recursos Humanos'],
+    Comercial: ['Vendas'],
+    'Customer Success': ['CS']
+  };
+
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
@@ -22,5 +34,9 @@ export class UsuariosComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+
+  onTeamChange(user: any) {
+    user.userSectorOptions = this.sectorOptions[user.team];
   }
 }

@@ -21,7 +21,7 @@ label {
   margin-bottom: 5px;
 }
 
-input {
+input, select, option {
   border: unset;
   background-color: #fff;
   border-radius: 5px;

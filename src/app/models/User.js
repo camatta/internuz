@@ -25,9 +25,13 @@ const userSchema = new mongoose.Schema ({
   },
   team: {
     type: String,
-    enum: ['Desenvolvimento', 'Design UI/UX', 'Design Publicitário', 'Marketing'],
-    required: false,
+    enum: ['Tecnologia', 'Marketing', 'Administrativo','Customer Success','Comercial'],
+    required: true,
   },
+  setor: {
+    type: String,
+    required: true,
+  }
 });
 
 // Criptografar senha do usuário

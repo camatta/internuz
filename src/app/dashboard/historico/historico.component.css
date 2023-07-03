@@ -1,0 +1,48 @@
+.form-select {
+  background-color: #ffffff30;
+  color: #fff;
+  border-radius: 5px;
+  border: unset;
+  padding: 10px;
+  width: 80%;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.form-select option {
+  color: #080b2c;
+}
+
+h1 {
+  margin-bottom: 1rem;
+}
+
+button {
+  margin-top: 1rem;
+  padding: 10px;
+  border: unset;
+  background-color: #080b2c;
+  font-weight: 500;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-bottom: 1rem;
+}
+
+.performance-prata {
+  background-color: #e1e1e1c7;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.performance-ouro {
+  background-color: #fdfc36c7;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.performance-diamante {
+  background-color: #96f6eec7;
+  padding: 10px;
+  border-radius: 10px;
+}

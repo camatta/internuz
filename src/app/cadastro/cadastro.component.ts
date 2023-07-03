@@ -12,6 +12,7 @@ export class CadastroComponent {
   nome: string = '';
   email: string = '';
   password: string = '';
+  team: string = '';
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -19,7 +20,10 @@ export class CadastroComponent {
     const novoUsuario = {
       name: this.nome,
       email: this.email,
-      password: this.password
+      password: this.password,
+      team: this.team,
+      accessLevel: 'Funcionário', // Definindo o valor padrão "Funcionário" para accessLevel
+      setor: 'Indefinido' // Setor padrão
     };
 
     this.http.post(environment.URL_API + '/api/auth/cadastro', novoUsuario)

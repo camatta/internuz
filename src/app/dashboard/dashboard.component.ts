@@ -3,6 +3,7 @@ import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,9 +14,13 @@ import { AuthService } from 'src/app/services/auth.service';
 export class DashboardComponent implements OnInit {
   userName: string = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.userName = this.authService.getUserName();
+  }
+
+  isHomePage(): boolean {
+    return this.router.url === '/dashboard';
   }
 }

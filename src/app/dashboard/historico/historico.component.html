@@ -1,1 +1,28 @@
-<p>historico works!</p>
+<h1>Histórico das Avaliações</h1>
+
+<div *ngIf="isAuthorized">
+  <select class="form-select" name="selectUsuario" id="select-usuario" #usuarioSelect (change)="getHistoricoAvaliacoes(usuarioSelect.value)">
+    <option disabled selected value="">Selecione um Funcionário</option>
+    <option *ngFor="let user of users" [value]="user.name">{{ user.name }}</option>
+  </select>
+</div>
+
+<div *ngFor="let avaliacao of historicoAvaliacoes">
+  <p>Data: {{ avaliacao.dataAvaliacao }}</p>
+  <p>Média Final: {{ avaliacao.mediaFinal }}</p>
+  <p>
+    <span class="performance-prata" *ngIf="avaliacao.mediaFinal <= 7">Performance: Prata</span>
+    <span class="performance-ouro" *ngIf="avaliacao.mediaFinal > 7 && avaliacao.mediaFinal <= 9">Performance: Ouro</span>
+    <span class="performance-diamante" *ngIf="avaliacao.mediaFinal > 9">Performance: Diamante</span>
+  </p>
+  <p>Avaliado por: {{ avaliacao.avaliador }}</p>
+  <div>
+    <ul>
+      <li *ngFor="let item of avaliacao.itens">
+        {{ item.nome }}: {{ item.nota }}
+      </li>
+    </ul>
+    <button (click)="downloadRelatorio()">Baixar Relatório</button>
+  </div>
+  <hr>
+</div>

@@ -10,6 +10,9 @@
       </div>
       <div class="col-9">
         <div class="conteudo">
+          <div class="conteudo-home" *ngIf="isHomePage()">
+            <h1>Bem vindo ao painel interno da Nairuz</h1>
+          </div>
           <router-outlet></router-outlet>
         </div>
       </div>
