@@ -12,14 +12,15 @@ const mongoose = require('mongoose');
 const User = require('./src/app/models/User');
 
 const MONGODB_URI = 'mongodb+srv://desenvolvimento:7CSJ5iTVgPxXeA1t@cluster0.wxdwjbm.mongodb.net/internuz'
+
+const path = require('path');
+
 // Conexão com banco de dados
 
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-})
-
-  .then(() => {
+}).then(() => {
     console.log('Conectado ao banco MongoDB');
   })
   .catch((error) => {
@@ -73,12 +74,6 @@ app.get('/api/avaliacoes', async (req, res) => {
     console.error('Erro ao obter as avaliações:', error);
     res.status(500).json({ message: 'Erro ao obter as avaliações' });
   }
-});
-
-// Inicialização do servidor
-const port = 3000;
-app.listen(port, () => {
-  console.log(`Servidor express iniciado na porta ${port}`);
 });
 
 // Rota de Cadastro
@@ -188,3 +183,18 @@ app.get('/api/users/me', authMiddleware, async (req, res) => {
   }
 });
 
+const distFolder = path.join(process.cwd(), '/dist/nairuz');
+
+app.get('*.*', express.static(distFolder, {
+  maxAge: '1y'
+}));
+
+app.use("*", function(req, resp) {
+  resp.sendFile(__dirname + '/dist/nairuz/index.html');
+});
+
+// Inicialização do servidor
+const port = process.env['PORT'] || 3000;
+app.listen(port, () => {
+  console.log(`Servidor express iniciado na porta ${port}`);
+});
