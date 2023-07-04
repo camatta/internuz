@@ -46,3 +46,8 @@ button {
   padding: 10px;
   border-radius: 10px;
 }
+
+.nota-final {
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}

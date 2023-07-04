@@ -76,57 +76,59 @@ export class HistoricoComponent implements OnInit {
     }
   }
 
-  downloadRelatorio() {
-    // Cria uma instância do jsPDF
+
+  downloadRelatorio(avaliacao: any) {
+    // Crie uma nova instância do jsPDF
     const doc = new jsPDF();
   
-    // Posição inicial para exibir as informações
-    let y = 10;
-  
-    // Funcionário
-    doc.setFontSize(15);
-    doc.text('Funcionário: ' + this.nomeUsuario, 10, y);
 
-    y += 10;
+    // Definir o tamanho da fonte menor para o conteúdo
+    const fontSizeMenor = 12;
 
-    // Avaliador
-    doc.setFontSize(15);
-    doc.text('Funcionário: ' + this.nomeUsuario, 10, y);
-  
-    y += 10;
-
-    // Data
-    doc.setFontSize(15);
-    doc.text('Data da Avaliação: ' + this.nomeUsuario, 10, y);
-  
-    y += 10;
-  
-    // Notas
-    doc.setFontSize(12);
-    doc.text('Notas:', 10, y);
-  
-    y += 10;
-  
-    // Percorre o histórico de avaliações
-    this.historicoAvaliacoes.forEach((avaliacao: any) => {
-      avaliacao.notas.forEach((nota: any, index: number) => {
-        // Verifica se há espaço suficiente na página atual para exibir a próxima linha
-        if (y > doc.internal.pageSize.height - 10) {
-          doc.addPage(); // Adiciona uma nova página
-          y = 10; // Reseta a posição vertical
-        }
-        doc.setFontSize(10);
-        doc.text(`${nota.nome}: ${nota.nota.toString()}`, 10, y);
-        y += 10; // Incrementa a posição vertical para a próxima linha
-      });
-    });
-  
-    // Salve o documento PDF como um arquivo
-    doc.save('relatorio-avaliacao.pdf');
-  }
+    // Adicionar o conteúdo ao PDF
+    doc.setFontSize(fontSizeMenor);
+    doc.text(`Nome do Funcionário: ${avaliacao.funcionario}`, 10, 10);
+    doc.text(`Avaliado por: ${avaliacao.avaliador}`, 10, 20);
+    doc.text(`Data da Avaliação: ${avaliacao.dataFormatada}`, 10, 30);
+    doc.text(`Nota Individual: ${avaliacao.mediaIndividual}`, 10, 40);
+    doc.text(`Nota do Time: ${avaliacao.mediaTime}`, 10, 50);
+    doc.text(`Nota da Empresa: ${avaliacao.mediaEmpresa}`, 10, 60);
+    doc.text(`Média Final: ${avaliacao.mediaFinalGeral}`, 10, 70);
     
+    // Verificar se há espaço suficiente na página atual
+    const availableSpace = doc.internal.pageSize.height - 70; // Espaço disponível após a adição dos primeiros elementos
   
+    // Definir a altura máxima para a lista de notas
+    const maxListHeight = availableSpace - 40; // 40 é a altura estimada dos outros elementos
   
+    // Verificar se há espaço suficiente para a lista de notas
+    if (maxListHeight > 0) {
+      // Continuar adicionando o conteúdo
+      doc.setFontSize(10);
   
+      // Lista de Notas
+      let posY = 90; // Posição inicial para a lista de notas
+      const itemsPerPage = Math.floor(maxListHeight / 10); // Quantidade máxima de itens por página
+  
+      avaliacao.notas.forEach((item: any, index: number) => {
+        if (index % itemsPerPage === 0 && index !== 0) {
+          // Adicionar nova página
+          doc.addPage();
+          posY = 10; // Reiniciar a posição para a nova página
+        }
+        doc.text(`${item.nome}: ${item.nota}`, 10, posY);
+        posY += 10;
+      });
+  
+      // Adicionar campos para as assinaturas
+      const posYAssinaturas = posY + 20;
+      doc.text('Assinatura do Funcionário:', 10, posYAssinaturas);
+      doc.text('Assinatura do Avaliador:', 100, posYAssinaturas);
+    }
+  
+    // Gerar e baixar o PDF
+    doc.save('relatorio.pdf');
+
+  }
   
 }

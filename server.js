@@ -38,18 +38,21 @@ const Avaliacao = require('./src/app/models/Avaliacao');
 
 // Rota para salvar a avaliação
 app.post('/api/avaliacao', async (req, res) => {
-  const avaliacaoData = req.body; // Dados da avaliação enviados pelo Angular
+  const dadosAvaliacao = req.body; // Dados da avaliação enviados pelo Angular
 
-  console.log('Notas recebidas:', avaliacaoData.notas);
+  console.log('Notas recebidas:', dadosAvaliacao.notas);
 
   // Cria uma nova instância do modelo Avaliacao com os dados recebidos
   const novaAvaliacao = new Avaliacao({
-    funcionario: avaliacaoData.usuario,
-    mediaFinal: avaliacaoData.mediaFinal,
-    performance: avaliacaoData.performance,
-    dataAvaliacao: avaliacaoData.dataAvaliacao,
-    avaliador: avaliacaoData.avaliador,
-    notas: avaliacaoData.notas // Adiciona as notas à avaliação
+    funcionario: dadosAvaliacao.funcionario,
+    mediaIndividual: dadosAvaliacao.mediaIndividual,
+    mediaTime: dadosAvaliacao.mediaTime,
+    mediaEmpresa: dadosAvaliacao.mediaEmpresa,
+    mediaFinalGeral: dadosAvaliacao.mediaFinalGeral,
+    performance: dadosAvaliacao.performance,
+    dataFormatada: dadosAvaliacao.dataFormatada,
+    avaliador: dadosAvaliacao.avaliador,
+    notas: dadosAvaliacao.notas // Adiciona as notas à avaliação
   });
 
   try {

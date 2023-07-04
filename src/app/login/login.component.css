@@ -87,3 +87,9 @@ input {
   margin-bottom: 0;
   font-weight: 600;
 }
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    width: 100%;
+  }
+}

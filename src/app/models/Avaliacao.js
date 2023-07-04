@@ -6,7 +6,19 @@ const AvaliacaoSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  mediaFinal: {
+  mediaIndividual: {
+    type: Number,
+    required: true,
+  },
+  mediaTime: {
+    type: Number,
+    required: true,
+  },
+  mediaEmpresa: {
+    type: Number,
+    required: true,
+  },
+  mediaFinalGeral: {
     type: Number,
     required: true,
   },
@@ -14,7 +26,7 @@ const AvaliacaoSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  dataAvaliacao: {
+  dataFormatada: {
     type: String,
     required: true,
   },
