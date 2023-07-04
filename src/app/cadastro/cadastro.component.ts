@@ -13,8 +13,13 @@ export class CadastroComponent {
   email: string = '';
   password: string = '';
   team: string = '';
+  showPassword: boolean = false;
 
   constructor(private http: HttpClient, private router: Router) {}
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
 
   cadastrarUsuario() {
     const novoUsuario = {

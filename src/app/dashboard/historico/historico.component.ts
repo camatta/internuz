@@ -81,22 +81,29 @@ export class HistoricoComponent implements OnInit {
     // Crie uma nova instância do jsPDF
     const doc = new jsPDF();
   
+    const logoPath = '../../../assets/images/logo-nairuz-colorido.png';
+
+    // Carregar o logo SVG
+    const logoWidth = 40; // Largura do logo SVG no PDF
+    const logoHeight = 8; // Altura do logo SVG no PDF
+    doc.addImage(logoPath,'PNG', 10, 10, logoWidth, logoHeight);
 
     // Definir o tamanho da fonte menor para o conteúdo
     const fontSizeMenor = 12;
 
     // Adicionar o conteúdo ao PDF
     doc.setFontSize(fontSizeMenor);
-    doc.text(`Nome do Funcionário: ${avaliacao.funcionario}`, 10, 10);
-    doc.text(`Avaliado por: ${avaliacao.avaliador}`, 10, 20);
-    doc.text(`Data da Avaliação: ${avaliacao.dataFormatada}`, 10, 30);
-    doc.text(`Nota Individual: ${avaliacao.mediaIndividual}`, 10, 40);
-    doc.text(`Nota do Time: ${avaliacao.mediaTime}`, 10, 50);
-    doc.text(`Nota da Empresa: ${avaliacao.mediaEmpresa}`, 10, 60);
-    doc.text(`Média Final: ${avaliacao.mediaFinalGeral}`, 10, 70);
+    doc.text(`Nome do Funcionário: ${avaliacao.funcionario}`, 10, 30);
+    doc.text(`Avaliado por: ${avaliacao.avaliador}`, 10, 40);
+    doc.text(`Data da Avaliação: ${avaliacao.dataFormatada}`, 10, 50);
+    doc.text(`Nota Individual: ${avaliacao.mediaIndividual}`, 10, 60);
+    doc.text(`Nota do Time: ${avaliacao.mediaTime}`, 10, 70);
+    doc.text(`Nota da Empresa: ${avaliacao.mediaEmpresa}`, 10, 80);
+    doc.text(`Média Final: ${avaliacao.mediaFinalGeral}`, 10, 90);
+    doc.text('Lista de Notas:', 10, 110);
     
     // Verificar se há espaço suficiente na página atual
-    const availableSpace = doc.internal.pageSize.height - 70; // Espaço disponível após a adição dos primeiros elementos
+    const availableSpace = doc.internal.pageSize.height - 110; // Espaço disponível após a adição dos primeiros elementos
   
     // Definir a altura máxima para a lista de notas
     const maxListHeight = availableSpace - 40; // 40 é a altura estimada dos outros elementos
@@ -107,7 +114,7 @@ export class HistoricoComponent implements OnInit {
       doc.setFontSize(10);
   
       // Lista de Notas
-      let posY = 90; // Posição inicial para a lista de notas
+      let posY = 120; // Posição inicial para a lista de notas
       const itemsPerPage = Math.floor(maxListHeight / 10); // Quantidade máxima de itens por página
   
       avaliacao.notas.forEach((item: any, index: number) => {

@@ -12,12 +12,17 @@ export class LoginComponent implements OnInit {
   password: string = '';
   errorMessage: string = '';
   mensagemAviso: string = '';
+  showPassword: boolean = false;
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {

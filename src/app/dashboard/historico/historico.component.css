@@ -33,18 +33,21 @@ button {
   background-color: #e1e1e1c7;
   padding: 10px;
   border-radius: 10px;
+  margin-left: 15px;
 }
 
 .performance-ouro {
   background-color: #fdfc36c7;
   padding: 10px;
   border-radius: 10px;
+  margin-left: 15px;
 }
 
 .performance-diamante {
   background-color: #96f6eec7;
   padding: 10px;
   border-radius: 10px;
+  margin-left: 15px;
 }
 
 .nota-final {

@@ -8,12 +8,17 @@
         <input type="email" id="email" [(ngModel)]="email" name="email" required>
       </div>
       <div class="row-form">
-        <label for="name">Nome:</label>
+        <label for="name">Nome e Sobrenome:</label>
         <input type="text" id="name" [(ngModel)]="nome" name="name" required>
       </div>
       <div class="row-form">
         <label for="password">Senha:</label>
-        <input type="password" id="password" [(ngModel)]="password" name="password" required>
+        <div class="password-input">
+          <input type="{{ showPassword ? 'text' : 'password' }}" id="password" [(ngModel)]="password" name="password" required>
+          <span class="password-toggle" (click)="togglePasswordVisibility()">
+            <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </span>
+        </div>
       </div>
       <div class="row-form">
         <label for="team">Selecione um departamento</label>

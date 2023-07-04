@@ -88,6 +88,21 @@ input {
   font-weight: 600;
 }
 
+.password-input {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 1rem;
+  top: 5px;
+  cursor: pointer;
+}
+
+.password-toggle .fas {
+  color: #240435;
+}
+
 @media screen and (max-width: 768px) {
   .wrapper {
     width: 100%;
