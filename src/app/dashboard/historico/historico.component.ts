@@ -123,7 +123,7 @@ export class HistoricoComponent implements OnInit {
           doc.addPage();
           posY = 10; // Reiniciar a posição para a nova página
         }
-        doc.text(`${item.nome}: ${item.nota}`, 10, posY);
+        doc.text(`${item.nome}  -  ${item.requisito}  -  ${item.avaliacao}  -  ${item.nota}`, 10, posY);
         posY += 10;
       });
   

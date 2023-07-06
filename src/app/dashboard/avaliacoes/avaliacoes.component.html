@@ -128,7 +128,7 @@
       <tbody>
         <tr *ngFor="let item of items">
           <ng-container *ngIf="item.tipo === 'comportamental'">
-            <td class="avaliacao-nome">{{ item.nome }}</td>
+            <td class="avaliacao-nome" [ngClass]="{'absenteismo': item.nome === 'Absenteísmo (INFORMATIVO)'}">{{ item.nome }}</td>
             <td>
               <select id="requisito" name="requisito" [(ngModel)]="item.requisito" (change)="calculateGrade(item)">
                 <option value="Obrigatório">Obrigatório</option>
@@ -240,17 +240,18 @@
     <div class="lista-criterios-info">
       <ul class="lista-criterios">
         <li>
-          Para receber as bonificações é necessário ter nota individual no mínimo de 9,0 em duas avaliações consecutivas e absenteísmo "Muito Bom";<br><br>Notas:
+          Para receber as bonificações* é necessário ter nota individual no mínimo de 9,0 em duas avaliações consecutivas e absenteísmo "Muito Bom";<br><br>Notas:
           <ul>
             <li>Se o colaborador obter nota maior ou igual a 9,0 e o absenteísmo for "Bom", receberá a bonificação da Performance Ouro;</li>
             <li>Caso o colaborador tenha nota maior ou igual a 9,0 porém o absenteísmo for "Regular" ou "Insatisfatório", não receberá as bonificações.</li>
+            <li class="not-list-style">*As bonificações estão atreladas ao fluxo de caixa da empresa, ou seja, mesmo o funcionairuz tendo uma performance Ouro ou Diamante, só será bonificado mediante a aprovação do Financeiro.</li>
           </ul>
         </li>
         <li>Para ser promovido é necessário ter nota individual e média no mínimo de 9,0 em quatro avaliações consecutivas;</li>
-        <li>Peso = 5 - empresa/ 3 - individual/ 2 - time;</li>
+        <li>Peso = 5 - empresa / 3 - individual / 2 - time;</li>
         <li>Se a empresa não atingiu o resultados, não segue com a promoção;</li>
         <li>
-          Promoção de 25%  de colabaradores por time, se houver e programado com o Financeiro, considerando a seguinte ordem:
+          Promoção de 25%  de colaboradores por time, se houver e programado com o Financeiro, considerando a seguinte ordem:
           <ul>
             <li>Colaborador com maior nota;</li>
             <li>Em caso de empate na pontuação, o colaborador que tiver maior tempo de contratação (não considerando o tempo de estágio).</li>

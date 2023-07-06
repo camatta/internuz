@@ -36,6 +36,8 @@ const AvaliacaoSchema = new mongoose.Schema({
   },
   notas: [
     { nome: String,
+      requisito: String,
+      avaliacao: String,
       nota: Number,
     }
   ]

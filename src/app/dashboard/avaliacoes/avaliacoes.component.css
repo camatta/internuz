@@ -8,7 +8,7 @@
   border-radius: 5px;
   border: unset;
   padding: 10px;
-  width: 80%;
+  width: 90%;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   font-weight: 600;
 }
@@ -18,7 +18,7 @@
 }
 
 .table-avaliacao {
-  width: 80%;
+  width: 90%;
   margin-top: 2rem;
   background-color: #ffffff30;
   color: #080b2c;
@@ -105,6 +105,10 @@ span {
   list-style-type: disc;
 }
 
+.lista-criterios ul li.not-list-style {
+  list-style-type: none;
+}
+
 .lista-criterios ul > li {
   margin-bottom: 20px;
 }
@@ -116,4 +120,18 @@ span {
 
 .aviso-disponibilidade {
   margin-top: 1rem;
+}
+
+.absenteismo {
+  padding-bottom: 1rem;
+  position: relative;
+}
+
+.absenteismo:after {
+  content: 'Nota: não influência na média';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  color: #ff9df3;
+  font-weight: 600;
 }
