@@ -218,7 +218,7 @@ export class AvaliacoesComponent implements OnInit {
       { tipo: 'ferramenta', nome: 'Mywork', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'ferramenta', nome: 'Adobe XD/Figma', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'ferramenta', nome: 'Adobe Photoshop', requisito: 'Obrigatório', peso: 'A', },
-      { tipo: 'ferramenta', nome: 'Adobe Illustrator/Corel Draw', requisito: 'Obrigatório', peso: 'A', },
+      { tipo: 'ferramenta', nome: 'Adobe Illustrator', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'ferramenta', nome: 'Teoria das cores', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'ferramenta', nome: 'Hierarquia textual', requisito: 'Diferencial', peso: 'A', },
       { tipo: 'ferramenta', nome: 'Inglês Básico ou intermediário', requisito: 'Diferencial', peso: 'A', },
