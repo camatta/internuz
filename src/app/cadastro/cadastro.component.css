@@ -1,16 +1,22 @@
 .container-fluid {
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100vh;
+  overflow: hidden;
   background: rgb(59,88,203);
   background: linear-gradient(107deg, rgba(59,88,203,1) 7%, rgba(176,36,190,1) 27%, rgba(75,13,104,1) 49%, rgba(8,11,44,1) 81%);
 }
 
 h1 {
   color: #fff;
+}
+
+form {
+  margin-top: 1.5rem;
 }
 
 label {
@@ -61,7 +67,8 @@ input, select, option {
 }
 
 .wrapper {
-  width: 25%;
+  width: 30%;
+  overflow-y: scroll;
 }
 
 .login-cadastro button {
@@ -86,6 +93,11 @@ input, select, option {
 
 .password-toggle .fas {
   color: #240435;
+}
+
+/*SCROLL */
+*::-webkit-scrollbar {
+  width: 0px;
 }
 
 @media screen and (max-width: 768px) {

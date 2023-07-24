@@ -15,6 +15,9 @@ export class HistoricoComponent implements OnInit {
   nomeUsuario: string = this.authService.getUserName(); // Nome do usuário para obter o histórico de avaliações
   isAuthorized: boolean = false; // Propriedade para controlar a autorização do usuário
   users: any[] = []; // Lista de usuários para o select
+  liderTeam: string = '';
+  filteredUsers: any[] = [];
+  isAdmin: boolean = false;
   exibirDetalhes = false;
 
   constructor(private avaliacoesService: AvaliacoesService, private authService: AuthService, private userService: UserService) { }
@@ -27,23 +30,32 @@ export class HistoricoComponent implements OnInit {
 
   checkAuthorization(): void {
     const accessLevel = this.authService.getAccessLevel(); // Método para obter o nível de acesso do usuário
-    if (accessLevel === 'Administrador' || accessLevel === 'Líder de Equipe') {
+    if (accessLevel === 'Administrador') {
       this.isAuthorized = true;
+    } else if (accessLevel === 'Líder de Equipe') {
+      this.isAuthorized = true;
+      const userLogadoJSON = localStorage.getItem('user');
+      if (userLogadoJSON) {
+        const userLogado = JSON.parse(userLogadoJSON);
+        this.liderTeam = userLogado.team;
+      }
     }
   }
 
   getUsers(): void {
-    if (this.isAuthorized) {
-      this.userService.getUsers().subscribe(
-        (users: any[]) => {
-          this.users = users;
-          console.log(this.users);
-        },
-        (error: any) => {
-          console.error('Erro ao obter lista de usuários', error);
+    this.userService.getUsers().subscribe(
+      (users: any[]) => {
+        if (this.isAuthorized && this.authService.getAccessLevel() === 'Líder de Equipe') {
+          // Filtrar os usuários para exibir somente os do mesmo time do líder
+          this.filteredUsers = users.filter(user => user.team === this.liderTeam);
+        } else {
+          this.filteredUsers = users;
         }
-      );
-    }
+      },
+      (error: any) => {
+        console.error('Erro ao obter lista de usuários', error);
+      }
+    );
   }
 
   getHistoricoAvaliacoes(nomeUsuario?: string): void {

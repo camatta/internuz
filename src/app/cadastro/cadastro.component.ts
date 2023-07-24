@@ -13,12 +13,18 @@ export class CadastroComponent {
   email: string = '';
   password: string = '';
   team: string = '';
+  setor: string = '';
+  setorTratadoSelecionado: string = '';
   showPassword: boolean = false;
 
   constructor(private http: HttpClient, private router: Router) {}
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
+  }
+
+  onSetorChange(event: any) {
+    this.setorTratadoSelecionado = event.target.options[event.target.selectedIndex].getAttribute('data-setor-tratado');
   }
 
   cadastrarUsuario() {
@@ -28,7 +34,8 @@ export class CadastroComponent {
       password: this.password,
       team: this.team,
       accessLevel: 'Funcionário', // Definindo o valor padrão "Funcionário" para accessLevel
-      setor: 'Indefinido' // Setor padrão
+      setor: this.setor,
+      setorTratado: this.setorTratadoSelecionado,
     };
 
     this.http.post(environment.URL_API + '/api/auth/cadastro', novoUsuario)

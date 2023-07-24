@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema ({
   setor: {
     type: String,
     required: true,
+  },
+  setorTratado: {
+    type: String,
+    required: true,
   }
 });
 

@@ -3,7 +3,7 @@
 <div *ngIf="isAuthorized">
   <select class="form-select" name="selectUsuario" id="select-usuario" #usuarioSelect (change)="getHistoricoAvaliacoes(usuarioSelect.value)">
     <option disabled selected value="">Selecione um Funcionário</option>
-    <option *ngFor="let user of users" [value]="user.name">{{ user.name }}</option>
+    <option *ngFor="let user of filteredUsers" [value]="user.name">{{ user.name }}</option>
   </select>
 </div>
 

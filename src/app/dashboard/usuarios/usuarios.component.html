@@ -22,12 +22,7 @@
           </ng-container>
         </td>
         <td>
-          <ng-container *ngIf="!user.editing">{{ user.setor }}</ng-container>
-          <ng-container *ngIf="user.editing">
-            <select [(ngModel)]="user.setor">
-              <option *ngFor="let option of user.userSectorOptions" [value]="option">{{ option }}</option>
-            </select>
-          </ng-container>
+          <ng-container *ngIf="!user.editing">{{ user.setorTratado }}</ng-container>
         </td>
         <td>
           <ng-container *ngIf="!user.editing">{{ user.accessLevel }}</ng-container>

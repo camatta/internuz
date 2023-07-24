@@ -82,7 +82,7 @@ app.get('/api/avaliacoes', async (req, res) => {
 // Rota de Cadastro
 app.post('/api/auth/cadastro', async (req, res) => {
   try {
-    const { name, email, password, team, accessLevel, setor } = req.body;
+    const { name, email, password, team, accessLevel, setor, setorTratado } = req.body;
 
     // Verifique se o usuário já existe no banco de dados
 
@@ -100,7 +100,8 @@ app.post('/api/auth/cadastro', async (req, res) => {
       password,
       team,
       accessLevel,
-      setor
+      setor,
+      setorTratado
     });
 
     // Salvar o novo usuário no banco de dados
@@ -176,7 +177,8 @@ app.get('/api/users/me', authMiddleware, async (req, res) => {
       email: req.user.email,
       time: req.user.team,
       funcao: req.user.accessLevel,
-      setor: req.user.setor
+      setor: req.user.setor,
+      setorTratado: req.user.setorTratado,
     };
 
     res.status(200).json(userInfo);

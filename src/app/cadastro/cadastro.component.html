@@ -4,12 +4,12 @@
 
     <form (ngSubmit)="cadastrarUsuario()">
       <div class="row-form">
-        <label for="email">Email:</label>
-        <input type="email" id="email" [(ngModel)]="email" name="email" required>
-      </div>
-      <div class="row-form">
         <label for="name">Nome e Sobrenome:</label>
         <input type="text" id="name" [(ngModel)]="nome" name="name" required>
+      </div>
+      <div class="row-form">
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="email" name="email" required>
       </div>
       <div class="row-form">
         <label for="password">Senha:</label>
@@ -29,6 +29,20 @@
           <option value="Administrativo">Administrativo</option>
           <option value="Customer Success">Customer Success</option>
           <option value="Comercial">Comercial</option>
+        </select>
+      </div>
+      <div class="row-form">
+        <label for="team">Selecione um setor</label>
+        <select class="form-select-cadastro" name="selectSetor" id="select-setor" [(ngModel)]="setor" (change)="onSetorChange($event)">
+          <option disabled selected value=""></option>
+          <option value="Desenvolvimento" data-setor-tratado="Desenvolvimento">Desenvolvimento</option>
+          <option value="DesignUIUX" data-setor-tratado="Design UX/UI">Design UX/UI</option>
+          <option value="Redacao" data-setor-tratado="Redação">Redação</option>
+          <option value="InboundMarketing" data-setor-tratado="Inbound Marketing">Inbound Marketing</option>
+          <option value="MidiasPagas" data-setor-tratado="Mídias Pagas">Mídias Pagas</option>
+          <option value="DesignPublicitario" data-setor-tratado="Design Publicitário">Design Publicitário</option>
+          <option value="CS" data-setor-tratado="CS">CS</option>
+          <option value="Vendas" data-setor-tratado="Vendas">Vendas</option>
         </select>
       </div>
       <button type="submit" class="submit-cadastro">Cadastrar</button>
