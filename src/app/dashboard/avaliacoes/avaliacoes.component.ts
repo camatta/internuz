@@ -59,7 +59,7 @@ export class AvaliacoesComponent implements OnInit {
             // Se não for Administrador, filtrar os usuários pelo time do líder
             this.filteredUsers = this.users.filter((user) => user.team === this.liderTeam);
           }
-
+          this.removeDevTesteUser(); // Remover o usuário "Dev Nairuz" da listagem
           this.sortUsersAlphabetically(); // Ordenar os usuários em ordem alfabética
         }
 
@@ -69,6 +69,10 @@ export class AvaliacoesComponent implements OnInit {
       }
     );
 
+  }
+
+  removeDevTesteUser(): void {
+    this.filteredUsers = this.filteredUsers.filter(user => user.name !== 'Dev Nairuz');
   }
 
   sortUsersAlphabetically(): void {

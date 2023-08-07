@@ -51,13 +51,17 @@ export class HistoricoComponent implements OnInit {
         } else {
           this.filteredUsers = users;
         }
-
+        this.removeDevTesteUser(); // Remover o usuário "Dev Nairuz" da listagem
         this.sortUsersAlphabetically(); // Ordenar os usuários em ordem alfabética
       },
       (error: any) => {
         console.error('Erro ao obter lista de usuários', error);
       }
     );
+  }
+
+  removeDevTesteUser(): void {
+    this.filteredUsers = this.filteredUsers.filter(user => user.name !== 'Dev Nairuz');
   }
 
   sortUsersAlphabetically(): void {
