@@ -49,16 +49,18 @@ export class AvaliacoesComponent implements OnInit {
           const liderLogado = JSON.parse(liderLogadoJSON);
           this.liderTeam = liderLogado.team;
 
-           // Verificar se o usuário é um Administrador
-           if (liderLogado.accessLevel === 'Administrador') {
+          // Verificar se o usuário é um Administrador
+          if (liderLogado.accessLevel === 'Administrador') {
             this.isAdmin = true;
             // Se for Administrador, não aplicar a filtragem, mostrar todos os usuários
-            this.filteredUsers = this.users;
+            this.filteredUsers = this.users.slice(); // Criar uma cópia do array de usuários
           } else {
             this.isAdmin = false;
             // Se não for Administrador, filtrar os usuários pelo time do líder
             this.filteredUsers = this.users.filter((user) => user.team === this.liderTeam);
           }
+
+          this.sortUsersAlphabetically(); // Ordenar os usuários em ordem alfabética
         }
 
       },
@@ -67,6 +69,14 @@ export class AvaliacoesComponent implements OnInit {
       }
     );
 
+  }
+
+  sortUsersAlphabetically(): void {
+    this.filteredUsers.sort((a, b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+      return nameA.localeCompare(nameB);
+    });
   }
 
 

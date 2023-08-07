@@ -51,11 +51,21 @@ export class HistoricoComponent implements OnInit {
         } else {
           this.filteredUsers = users;
         }
+
+        this.sortUsersAlphabetically(); // Ordenar os usuários em ordem alfabética
       },
       (error: any) => {
         console.error('Erro ao obter lista de usuários', error);
       }
     );
+  }
+
+  sortUsersAlphabetically(): void {
+    this.filteredUsers.sort((a, b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+      return nameA.localeCompare(nameB);
+    });
   }
 
   getHistoricoAvaliacoes(nomeUsuario?: string): void {
