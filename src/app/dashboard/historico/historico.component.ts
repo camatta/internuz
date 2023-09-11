@@ -114,6 +114,8 @@ export class HistoricoComponent implements OnInit {
     const logoHeight = 8; // Altura do logo SVG no PDF
     doc.addImage(logoPath,'PNG', 10, 10, logoWidth, logoHeight);
 
+    doc.text('Avaliação de Desempenho', 80, 18);
+
     // Definir o tamanho da fonte menor para o conteúdo
     const fontSizeMenor = 12;
 

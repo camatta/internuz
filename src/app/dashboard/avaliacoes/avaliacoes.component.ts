@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class AvaliacoesComponent implements OnInit {
 
   @ViewChild('tableAvaliacao') tableAvaliacao: any;
 
-  constructor(private userService: UserService, private http: HttpClient, private authService: AuthService) {}
+  constructor(private userService: UserService, private http: HttpClient, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.getUsers();
@@ -1018,9 +1019,24 @@ export class AvaliacoesComponent implements OnInit {
   
   }
 
+
   enviarAvaliacao() {
 
-    
+    const selectsPreenchidos = this.avaliacoes.every(item => {
+      return (
+        item.avaliacao === 'Muito Bom' ||
+        item.avaliacao === 'Bom' ||
+        item.avaliacao === 'Regular' ||
+        item.avaliacao === 'Insatisfatório' ||
+        item.avaliacao === 'Não Consta' ||
+        item.avaliacao === 'Satisfatório'
+      );
+    });
+  
+    if (!selectsPreenchidos) {
+      alert('Por favor, preencha todas as notas antes de enviar a avaliação.');
+      return; // Impede o envio da avaliação se algum select não for preenchido corretamente
+    }
     // Obter o usuário avaliador logado do localStorage
     const avaliadorLogadoJSON = localStorage.getItem('user');
 
@@ -1028,7 +1044,8 @@ export class AvaliacoesComponent implements OnInit {
       const avaliadorLogado = JSON.parse(avaliadorLogadoJSON);
       this.nomeAvaliador = avaliadorLogado.name;
       console.log('Avaliador logado:', this.nomeAvaliador);
-    } 
+    }
+    
 
     // Formatar data para padrão brasileiro
     const dataAtual = new Date();
@@ -1061,7 +1078,7 @@ export class AvaliacoesComponent implements OnInit {
 
     // Chamar a API para salvar a avaliação
     this.salvarAvaliacao(dadosAvaliacao);
-
+ 
   }
 
   
@@ -1071,12 +1088,11 @@ export class AvaliacoesComponent implements OnInit {
       .subscribe(
         response => {
           console.log('Avaliação enviada com sucesso!', response);
-          alert('Avaliação enviada com sucesso. Veja o resultado no histórico do funcionário.')
-          // Faça qualquer outra ação necessária após salvar a avaliação, como redirecionar para outra página
+          alert('Avaliação enviada com sucesso!')
+          this.router.navigate(['/dashboard']);
         },
         error => {
           console.error('Erro ao enviar a avaliação.', error);
-          // Trate o erro de acordo com a necessidade do seu aplicativo
         }
       );
   }
