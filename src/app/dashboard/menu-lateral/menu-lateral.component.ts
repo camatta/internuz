@@ -11,16 +11,18 @@ import { AuthService } from 'src/app/services/auth.service';
 export class MenuLateralComponent implements OnInit {
   showAvaliacoesLink = false;
   showUsuariosLink = false;
-
+  showComercialLink = false;
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     const user = this.authService.getUser();
     const accessLevel = user ? user.accessLevel : '';
+    const team = user ? user.team : '';
 
-    // Verificar o accessLevel e definir as variáveis showAvaliacoesLink e showUsuariosLink
+    // Verificar o accessLevel e permissões
     this.showAvaliacoesLink = accessLevel === 'Líder de Equipe' || accessLevel === 'Administrador';
     this.showUsuariosLink = accessLevel === 'Líder de Equipe' || accessLevel === 'Administrador';
+    this.showComercialLink = team === 'Comercial' || accessLevel === 'Administrador';
   }
 
   logout(): void {

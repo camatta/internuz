@@ -14,6 +14,7 @@ import { UsuariosComponent } from './dashboard/usuarios/usuarios.component';
 import { AvaliacoesComponent } from './dashboard/avaliacoes/avaliacoes.component';
 import { PerfilComponent } from './dashboard/perfil/perfil.component';
 import { HistoricoComponent } from './dashboard/historico/historico.component';
+import { ComercialComponent } from './dashboard/comercial/comercial.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HistoricoComponent } from './dashboard/historico/historico.component';
     UsuariosComponent,
     AvaliacoesComponent,
     PerfilComponent,
-    HistoricoComponent
+    HistoricoComponent,
+    ComercialComponent
   ],
   imports: [
     BrowserModule,
