@@ -14,3 +14,7 @@
   background: unset;
   border: unset;
 }
+
+.link-ativo {
+  font-weight: bold;
+}

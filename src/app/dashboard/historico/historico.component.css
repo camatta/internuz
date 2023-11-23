@@ -54,3 +54,84 @@ button {
   margin-bottom: 1.5rem;
   font-weight: 700;
 }
+
+/* Relatório */
+
+.title {
+  text-align: center;
+  text-transform: uppercase;
+  background-color: #15aea1;
+  padding: 20px;
+  margin-bottom: 2rem;
+}
+
+.title p {
+  margin-bottom: 0;
+  font-weight: 600;
+}
+
+.header {
+  display: flex;
+}
+
+.header ul {
+  width: 50%;
+  border: 1px solid #000;
+  padding-left: 0;
+}
+
+.header ul.labels {
+  background-color: #15aea1;
+}
+
+.header ul.infos {
+  background-color: #14daca;
+}
+
+.header ul li {
+  list-style: none;
+  border-bottom: 1px solid #000;
+  padding: 10px 20px;
+}
+
+.header ul li p {
+  margin-bottom: 0;
+}
+
+.legendas {
+  display: flex;
+  justify-content: space-between;
+}
+
+.legendas thead {
+  text-transform: uppercase;
+  font-weight: 600;
+  background-color: #15aea1;
+}
+
+.legenda {
+  width: 50%;
+}
+
+.legendas table {
+  width: 100%;
+}
+
+.legendas table tr {
+  border: 1px solid #000;
+}
+
+.legendas table td,
+.legendas table th {
+  padding: 5px;
+}
+
+.legendas table tbody td {
+  background-color: rgb(14, 14, 178);
+}
+
+.requisitos table th,
+.requisitos table td  {
+  border: 1px solid #000;
+}
+

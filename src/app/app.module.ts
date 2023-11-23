@@ -15,6 +15,7 @@ import { AvaliacoesComponent } from './dashboard/avaliacoes/avaliacoes.component
 import { PerfilComponent } from './dashboard/perfil/perfil.component';
 import { HistoricoComponent } from './dashboard/historico/historico.component';
 import { ComercialComponent } from './dashboard/comercial/comercial.component';
+import { PiramideComponent } from './dashboard/piramide/piramide.component'
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ComercialComponent } from './dashboard/comercial/comercial.component';
     AvaliacoesComponent,
     PerfilComponent,
     HistoricoComponent,
-    ComercialComponent
+    ComercialComponent,
+    PiramideComponent,
   ],
   imports: [
     BrowserModule,

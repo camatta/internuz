@@ -9,6 +9,7 @@ import { PerfilComponent } from './dashboard/perfil/perfil.component';
 import { HistoricoComponent } from './dashboard/historico/historico.component';
 import { ComercialComponent } from './dashboard/comercial/comercial.component';
 import { AuthGuard } from './routes/auth.guard';
+import { PiramideComponent } from './dashboard/piramide/piramide.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
     { path: 'avaliacoes', component: AvaliacoesComponent },
     { path: 'perfil', component: PerfilComponent },
     { path: 'historico', component: HistoricoComponent },
-    { path: 'comercial', component: ComercialComponent }
+    { path: 'comercial', component: ComercialComponent },
+    { path: 'piramide', component: PiramideComponent },
   ]},
   { path: 'cadastro', component: CadastroComponent },
 ];
