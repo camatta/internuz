@@ -98,6 +98,11 @@ button {
   margin-bottom: 0;
 }
 
+.criterios {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
 .legendas {
   display: flex;
   justify-content: space-between;
@@ -128,6 +133,7 @@ button {
 
 .legendas table tbody td {
   background-color: rgb(14, 14, 178);
+  min-width: 40px;
 }
 
 .requisitos table th,
@@ -135,3 +141,57 @@ button {
   border: 1px solid #000;
 }
 
+.notas thead {
+  text-transform: uppercase;
+  font-weight: 600;
+  background-color: #15aea1;
+}
+
+.notas table {
+  width: 100%;
+}
+
+.notas tr, .notas td {
+  border: 1px solid #000;
+}
+
+.notas table p {
+  margin-bottom: 0;
+}
+
+.notas tbody {
+  background-color: #fff;
+}
+
+.notas table td,
+.notas table th {
+  padding: 5px;
+  text-align: center;
+}
+
+.notas table td:first-child,
+.notas table tr th:first-child {
+  text-align: left;
+}
+
+.notas tbody td:nth-child(2),
+.notas tbody td:nth-child(3) {
+  background-color: #14daca;
+}
+
+.notas table tbody p {
+  color: #000;
+}
+
+.assinaturas {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6rem;
+}
+
+.assinatura-funcionario, .assinatura-avaliador {
+  border-top: 1px solid;
+  padding-top: 10px;
+  width: 280px;
+  text-align: center;
+}
