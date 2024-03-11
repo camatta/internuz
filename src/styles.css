@@ -6,14 +6,27 @@
 
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif !important;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 h1 {
   font-weight: 700 !important;
   font-size: 2rem !important;
+  color: #00175d;
+  font-style: italic;
+  margin-bottom: 30px !important;
 }
 
 span {
   font-weight: 600 !important;
+}
+
+p {
+  color: #1c1c1c;
+  line-height: 21px;
+  font-size: 14px;
+}
+
+.progress-bar {
+  background-color: #00175d;
 }

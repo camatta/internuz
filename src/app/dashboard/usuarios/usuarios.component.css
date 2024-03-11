@@ -1,9 +1,10 @@
 h1 {
-  margin-bottom: 1rem;
+  color: #00175d;
+  font-style: italic;
 }
 
-p, li, h1 {
-  color: #fff;
+.wrapper-table p, .wrapper-table li {
+  color: #00175d;
 }
 
 .wrapper-table {
@@ -22,20 +23,25 @@ table {
 }
 
 tbody tr {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #00175d;
 }
 
 tbody tr:last-child {
   border-bottom: 0;
 }
 
-td {
+td, th {
   height: 50px;
+  color: #00175d;
+}
+
+tbody td {
+  font-size: 14px;
 }
 
 select {
   background-color: #40ca9438;
-  color: #fff;
+  color: #00175d;
   border-radius: 5px;
   border: unset;
   padding: 10px;

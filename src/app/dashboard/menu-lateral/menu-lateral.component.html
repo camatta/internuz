@@ -1,19 +1,19 @@
 <!-- Seu HTML adaptado -->
 <div class="menu-lateral">
   <ul>
-    <li><button routerLink="/dashboard" [class.link-ativo]="isLinkAtivo('/dashboard')">Home</button></li>
-    <li><button routerLink="/dashboard/perfil" [class.link-ativo]="isLinkAtivo('/dashboard/perfil')">Perfil</button></li>
-    <li><button routerLink="/dashboard/historico" [class.link-ativo]="isLinkAtivo('/dashboard/historico')">Histórico</button></li>
+    <li><button routerLink="/dashboard" [class.link-ativo]="isLinkAtivo('/dashboard')"><i class="fas fa-home"></i>Home</button></li>
+    <li><button routerLink="/dashboard/perfil" [class.link-ativo]="isLinkAtivo('/dashboard/perfil')"><i class="fas fa-user"></i>Perfil</button></li>
+    <li><button routerLink="/dashboard/historico" [class.link-ativo]="isLinkAtivo('/dashboard/historico')"><i class="fas fa-history"></i>Histórico</button></li>
     <li *ngIf="showUsuariosLink">
-      <button routerLink="/dashboard/usuarios" [class.link-ativo]="isLinkAtivo('/dashboard/usuarios')">Usuários</button>
+      <button routerLink="/dashboard/usuarios" [class.link-ativo]="isLinkAtivo('/dashboard/usuarios')"><i class="fas fa-users"></i>Usuários</button>
     </li>
     <li *ngIf="showAvaliacoesLink">
-      <button routerLink="/dashboard/avaliacoes" [class.link-ativo]="isLinkAtivo('/dashboard/avaliacoes')">Avaliações</button>
+      <button routerLink="/dashboard/avaliacoes" [class.link-ativo]="isLinkAtivo('/dashboard/avaliacoes')"><i class="fas fa-star"></i>Avaliações</button>
     </li>
     <!-- <li><button routerLink="/dashboard/piramide" [class.link-ativo]="isLinkAtivo('/dashboard/piramide')">Pirâmide de Nairuz</button></li> -->
-    <li *ngIf="showComercialLink">
+    <!-- <li *ngIf="showComercialLink">
       <button routerLink="/dashboard/comercial" [class.link-ativo]="isLinkAtivo('/dashboard/comercial')">Comercial</button>
-    </li>
-    <li><button routerLink="/" [class.link-ativo]="isLinkAtivo('/')" (click)="logout()">Sair</button></li>
+    </li> -->
+    <li><button routerLink="/" [class.link-ativo]="isLinkAtivo('/')" (click)="logout()"><i class="fas fa-sign-out-alt"></i>Sair</button></li>
   </ul>
 </div>

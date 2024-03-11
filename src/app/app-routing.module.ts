@@ -10,6 +10,7 @@ import { HistoricoComponent } from './dashboard/historico/historico.component';
 import { ComercialComponent } from './dashboard/comercial/comercial.component';
 import { AuthGuard } from './routes/auth.guard';
 import { PiramideComponent } from './dashboard/piramide/piramide.component';
+import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: 'piramide', component: PiramideComponent },
   ]},
   { path: 'cadastro', component: CadastroComponent },
+  { path: 'redefinir-senha', component: RedefinirSenhaComponent },
 ];
 
 @NgModule({

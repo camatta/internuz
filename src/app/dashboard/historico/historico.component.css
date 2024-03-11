@@ -1,6 +1,6 @@
 .form-select {
   background-color: #ffffff30;
-  color: #fff;
+  color: #00175d;
   border-radius: 5px;
   border: unset;
   padding: 10px;
@@ -8,6 +8,7 @@
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   font-weight: 600;
   margin-bottom: 2rem;
+  font-size: 14px;
 }
 
 .form-select option {
@@ -15,18 +16,29 @@
 }
 
 h1 {
-  margin-bottom: 1rem;
+  color: #00175d;
+  font-style: italic;
+}
+
+hr {
+  color: #00175d;
 }
 
 button {
   margin-top: 1rem;
   padding: 10px;
   border: unset;
-  background-color: #080b2c;
-  font-weight: 500;
+  background-color: #61dcab;
+  color: #00175d;
+  font-size: 14px;
+  font-weight: 600;
   border-radius: 5px;
   padding: 10px 20px;
   margin-bottom: 1rem;
+}
+
+p span {
+  color: #1c1c1c;
 }
 
 .performance-prata {
@@ -34,6 +46,7 @@ button {
   padding: 10px;
   border-radius: 10px;
   margin-left: 15px;
+  color: #1c1c1c;
 }
 
 .performance-ouro {
@@ -41,6 +54,7 @@ button {
   padding: 10px;
   border-radius: 10px;
   margin-left: 15px;
+  color: #1c1c1c;
 }
 
 .performance-diamante {
@@ -48,6 +62,7 @@ button {
   padding: 10px;
   border-radius: 10px;
   margin-left: 15px;
+  color: #1c1c1c;
 }
 
 .nota-final {

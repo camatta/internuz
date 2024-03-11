@@ -227,30 +227,47 @@ Diamante, só será bonificado mediante a aprovação do Financeiro.
  c) Bom: Um atraso e/ou um atestado no mês (equivalente até um dia);
  d) Muito bom: zero absenteísmo.`;
 
+ let currentPage = 1;
+
+ function addPageNumber() {
+   doc.setTextColor(0, 0, 0);
+   doc.setFontSize(10);
+   doc.text(`Página ${currentPage} de 5`, doc.internal.pageSize.width - 33, doc.internal.pageSize.height - 10);
+ }
+
+ addPageNumber();
+
   doc.setFontSize(9); // Tamanho da fonte
   addFormattedText(doc, formattedText, 10, 155, 10);
 
   doc.addPage(); // Adiciona uma nova página
+  currentPage++
 
-  doc.text('Lista de Notas', 10, 15);
+  // doc.text('Lista de Notas', 10, 15);
 
-  addTableCell(doc, `Itens:`, 10, 25, 100, 10, 'left', 3, [0, 187, 185])
-  addTableCell(doc, `Requisitos:`, 110, 25, 30, 10, 'center', 0, [0, 187, 185])
-  addTableCell(doc, `Avaliação:`, 140, 25, 30, 10, 'center', 0, [0, 187, 185])
-  addTableCell(doc, `Nota:`, 170, 25, 30, 10, 'center', 0, [0, 187, 185])
+  addTableCell(doc, `Itens:`, 10, 10, 100, 10, 'left', 3, [0, 187, 185])
+  addTableCell(doc, `Requisitos:`, 110, 10, 30, 10, 'center', 0, [0, 187, 185])
+  addTableCell(doc, `Avaliação:`, 140, 10, 30, 10, 'center', 0, [0, 187, 185])
+  addTableCell(doc, `Nota:`, 170, 10, 30, 10, 'center', 0, [0, 187, 185])
 
+  addPageNumber();
   
-  let posY = 35;
+  let posY = 20;
 
   const itemsPerPage = 25; // Número de itens por página
-  let currentPage = 1;
+
 
 avaliacao.notas.forEach((item: any, index: number) => {
   if (index % itemsPerPage === 0 && index !== 0) {
     // Adicionar nova página
     doc.addPage();
-    posY = 15; // Reiniciar a posição para a nova página
+    addTableCell(doc, `Itens:`, 10, 10, 100, 10, 'left', 3, [0, 187, 185])
+    addTableCell(doc, `Requisitos:`, 110, 10, 30, 10, 'center', 0, [0, 187, 185])
+    addTableCell(doc, `Avaliação:`, 140, 10, 30, 10, 'center', 0, [0, 187, 185])
+    addTableCell(doc, `Nota:`, 170, 10, 30, 10, 'center', 0, [0, 187, 185])
+    posY = 20; // Reiniciar a posição para a nova página
     currentPage++;
+    addPageNumber();
   }
 
   // Adicionar as células da tabela de notas
@@ -262,8 +279,9 @@ avaliacao.notas.forEach((item: any, index: number) => {
   posY += 10; // Espaço entre as linhas
 });
 
+
 // Adicionar campos para as assinaturas na última página
-const posYAssinaturas = posY + 20;
+const posYAssinaturas = posY + 15;
 doc.text('____________________________________', 10, posYAssinaturas);
 doc.text('____________________________________', 130, posYAssinaturas);
 doc.text('Assinatura do Funcionário', 24, posYAssinaturas + 10);

@@ -33,6 +33,55 @@ app.use(express.json());
 // Middleware para analisar o corpo das solicitações como JSON
 app.use(bodyParser.json());
 
+// Rota para solicitar redefinição de senha
+app.post('/api/auth/esqueci-senha', async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    // Verifique se o usuário existe no banco de dados
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: 'E-mail não encontrado.' });
+    }
+
+    // Gerar token de redefinição de senha
+    const resetToken = jwt.sign({ email }, 'seu-segredo', { expiresIn: '1h' });
+
+    // Atualizar o modelo de usuário com o token e o tempo de expiração
+    user.resetToken = resetToken;
+    user.resetTokenExpiry = new Date(Date.now() + 3600000); // 1 hora de expiração
+    await user.save();
+
+    const nodemailer = require('nodemailer');
+
+    // Configurar o nodemailer com suas credenciais de e-mail
+    const transporter = nodemailer.createTransport({
+      service: 'gmail', 
+      auth: {
+        user: 'desenvolvimentonairuz@gmail.com',
+        pass: 'Senha@NairuzDev2022',
+      },
+    });
+
+    const resetLink = `http://localhost:4200/redefinir-senha/${resetToken}`;
+
+    const mailOptions = {
+      from: 'desenvolvimentonairuz@gmail.com',
+      to: email,
+      subject: 'Redefinição de Senha',
+      html: `<p>Clique no link a seguir para redefinir sua senha: <a href="${resetLink}">${resetLink}</a></p>`,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    res.status(200).json({ message: 'E-mail enviado com sucesso.' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao solicitar redefinição de senha.' });
+  }
+});
+
 // Importe o modelo de Avaliacao
 const Avaliacao = require('./src/app/models/Avaliacao');
 
