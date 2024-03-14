@@ -96,6 +96,7 @@ input {
 .error-message p {
   margin-bottom: 0;
   font-weight: 600;
+  color: #fff;
 }
 
 .password-input {
@@ -111,6 +112,10 @@ input {
 
 .password-toggle .fas {
   color: #00175d;
+}
+
+.esqueci-a-senha {
+  display: none;
 }
 
 @media screen and (max-width: 768px) {

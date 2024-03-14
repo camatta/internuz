@@ -17,12 +17,13 @@
   content: '';
   width: 860px;
   height: 400px;
-  position: absolute;
+  position: fixed;
   right: 0rem;
   bottom: 0;
   background-image: url(../../assets/images/n-nairuz.svg);
   opacity: .1;
   background-size: cover;
+  z-index: 0;
 }
 
 h1 {
@@ -73,6 +74,8 @@ h1 {
 
 .main-content {
   padding: 2rem 5rem;
+  position: relative;
+  z-index: 1;
 }
 
 h2 {
@@ -120,16 +123,25 @@ h5 {
   animation: 1s linear infinite progress-bar-stripes !important;
 }
 
-.footer {
+.footer-wrapper {
   color: #01134c;
   font-size: 14px;
   text-align: center;
   position: fixed;
   bottom: 0;
+  padding-top: 20px;
+  left: 16.2%;
+  width: 83.8%;
+  background-color: #fff;
+}
+
+.footer {
   padding-bottom: 10px;
   padding-top: 10px;
-  left: 50%;
-  transform: translate(-50%);
-  width: 100%;
-  background-color: #fff;
+  border-top: 1px solid #00175d;
+}
+
+.footer p {
+  margin-bottom: 0;
+  color: #01134c;
 }
