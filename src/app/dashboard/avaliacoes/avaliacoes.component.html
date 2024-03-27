@@ -17,11 +17,12 @@
           <th>Competências - Fixo</th>
           <th>Requisitos</th>
           <th>Avaliação</th>
+          <th>Autoavaliação</th>
           <th>Nota</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of items">
+        <tr *ngFor="let item of items; let i = index">
           <ng-container *ngIf="item.tipo === 'competencia'">
             <td class="avaliacao-nome">{{ item.nome }}</td>
             <td>
@@ -40,6 +41,16 @@
                 <option value="Não Consta">Não Consta</option>
               </select>
             </td>
+            
+            <td>
+              <!-- Itera sobre cada nota dentro da array de notas da última autoavaliação -->
+              <ng-container *ngFor="let nota of ultimaAutoAvaliacao?.notas; let j = index">
+                <!-- Verifica se o índice do item atual é igual ao índice da nota usando a função isSameIndex -->
+                <div *ngIf="isSameIndex(i, j)">{{ nota.nota }}</div>
+              </ng-container>
+            </td>
+
+
             <td>{{ item.nota }}</td>
           </ng-container>
         </tr>
@@ -52,11 +63,12 @@
           <th>Qualificações - Fixo</th>
           <th>Requisitos</th>
           <th>Avaliação</th>
+          <th>Autoavaliação</th>
           <th>Nota</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of items">
+        <tr *ngFor="let item of items; let i = index">
           <ng-container *ngIf="item.tipo === 'qualificacao'">
             <td class="avaliacao-nome">{{ item.nome }}</td>
             <td>
@@ -75,6 +87,15 @@
                 <option value="Não Consta">Não Consta</option>
               </select>
             </td>
+
+            <td>
+              <!-- Itera sobre cada nota dentro da array de notas da última autoavaliação -->
+              <ng-container *ngFor="let nota of ultimaAutoAvaliacao?.notas; let j = index">
+                <!-- Verifica se o índice do item atual é igual ao índice da nota usando a função isSameIndex -->
+                <div *ngIf="isSameIndex(i, j)">{{ nota.nota }}</div>
+              </ng-container>
+            </td>
+            
             <td>{{ item.nota }}</td>
           </ng-container>
         </tr>
@@ -87,11 +108,12 @@
           <th>Ferramentas - Variável</th>
           <th>Requisitos</th>
           <th>Avaliação</th>
+          <th>Autoavaliação</th>
           <th>Nota</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of items">
+        <tr *ngFor="let item of items; let i = index">
           <ng-container *ngIf="item.tipo === 'ferramenta'">
             <td class="avaliacao-nome">{{ item.nome }}</td>
             <td>
@@ -110,23 +132,33 @@
                 <option value="Não Consta">Não Consta</option>
               </select>
             </td>
+
+            <td>
+              <!-- Itera sobre cada nota dentro da array de notas da última autoavaliação -->
+              <ng-container *ngFor="let nota of ultimaAutoAvaliacao?.notas; let j = index">
+                <!-- Verifica se o índice do item atual é igual ao índice da nota usando a função isSameIndex -->
+                <div *ngIf="isSameIndex(i, j)">{{ nota.nota }}</div>
+              </ng-container>
+            </td>
+
             <td>{{ item.nota }}</td>
           </ng-container>
         </tr>
       </tbody>
     </table>
-  
+ 
     <table class="tabela-comportamental">
       <thead>
         <tr>
           <th>Comportamental - Fixo</th>
           <th>Requisitos</th>
           <th>Avaliação</th>
+          <th>Autoavaliação</th>
           <th>Nota</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of items">
+        <tr *ngFor="let item of items; let i = index">
           <ng-container *ngIf="item.tipo === 'comportamental'">
             <td class="avaliacao-nome" [ngClass]="{'absenteismo': item.nome === 'Absenteísmo (INFORMATIVO)'}">{{ item.nome }}</td>
             <td>
@@ -145,6 +177,15 @@
                 <option value="Não Consta">Não Consta</option>
               </select>
             </td>
+
+            <td>
+              <!-- Itera sobre cada nota dentro da array de notas da última autoavaliação -->
+              <ng-container *ngFor="let nota of ultimaAutoAvaliacao?.notas; let j = index">
+                <!-- Verifica se o índice do item atual é igual ao índice da nota usando a função isSameIndex -->
+                <div *ngIf="isSameIndex(i, j)">{{ nota.nota }}</div>
+              </ng-container>
+            </td>
+
             <td>{{ item.nota }}</td>
           </ng-container>
         </tr>
@@ -157,11 +198,12 @@
           <th>Objetivo Individual - Variável</th>
           <th class="hidden">Requisitos</th>
           <th>Avaliação</th>
+          <th>Autoavaliação</th>
           <th>Nota</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of items">
+        <tr *ngFor="let item of items; let i = index">
           <ng-container *ngIf="item.tipo === 'individual'">
             <td class="avaliacao-nome">{{ item.nome }}</td>
             <td name="requisito" class="hidden">{{ item.requisito }}</td>
@@ -171,6 +213,15 @@
                   <option value="Insatisfatório">Insatisfatório</option>
                 </select>
               </td>
+
+              <td>
+                <!-- Itera sobre cada nota dentro da array de notas da última autoavaliação -->
+                <ng-container *ngFor="let nota of ultimaAutoAvaliacao?.notas; let j = index">
+                  <!-- Verifica se o índice do item atual é igual ao índice da nota usando a função isSameIndex -->
+                  <div *ngIf="isSameIndex(i, j)">{{ nota.nota }}</div>
+                </ng-container>
+              </td>
+
             <td>{{ item.nota }}</td>
           </ng-container>
         </tr>
@@ -183,6 +234,7 @@
           <th>Objetivo do Time - Variável</th>
           <th class="hidden">Requisitos</th>
           <th>Avaliação</th>
+          <th class="hidden">Autoavaliação</th>
           <th>Nota</th>
         </tr>
       </thead>
@@ -209,6 +261,7 @@
           <th>Objetivo da Empresa - Fixo</th>
           <th class="hidden">Requisitos</th>
           <th>Avaliação</th>
+          <th class="hidden">Autoavaliação</th>
           <th>Nota</th>
         </tr>
       </thead>

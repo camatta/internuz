@@ -11,6 +11,7 @@ import { ComercialComponent } from './dashboard/comercial/comercial.component';
 import { AuthGuard } from './routes/auth.guard';
 import { PiramideComponent } from './dashboard/piramide/piramide.component';
 import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
+import { AutoavaliacaoComponent } from './dashboard/autoavaliacao/autoavaliacao.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
     { path: 'historico', component: HistoricoComponent },
     { path: 'comercial', component: ComercialComponent },
     { path: 'piramide', component: PiramideComponent },
+    { path: 'autoavaliacao', component: AutoavaliacaoComponent },
   ]},
   { path: 'cadastro', component: CadastroComponent },
   { path: 'redefinir-senha', component: RedefinirSenhaComponent },

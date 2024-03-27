@@ -114,10 +114,6 @@ input {
   color: #00175d;
 }
 
-.esqueci-a-senha {
-  display: none;
-}
-
 @media screen and (max-width: 768px) {
   .wrapper {
     width: 100%;

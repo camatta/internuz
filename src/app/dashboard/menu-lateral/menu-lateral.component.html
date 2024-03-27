@@ -1,4 +1,3 @@
-<!-- Seu HTML adaptado -->
 <div class="menu-lateral">
   <ul>
     <li><button routerLink="/dashboard" [class.link-ativo]="isLinkAtivo('/dashboard')"><i class="fas fa-home"></i>Home</button></li>
@@ -10,6 +9,7 @@
     <li *ngIf="showAvaliacoesLink">
       <button routerLink="/dashboard/avaliacoes" [class.link-ativo]="isLinkAtivo('/dashboard/avaliacoes')"><i class="fas fa-star"></i>Avaliações</button>
     </li>
+    <li><button routerLink="/dashboard/autoavaliacao" [class.link-ativo]="isLinkAtivo('/dashboard/autoavaliacao')"><i class="fa-solid fa-face-smile"></i>Autoavaliação</button></li>
     <!-- <li><button routerLink="/dashboard/piramide" [class.link-ativo]="isLinkAtivo('/dashboard/piramide')">Pirâmide de Nairuz</button></li> -->
     <!-- <li *ngIf="showComercialLink">
       <button routerLink="/dashboard/comercial" [class.link-ativo]="isLinkAtivo('/dashboard/comercial')">Comercial</button>

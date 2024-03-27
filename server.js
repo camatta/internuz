@@ -57,17 +57,17 @@ app.post('/api/auth/esqueci-senha', async (req, res) => {
 
     // Configurar o nodemailer com suas credenciais de e-mail
     const transporter = nodemailer.createTransport({
-      service: 'gmail', 
+      service: 'outlook', 
       auth: {
-        user: 'desenvolvimentonairuz@gmail.com',
-        pass: 'Senha@NairuzDev2022',
+        user: 'ti@nairuz.com.br',
+        pass: 'xxx*',
       },
     });
 
     const resetLink = `http://localhost:4200/redefinir-senha/${resetToken}`;
 
     const mailOptions = {
-      from: 'desenvolvimentonairuz@gmail.com',
+      from: 'ti@nairuz.com.br',
       to: email,
       subject: 'Redefinição de Senha',
       html: `<p>Clique no link a seguir para redefinir sua senha: <a href="${resetLink}">${resetLink}</a></p>`,
@@ -234,6 +234,53 @@ app.get('/api/users/me', authMiddleware, async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Ocorreu um erro ao obter as informações do usuário.' });
+  }
+});
+
+const Autoavaliacao = require('./src/app/models/Autoavaliacao');
+
+// Rota para salvar a autoavaliação
+app.post('/api/autoavaliacoes', async (req, res) => {
+  const dadosAutoavaliacao = req.body; 
+
+  const mediaIndividualFixa = 0;
+  console.log('Autoavaliação recebida:', dadosAutoavaliacao);
+
+  const novaAutoavaliacao = new Autoavaliacao({
+    funcionario: dadosAutoavaliacao.funcionario,
+    mediaIndividual: mediaIndividualFixa,
+    dataFormatada: dadosAutoavaliacao.data,
+    notas: dadosAutoavaliacao.notas,
+  });
+
+  try {
+    // Salva a nova autoavaliação no banco de dados
+    await novaAutoavaliacao.save();
+    res.status(200).json({ message: 'Autoavaliação salva com sucesso!' });
+  } catch (error) {
+    console.error('Erro ao salvar a autoavaliação:', error);
+    res.status(500).json({ message: 'Erro ao salvar a autoavaliação' });
+  }
+});
+
+// Rota para obter a última autoavaliação de um funcionário específico
+app.get('/api/autoavaliacoes', async (req, res) => {
+  try {
+      const { funcionario } = req.query;
+
+      // Consulte a última autoavaliação do funcionário especificado
+      const ultimaAutoAvaliacao = await Autoavaliacao.findOne({ funcionario })
+          .sort({ data: -1 }) // Classifique por data em ordem decrescente para obter a última
+          .limit(1);
+
+      if (!ultimaAutoAvaliacao) {
+          return res.status(404).json({ message: 'Nenhuma autoavaliação encontrada para o funcionário especificado.' });
+      }
+
+      res.json(ultimaAutoAvaliacao);
+  } catch (error) {
+      console.error('Erro ao recuperar a última autoavaliação:', error);
+      res.status(500).json({ message: 'Erro ao recuperar a última autoavaliação.' });
   }
 });
 

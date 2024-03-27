@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,25 +12,12 @@ import { UserService } from '../../services/user.service';
 export class UsuariosComponent implements OnInit {
   users: any[] = [];
 
-  userSectorOptions: { [key: string]: string[] } = {};
-
-  teamOptions: string[] = ['Tecnologia', 'Marketing', 'Administrativo', 'Comercial', 'Customer Success'];
-
-  sectorOptions: { [key: string]: string[] } = {
-    Tecnologia: ['Design UX/UI', 'Desenvolvimento'],
-    Marketing: ['Design Publicitário', 'Inbound Marketing', 'Mídias Pagas', 'Redação', 'SEO'],
-    Administrativo: ['Administrativo', 'Financeiro', 'Recursos Humanos'],
-    Comercial: ['Vendas'],
-    'Customer Success': ['CS']
-  };
-
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.userService.getUsers().subscribe(
       (data) => {
         this.users = data;
-        console.log(this.users)
       },
       (error) => {
         console.error(error);
@@ -37,7 +25,7 @@ export class UsuariosComponent implements OnInit {
     );
   }
 
-  onTeamChange(user: any) {
-    user.userSectorOptions = this.sectorOptions[user.team];
+  editarUsuario(userId: string) {
+    
   }
 }

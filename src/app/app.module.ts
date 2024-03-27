@@ -20,6 +20,7 @@ import { PiramideComponent } from './dashboard/piramide/piramide.component';
 import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxPrintModule } from 'ngx-print';
+import { AutoavaliacaoComponent } from './dashboard/autoavaliacao/autoavaliacao.component';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { NgxPrintModule } from 'ngx-print';
     HistoricoComponent,
     ComercialComponent,
     PiramideComponent,
-    RedefinirSenhaComponent
+    RedefinirSenhaComponent,
+    AutoavaliacaoComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

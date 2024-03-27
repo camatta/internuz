@@ -14,4 +14,8 @@ export class AvaliacoesService {
     const params = new HttpParams().set('nomeUsuario', nomeUsuario);
     return this.http.get<any[]>(environment.URL_API + '/api/avaliacoes', { params });
   }
+
+  getUltimaAvaliacaoPorUsuario(nomeUsuario: string): Observable<any> {
+    return this.http.get<any>(environment.URL_API + `/api/avaliacoes/ultima?usuario=${nomeUsuario}`);
+  }
 }

@@ -1,0 +1,184 @@
+<h1>Autoavaliação</h1>
+
+<div *ngIf="isAuthorized">
+    <p>A prática da autoavaliação é fundamental no desenvolvimento profissional, fornecendo aos <strong>funcionairuz</strong> uma oportunidade valiosa de refletir sobre seu próprio desempenho, identificar áreas de força e de melhoria, e estabelecer metas pessoais para o crescimento contínuo. Ao se envolver ativamente nesse processo, os colaboradores assumem responsabilidade pelo seu desenvolvimento, promovendo uma cultura de autogestão e aprendizado constante dentro da empresa.</p>
+
+    <div class="table-avaliacao">
+      <table class="tabela-competencias">
+        <thead>
+          <tr>
+            <th>Competências - Fixo</th>
+            <th>Requisitos</th>
+            <th>Avaliação</th>
+            <th>Nota</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of itemsPorTime[setorFuncionario]">
+            <ng-container *ngIf="item.tipo === 'competencia'">
+              <td class="avaliacao-nome">{{ item.nome }}</td>
+              <td>
+                <select id="requisito" name="requisito" [(ngModel)]="item.requisito" (change)="calculateGrade(item)">
+                  <option value="Obrigatório">Obrigatório</option>
+                  <option value="Diferencial">Diferencial</option>
+                  <option value="Desejado">Desejado</option>
+                </select>
+              </td>
+              <td>
+                <select [(ngModel)]="item.avaliacao" (ngModelChange)="calculateGrade(item)">
+                  <option value="Muito Bom">Muito Bom</option>
+                  <option value="Bom">Bom</option>
+                  <option value="Regular">Regular</option>
+                  <option value="Insatisfatório">Insatisfatório</option>
+                  <option value="Não Consta">Não Consta</option>
+                </select>
+              </td>
+              <td>{{ item.nota }}</td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+    
+      <table class="tabela-qualificacoes">
+        <thead>
+          <tr>
+            <th>Qualificações - Fixo</th>
+            <th>Requisitos</th>
+            <th>Avaliação</th>
+            <th>Nota</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of itemsPorTime[setorFuncionario]">
+            <ng-container *ngIf="item.tipo === 'qualificacao'">
+              <td class="avaliacao-nome">{{ item.nome }}</td>
+              <td>
+                <select id="requisito" name="requisito" [(ngModel)]="item.requisito" (change)="calculateGrade(item)">
+                  <option value="Obrigatório">Obrigatório</option>
+                  <option value="Diferencial">Diferencial</option>
+                  <option value="Desejado">Desejado</option>
+                </select>
+              </td>
+              <td>
+                <select [(ngModel)]="item.avaliacao" (ngModelChange)="calculateGrade(item)">
+                  <option value="Muito Bom">Muito Bom</option>
+                  <option value="Bom">Bom</option>
+                  <option value="Regular">Regular</option>
+                  <option value="Insatisfatório">Insatisfatório</option>
+                  <option value="Não Consta">Não Consta</option>
+                </select>
+              </td>
+              <td>{{ item.nota }}</td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+    
+      <table class="tabela-ferramentas">
+        <thead>
+          <tr>
+            <th>Ferramentas - Variável</th>
+            <th>Requisitos</th>
+            <th>Avaliação</th>
+            <th>Nota</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of itemsPorTime[setorFuncionario]">
+            <ng-container *ngIf="item.tipo === 'ferramenta'">
+              <td class="avaliacao-nome">{{ item.nome }}</td>
+              <td>
+                <select id="requisito" name="requisito" [(ngModel)]="item.requisito" (change)="calculateGrade(item)">
+                  <option value="Obrigatório">Obrigatório</option>
+                  <option value="Diferencial">Diferencial</option>
+                  <option value="Desejado">Desejado</option>
+                </select>
+              </td>
+              <td>
+                <select [(ngModel)]="item.avaliacao" (ngModelChange)="calculateGrade(item)">
+                  <option value="Muito Bom">Muito Bom</option>
+                  <option value="Bom">Bom</option>
+                  <option value="Regular">Regular</option>
+                  <option value="Insatisfatório">Insatisfatório</option>
+                  <option value="Não Consta">Não Consta</option>
+                </select>
+              </td>
+              <td>{{ item.nota }}</td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+   
+      <table class="tabela-comportamental">
+        <thead>
+          <tr>
+            <th>Comportamental - Fixo</th>
+            <th>Requisitos</th>
+            <th>Avaliação</th>
+            <th>Nota</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of itemsPorTime[setorFuncionario]">
+            <ng-container *ngIf="item.tipo === 'comportamental'">
+              <td class="avaliacao-nome" [ngClass]="{'absenteismo': item.nome === 'Absenteísmo (INFORMATIVO)'}">{{ item.nome }}</td>
+              <td>
+                <select id="requisito" name="requisito" [(ngModel)]="item.requisito" (change)="calculateGrade(item)">
+                  <option value="Obrigatório">Obrigatório</option>
+                  <option value="Diferencial">Diferencial</option>
+                  <option value="Desejado">Desejado</option>
+                </select>
+              </td>
+              <td>
+                <select [(ngModel)]="item.avaliacao" (ngModelChange)="calculateGrade(item)">
+                  <option value="Muito Bom">Muito Bom</option>
+                  <option value="Bom">Bom</option>
+                  <option value="Regular">Regular</option>
+                  <option value="Insatisfatório">Insatisfatório</option>
+                  <option value="Não Consta">Não Consta</option>
+                </select>
+              </td>
+              <td>{{ item.nota }}</td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+    
+      <table class="tabela-individual">
+        <thead>
+          <tr>
+            <th>Objetivo Individual - Variável</th>
+            <th class="hidden">Requisitos</th>
+            <th>Avaliação</th>
+            <th>Nota</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of itemsPorTime[setorFuncionario]">
+            <ng-container *ngIf="item.tipo === 'individual'">
+              <td class="avaliacao-nome">{{ item.nome }}</td>
+              <td name="requisito" class="hidden">{{ item.requisito }}</td>
+                <td>
+                  <select [(ngModel)]="item.avaliacao" (ngModelChange)="calculateGrade(item)">
+                    <option value="Satisfatório">Satisfatório</option>
+                    <option value="Insatisfatório">Insatisfatório</option>
+                  </select>
+                </td>
+              <td>{{ item.nota }}</td>
+            </ng-container>
+          </tr>
+        </tbody>
+      </table>
+    
+      <div class="enviar-autoavaliacao">
+        <button (click)="enviarAutoAvaliacao()">Enviar Autoavaliação</button>
+      </div>
+       
+    </div>
+      
+      
+</div>
+
+<div *ngIf="!isAuthorized">
+    <p>Administradores e Líderes de Equipe não precisam realizar a autoavaliação.</p>
+</div>

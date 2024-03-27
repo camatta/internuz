@@ -1,95 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
-import { AuthService } from '../../services/auth.service';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { ViewChild } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { AutoavaliacaoService } from 'src/app/services/autoavaliacao.service';
 import { Router } from '@angular/router';
-import { AvaliacoesService } from 'src/app/services/avaliacoes.service';
-
 
 @Component({
-  selector: 'app-avaliacoes',
-  templateUrl: './avaliacoes.component.html',
-  styleUrls: ['./avaliacoes.component.css']
+  selector: 'app-autoavaliacao',
+  templateUrl: './autoavaliacao.component.html',
+  styleUrls: ['./autoavaliacao.component.css']
 })
-
-export class AvaliacoesComponent implements OnInit {
-
-  users: any[] = [];
-  avaliacoes: any[] = [];
-  selectedUser: string = '';
-  selectedUserNote: string = '';
-  usuarioSelecionado: string | null = null;
-  nomeAvaliador: string = '';
-  liderTeam: string = '';
-  filteredUsers: any[] = [];
-  isAdmin: boolean = false;
-  somaMediasFinaisGrupoAEscopo: number = 0;
-  mediaFinalPorTipoB: number = 0;
-  mediaFinalPorTipoC: number = 0;
-  somaMediasFinaisTotais: number = 0;
-  avaliacaoDisponivel: boolean = true;
-  ultimaAutoAvaliacao: any;
-
-  @ViewChild('tableAvaliacao') tableAvaliacao: any;
-
-  constructor(private userService: UserService, private http: HttpClient, private authService: AuthService, private router: Router, private avaliacoesService: AvaliacoesService) {}
-
-  ngOnInit(): void {
-    this.getUsers();
-  }
-
-  getUsers(): void {
-    this.userService.getUsers().subscribe(
-      (response: any) => {
-        this.users = response;
-
-        const liderLogadoJSON = localStorage.getItem('user');
-
-        if (liderLogadoJSON) {
-          const liderLogado = JSON.parse(liderLogadoJSON);
-          this.liderTeam = liderLogado.team;
-
-          // Verificar se o usuário é um Administrador
-          if (liderLogado.accessLevel === 'Administrador') {
-            this.isAdmin = true;
-            // Se for Administrador, não aplicar a filtragem, mostrar todos os usuários
-            this.filteredUsers = this.users.slice(); // Criar uma cópia do array de usuários
-          } else {
-            this.isAdmin = false;
-            // Se não for Administrador, filtrar os usuários pelo time do líder
-            this.filteredUsers = this.users.filter((user) => user.team === this.liderTeam);
-          }
-          this.removeDevTesteUser(); // Remover o usuário "Dev Nairuz" da listagem
-          this.sortUsersAlphabetically(); // Ordenar os usuários em ordem alfabética
-        }
-
-      },
-      (error: any) => {
-        console.error(error);
-      }
-    );
-
-  }
-
-  removeDevTesteUser(): void {
-    this.filteredUsers = this.filteredUsers.filter(user => user.name !== 'Dev Nairuz');
-  }
-
-  sortUsersAlphabetically(): void {
-    this.filteredUsers.sort((a, b) => {
-      const nameA = a.name.toLowerCase();
-      const nameB = b.name.toLowerCase();
-      return nameA.localeCompare(nameB);
-    });
-  }
-
-
-  items: any[] = [
-
-  ];
-
+export class AutoavaliacaoComponent implements OnInit {
+  isAuthorized: boolean = true;
+  autoavaliacoes: any[] = [];
+  setorFuncionario: string = '';
   itemsPorTime: { [key: string]: any[] } = {
     Desenvolvimento: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -177,14 +99,6 @@ export class AvaliacoesComponent implements OnInit {
       { tipo: 'individual', nome: 'Acuracidade no registro de ponto', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'SLA Chamados', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Tecnologia', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Tecnologia', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'SLA Chamados', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'Churn MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Meta de Faturamento', requisito: 'Indispensável', peso: 'C', },
     ],
     DesignUIUX: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -259,14 +173,6 @@ export class AvaliacoesComponent implements OnInit {
       { tipo: 'individual', nome: 'Acuracidade no registro de ponto', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'SLA Chamados', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Tecnologia', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Tecnologia', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'SLA Chamados', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'Churn MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Meta de Faturamento', requisito: 'Indispensável', peso: 'C', },
     ],
     CS: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -346,15 +252,6 @@ export class AvaliacoesComponent implements OnInit {
       { tipo: 'individual', nome: 'Cumprimento de prazo', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'SLA de resposta interna 24h', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'Aprovação de calendário', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Aprovação de calendário', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Resposta NPS  > 70%', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'Churn MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Meta de Faturamento', requisito: 'Indispensável', peso: 'C', },
     ],
     CSTec: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -435,14 +332,6 @@ export class AvaliacoesComponent implements OnInit {
       { tipo: 'individual', nome: 'Cumprimento de prazo contratual dos projetos (go-live)', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'SLA de resposta interna 24h', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'Resposta NPS > 70%', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Tecnologia', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Tecnologia', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'SLA Chamados', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'Churn MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Meta de Faturamento', requisito: 'Indispensável', peso: 'C', },
     ],
     Vendas: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -515,11 +404,6 @@ export class AvaliacoesComponent implements OnInit {
       { tipo: 'individual', nome: 'Taxa de conversão de 25%', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'Acuracidade no registro de ponto', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'Manter o CRM atualizado em todas as etapas do funil', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'time', nome: 'Meta do time de contratos fechados para as esteiras da empresa', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'SLA de resposta dos Suspects 1 dia útil para agendamento de reuniões', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'Churn MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Meta de Faturamento', requisito: 'Indispensável', peso: 'C', },
     ],
     PreVendas: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -598,16 +482,6 @@ export class AvaliacoesComponent implements OnInit {
       { tipo: 'comportamental', nome: 'Absenteísmo (INFORMATIVO)', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'comportamental', nome: 'Comprometimento', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'comportamental', nome: 'Inovação', requisito: 'Obrigatório', peso: 'A', },
-      { tipo: 'individual', nome: 'Meta de SDR: SLA de 1 dia útil dos Suspects que vierem do canal Marketing;', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'individual', nome: 'Meta de BDR 06 oportunidades qualificadas por mês (Perfil Enterprise, A e B) válido para esteira de tecnologia e marketing', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'individual', nome: 'Acuracidade no registro de ponto', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'individual', nome: 'Manter o CRM atualizado nas etapas correspondentes ao Pré Vendas', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'individual', nome: 'Manter a planilha de controle de OPS atualizada da entrada do suspect ao agendamento', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'individual', nome: 'Dar lost  nos Suspect do canal marketing como não consegui qualificar, apenas após 5 dias úteis de tentativas e ter realizado o seguinte fluxo: 1 tentativa de ligação e 1 whatsapp depois do meio dia + 1 tentativa de contato e +1 Whatsapp', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'time', nome: 'Meta do time de contratos fechados para as esteiras da empresa', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'Churn MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Meta de Faturamento', requisito: 'Indispensável', peso: 'C', },
     ],
     Redacao: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -687,15 +561,6 @@ export class AvaliacoesComponent implements OnInit {
       { tipo: 'individual', nome: 'Tempo de produção', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'Média de aprovação', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'Cumprimento de prazo', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Média de aprovação', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Tempo de produção', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazo', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'Churn MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Meta de Faturamento', requisito: 'Indispensável', peso: 'C', },
     ],
     MidiasPagas: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -773,14 +638,6 @@ export class AvaliacoesComponent implements OnInit {
       { tipo: 'individual', nome: 'Atingimento dos objetivos da carteira', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'Assertividade de projeção', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'Cumprimento de prazo', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Atingimento dos objetivos da carteira', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'Churn MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Meta de Faturamento', requisito: 'Indispensável', peso: 'C', },
     ],
     InboundMarketing: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -853,16 +710,6 @@ export class AvaliacoesComponent implements OnInit {
       { tipo: 'individual', nome: 'Média de aprovação', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'Cumprimento de prazo', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'GDR - RD Station da carteira', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Tempo de produção', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'time', nome: 'Média de aprovação', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'GDR - RD Station - Cliente Ativos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'Churn MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Meta de Faturamento', requisito: 'Indispensável', peso: 'C', },
     ],
     DesignPublicitario: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -941,15 +788,6 @@ export class AvaliacoesComponent implements OnInit {
       { tipo: 'individual', nome: 'Tempo de produção', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'Média de aprovação', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'Cumprimento de prazo', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Design', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Média de aprovação', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Tempo de produção', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'Churn MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Meta de Faturamento', requisito: 'Indispensável', peso: 'C', },
     ],
     TeamLiderUIUX: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -1033,14 +871,6 @@ export class AvaliacoesComponent implements OnInit {
       { tipo: 'individual', nome: 'Acuracidade no registro de ponto', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'SLA Chamados', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Tecnologia', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Tecnologia', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'SLA Chamados', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'Churn MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Meta de Faturamento', requisito: 'Indispensável', peso: 'C', },
     ],
     TeamLiderRedacao: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -1129,15 +959,6 @@ export class AvaliacoesComponent implements OnInit {
       { tipo: 'individual', nome: 'Tempo de produção', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'Média de aprovação', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'Cumprimento de prazo', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Média de aprovação', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Tempo de produção', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazo', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'Churn MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Meta de Faturamento', requisito: 'Indispensável', peso: 'C', },
     ],
     TeamLiderDesignPublicitario: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -1225,68 +1046,30 @@ export class AvaliacoesComponent implements OnInit {
       { tipo: 'individual', nome: 'Tempo de produção', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'Média de aprovação', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'Cumprimento de prazo', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Design', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Média de aprovação', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Tempo de produção', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'Churn MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Meta de Faturamento', requisito: 'Indispensável', peso: 'C', },
     ],
     // Outros times e seus respectivos itens
   };
+  items: any[] = [];
 
-//Método para atualizar o usuário selecionado de acordo com o select feio no front.
-  atualizarUsuarioSelecionado(event: any) {
-    const usuarioSelecionado = event.target.value;
-    const setorSelecionado = event.target.options[event.target.selectedIndex].getAttribute('data-setor');
-    
-    console.log('Usuário selecionado:', usuarioSelecionado);
-    console.log('Setor do usuário:', setorSelecionado);
-    
-    // Atualizar a lista de itens com base no time selecionado
-    this.usuarioSelecionado = usuarioSelecionado;
-    this.items = this.itemsPorTime[setorSelecionado];
-    
+  constructor(private autoavaliacaoService: AutoavaliacaoService, private router: Router, private authService: AuthService) { }
 
-    if (!this.items || this.items.length === 0) {
-      this.items = []; // Limpar a lista de itens
-      this.avaliacaoDisponivel = false;
-      console.log('A avaliação ainda não está disponível para seu time');
-    } else {
-      this.avaliacaoDisponivel = true;
-    }
-    this.limparNotasAutoAvaliacao();
-    this.carregarUltimaAutoAvaliacao();
-
+  ngOnInit(): void {
+    this.checkAuthorization();
+    this.getSetor();
   }
 
-  limparNotasAutoAvaliacao() {
-    this.ultimaAutoAvaliacao = null; 
+  checkAuthorization(): void {
+    const accessLevel = this.authService.getAccessLevel();
+    if (accessLevel === 'Administrador' || accessLevel === 'Líder de Equipe')  {
+      this.isAuthorized = false;
+    } 
   }
 
-// Método para carregar a última autoavaliação do funcionário selecionado
-carregarUltimaAutoAvaliacao(): void {
-  if (this.usuarioSelecionado) {
-    this.http.get(environment.URL_API + `/api/autoavaliacoes?funcionario=${this.usuarioSelecionado}&_sort=data&_order=desc&_limit=1`)
-      .subscribe((response: any) => {
-        this.ultimaAutoAvaliacao = response; // A resposta é um array, então pegamos o primeiro item
-        console.log('Última autoavaliação:', this.ultimaAutoAvaliacao);
-      }, (error) => {
-        console.log('O usuário não possui autoavaliação');
-      });
+  getSetor(): void {
+    this.setorFuncionario = this.authService.getSetor();
   }
-}
 
-// Método para verificar se o índice do item atual é igual ao índice da nota
-isSameIndex(index: number, notaIndex: number): boolean {
-  return index === notaIndex;
-}
-
-
-  calculateGrade(item: any) {
+  calculateGrade(item: any): void {
     switch (item.requisito) {
       case 'Obrigatório':
         switch (item.avaliacao) {
@@ -1322,8 +1105,6 @@ isSameIndex(index: number, notaIndex: number): boolean {
             item.nota = 0.25;
             break;
           case 'Insatisfatório':
-            item.nota = 0;
-            break;
           case 'Não Consta':
             item.nota = 0;
             break;
@@ -1341,210 +1122,69 @@ isSameIndex(index: number, notaIndex: number): boolean {
             item.nota = 0.5;
             break;
           case 'Insatisfatório':
-            item.nota = 0;
-            break;
           case 'Não Consta':
             item.nota = 0;
             break;
         }
         break;
-        case 'Indispensável':
-          switch (item.avaliacao) {
-            case 'Satisfatório':
-              item.nota = 10;
-              break;
-            case 'Insatisfatório':
-              item.nota = -10;
-              break;
-          }
+      case 'Indispensável':
+        switch (item.avaliacao) {
+          case 'Satisfatório':
+            item.nota = 10;
+            break;
+          case 'Insatisfatório':
+            item.nota = -10;
+            break;
+        }
         break;
     }
+
     this.updateAvaliacaoNotas();
-
   }
 
-
-
-   // Função para atualizar as notas após cada a avaliação de item
-   updateAvaliacaoNotas() {
-    this.avaliacoes = this.items.map((item) => ({
-      nome: item.nome,
-      nota: item.nota,
-      requisito: item.requisito,
-      avaliacao: item.avaliacao,
-      tipo: item.tipo,
-    }));
-    console.log(this.avaliacoes)
-
-
-      // Criar objetos separados para armazenar as notas totais por tipo para requisitos "Obrigatório", "nulo", "desejado" e "diferencial"
-      const notasObrigatorioNuloPorTipo: { [key: string]: { quantidade: number; notaTotal: number } | undefined } = {};
-      const notasDesejadoPorTipo: { [key: string]: { quantidade: number; notaTotal: number } | undefined } = {};
-      const notasDiferencialPorTipo: { [key: string]: { quantidade: number; notaTotal: number } | undefined } = {};
-
-      // Percorrer os itens e somar as notas dos itens com requisito "Obrigatório", "nulo", "desejado" ou "diferencial" por tipo
-      for (const item of this.avaliacoes) {
-        if (item.requisito === 'Obrigatório' || item.requisito === 'nulo') {
-          if (!notasObrigatorioNuloPorTipo[item.tipo]) {
-            notasObrigatorioNuloPorTipo[item.tipo] = { quantidade: 1, notaTotal: item.nota };
-          } else {
-            notasObrigatorioNuloPorTipo[item.tipo]!.quantidade++;
-            notasObrigatorioNuloPorTipo[item.tipo]!.notaTotal += item.nota;
-          }
-        } else if (item.requisito === 'Desejado') {
-          if (!notasDesejadoPorTipo[item.tipo]) {
-            notasDesejadoPorTipo[item.tipo] = { quantidade: 1, notaTotal: item.nota };
-          } else {
-            notasDesejadoPorTipo[item.tipo]!.quantidade++;
-            notasDesejadoPorTipo[item.tipo]!.notaTotal += item.nota;
-          }
-        } else if (item.requisito === 'Diferencial') {
-          if (!notasDiferencialPorTipo[item.tipo]) {
-            notasDiferencialPorTipo[item.tipo] = { quantidade: 1, notaTotal: item.nota };
-          } else {
-            notasDiferencialPorTipo[item.tipo]!.quantidade++;
-            notasDiferencialPorTipo[item.tipo]!.notaTotal += item.nota;
-          }
-        }
-      }
-
-      // Definir os tipos desejados para calcular a média final
-      
-      const tiposGrupoA = ['competencia', 'qualificacao', 'ferramenta', 'comportamental', 'individual'];
-      const tiposGrupoB = 'time';
-      const tiposGrupoC = 'empresa';
-
-      let somaMediasFinaisGrupoA = 0;
-
-      // Exibindo as notas somadas, notas máximas por grupo e notas por cada requisito.
-      for (const tipo in notasObrigatorioNuloPorTipo) {
-        if (tiposGrupoA.includes(tipo)) {
-          const notaObrigatorioNulo = notasObrigatorioNuloPorTipo[tipo]?.notaTotal || 0;
-          const notaDesejado = notasDesejadoPorTipo[tipo]?.notaTotal || 0;
-          const notaDiferencial = notasDiferencialPorTipo[tipo]?.notaTotal || 0;
-          const qtdMaximaPorTipo = notasObrigatorioNuloPorTipo[tipo]!.quantidade * 10;
-          const mediaObrigatoria = (notaObrigatorioNulo / qtdMaximaPorTipo) * 10;
-          const mediaDiferencial = Math.min(notaDiferencial, 1);
-          const mediaDesejado = Math.min(notaDesejado, 0.75);
-          const mediaFinalPorTipo = Math.min(mediaObrigatoria + mediaDiferencial + mediaDesejado, 10);
-
-          console.log(`Tipo: %c${tipo}%c, Quantidade: ${notasObrigatorioNuloPorTipo[tipo]!.quantidade}, Nota Total Obrigatório: ${notaObrigatorioNulo}, Nota Total Desejado: ${notaDesejado}, Nota Total Diferencial: ${notaDiferencial}, Nota Máxima Do Grupo: ${qtdMaximaPorTipo}, Média Obrigatória: ${mediaObrigatoria}, Média Desejado: ${mediaDesejado}, Média Diferencial: ${mediaDiferencial}, Média Final: ${mediaFinalPorTipo}`, 'font-weight: bold; color: blue', 'font-weight: normal');
-
-          somaMediasFinaisGrupoA += mediaFinalPorTipo / 5;
-
-          this.somaMediasFinaisGrupoAEscopo = parseFloat(somaMediasFinaisGrupoA.toFixed(2));
-
-          console.log('Soma das 5 medias para formar a média individual:' + this.somaMediasFinaisGrupoAEscopo);
-
-        } else if (tipo === tiposGrupoB) {
-          const notaObrigatorioNulo = notasObrigatorioNuloPorTipo[tipo]?.notaTotal || 0;
-          const notaDesejado = notasDesejadoPorTipo[tipo]?.notaTotal || 0;
-          const notaDiferencial = notasDiferencialPorTipo[tipo]?.notaTotal || 0;
-          const qtdMaximaPorTipo = notasObrigatorioNuloPorTipo[tipo]!.quantidade * 10;
-          const mediaObrigatoria = (notaObrigatorioNulo / qtdMaximaPorTipo) * 10;
-          const mediaDiferencial = Math.min(notaDiferencial, 1);
-          const mediaDesejado = Math.min(notaDesejado, 0.75);
-          this.mediaFinalPorTipoB = mediaObrigatoria + mediaDiferencial + mediaDesejado;
-
-          console.log(`Tipo: %c${tipo}%c, Quantidade: ${notasObrigatorioNuloPorTipo[tipo]!.quantidade}, Nota Total Obrigatório: ${notaObrigatorioNulo}, Nota Total Desejado: ${notaDesejado}, Nota Total Diferencial: ${notaDiferencial}, Nota Máxima Do Grupo: ${qtdMaximaPorTipo}, Média Obrigatória: ${mediaObrigatoria}, Média Desejado: ${mediaDesejado}, Média Diferencial: ${mediaDiferencial}, Média Final: ${this.mediaFinalPorTipoB}`, 'font-weight: bold; color: blue', 'font-weight: normal');
-
-        } else if (tipo === tiposGrupoC) {
-          const notaObrigatorioNulo = notasObrigatorioNuloPorTipo[tipo]?.notaTotal || 0;
-          const notaDesejado = notasDesejadoPorTipo[tipo]?.notaTotal || 0;
-          const notaDiferencial = notasDiferencialPorTipo[tipo]?.notaTotal || 0;
-          const qtdMaximaPorTipo = notasObrigatorioNuloPorTipo[tipo]!.quantidade * 10;
-          const mediaObrigatoria = (notaObrigatorioNulo / qtdMaximaPorTipo) * 10;
-          const mediaDiferencial = Math.min(notaDiferencial, 1);
-          const mediaDesejado = Math.min(notaDesejado, 0.75);
-          this.mediaFinalPorTipoC = mediaObrigatoria + mediaDiferencial + mediaDesejado;
-
-          console.log(`Tipo: %c${tipo}%c, Quantidade: ${notasObrigatorioNuloPorTipo[tipo]!.quantidade}, Nota Total Obrigatório: ${notaObrigatorioNulo}, Nota Total Desejado: ${notaDesejado}, Nota Total Diferencial: ${notaDiferencial}, Nota Máxima Do Grupo: ${qtdMaximaPorTipo}, Média Obrigatória: ${mediaObrigatoria}, Média Desejado: ${mediaDesejado}, Média Diferencial: ${mediaDiferencial}, Média Final: ${this.mediaFinalPorTipoC}`, 'font-weight: bold; color: blue', 'font-weight: normal');
-        }
-      }
-
-      this.somaMediasFinaisTotais = (this.somaMediasFinaisGrupoAEscopo / 10 * 3) + (this.mediaFinalPorTipoB / 10 * 2) + (this.mediaFinalPorTipoC / 10 * 5);;
-      console.log('Soma das médias finais de todos os grupos:', this.somaMediasFinaisTotais);
-
-    
-  
+  updateAvaliacaoNotas() {
   }
 
+  enviarAutoAvaliacao(): void {
 
-  enviarAvaliacao() {
 
-    const selectsPreenchidos = this.avaliacoes.every(item => {
-      return (
-        item.avaliacao === 'Muito Bom' ||
-        item.avaliacao === 'Bom' ||
-        item.avaliacao === 'Regular' ||
-        item.avaliacao === 'Insatisfatório' ||
-        item.avaliacao === 'Não Consta' ||
-        item.avaliacao === 'Satisfatório'
-      );
-    });
-  
-    if (!selectsPreenchidos) {
-      alert('Por favor, preencha todas as notas antes de enviar a avaliação.');
-      return; // Impede o envio da avaliação se algum select não for preenchido corretamente
+    const todosRequisitosSelecionados = this.itemsPorTime[this.setorFuncionario].every(item => item.avaliacao);
+
+    // Se algum item não tiver o requisito selecionado, exibe uma mensagem de erro e não envia a avaliação
+    if (!todosRequisitosSelecionados) {
+      alert('Por favor, selecione a nota para todos os itens antes de enviar a avaliação.');
+      return;
     }
-    // Obter o usuário avaliador logado do localStorage
-    const avaliadorLogadoJSON = localStorage.getItem('user');
 
-    if (avaliadorLogadoJSON) {
-      const avaliadorLogado = JSON.parse(avaliadorLogadoJSON);
-      this.nomeAvaliador = avaliadorLogado.name;
-      console.log('Avaliador logado:', this.nomeAvaliador);
-    }
-    
+  // Formatar data para padrão brasileiro
+  const dataAtual = new Date();
+  const dia = dataAtual.getDate();
+  const mes = dataAtual.getMonth() + 1;
+  const ano = dataAtual.getFullYear();
 
-    // Formatar data para padrão brasileiro
-    const dataAtual = new Date();
-    const dia = dataAtual.getDate();
-    const mes = dataAtual.getMonth() + 1;
-    const ano = dataAtual.getFullYear();
-  
-    // Itens que serao enviados para o servidor
-    const funcionario = this.usuarioSelecionado;
-    const avaliador = this.nomeAvaliador;
-    const mediaIndividual = this.somaMediasFinaisGrupoAEscopo;
-    const mediaTime = this.mediaFinalPorTipoB;
-    const mediaEmpresa = this.mediaFinalPorTipoC;
-    const mediaFinalGeral = this.somaMediasFinaisTotais;
-    const dataFormatada = `${dia}/${mes}/${ano}`;
-    
+  const dataFormatada = `${dia}/${mes}/${ano}`;
 
-    const dadosAvaliacao = {
-      funcionario,
-      avaliador,
-      dataFormatada,
-      notas: this.avaliacoes.map((item) => ({ nome: item.nome, requisito: item.requisito, avaliacao: item.avaliacao, nota: item.nota })),
-      mediaIndividual,
-      mediaTime,
-      mediaEmpresa,
-      mediaFinalGeral
+
+    const dadosAutoavaliacao = {
+      funcionario: this.authService.getUserName(),
+      data: dataFormatada,
+      notas: this.itemsPorTime[this.setorFuncionario].map(item => ({
+        nome: item.nome,
+        requisito: item.requisito,
+        avaliacao: item.avaliacao,
+        nota: item.nota
+      }))
     };
 
-    console.log('Dados enviados para o banco:' + JSON.stringify(dadosAvaliacao, null, 2));
-
-    // Chamar a API para salvar a avaliação
-    this.salvarAvaliacao(dadosAvaliacao);
- 
+    this.autoavaliacaoService.enviarAutoavaliacao(dadosAutoavaliacao).subscribe(
+      (response: any) => {
+        console.log('Autoavaliação enviada com sucesso!');
+        alert('Avaliação Enviada com Sucesso');
+        this.router.navigate(['/dashboard']);
+      },
+      (error: any) => {
+        console.error('Erro ao enviar autoavaliação', error);
+      }
+    );
   }
-
-  
-  salvarAvaliacao(dadosAvaliacao: any) {
-    // Chamar a API usando o HttpClient
-    this.http.post(environment.URL_API + '/api/avaliacao', dadosAvaliacao)
-      .subscribe(
-        response => {
-          console.log('Avaliação enviada com sucesso!', response);
-          alert('Avaliação enviada com sucesso!')
-          this.router.navigate(['/dashboard']);
-        },
-        error => {
-          console.error('Erro ao enviar a avaliação.', error);
-        }
-      );
-  }
-
 }

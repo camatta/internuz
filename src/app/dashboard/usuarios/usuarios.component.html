@@ -14,31 +14,18 @@
       <tr *ngFor="let user of users">
         <td>{{ user.name }}</td>
         <td>
-          <ng-container *ngIf="!user.editing">{{ user.team }}</ng-container>
-          <ng-container *ngIf="user.editing">
-            <select [(ngModel)]="user.team" (change)="onTeamChange(user)">
-              <option *ngFor="let option of teamOptions" [value]="option">{{ option }}</option>
-            </select>
-          </ng-container>
+          {{ user.team }}
         </td>
         <td>
-          <ng-container *ngIf="!user.editing">{{ user.setorTratado }}</ng-container>
+          {{ user.setorTratado }}
         </td>
         <td>
-          <ng-container *ngIf="!user.editing">{{ user.accessLevel }}</ng-container>
-          <ng-container *ngIf="user.editing">
-            <select>
-              <option value="Administrador">Administrador</option>
-              <option value="Líder de Equipe">Líder de Equipe</option>
-              <option value="Funcionário">Funcionário</option>
-            </select>
-          </ng-container>
+          {{ user.accessLevel }}
         </td>
-        <!-- <td>
-          <button (click)="user.editing = !user.editing">{{ user.editing ? 'Salvar' : 'Editar' }}</button>
-        </td> -->
+        <td>
+          <span class="edit-icon" (click)="editarUsuario(user._id)"><i class="fa-solid fa-pen"></i></span>
+        </td>
       </tr>          
     </tbody>
   </table>
 </div>
-

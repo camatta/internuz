@@ -57,3 +57,7 @@ button {
   padding: 10px;
   margin-bottom: 1rem
 }
+
+.edit-icon i {
+  color: #61dcab;
+}
