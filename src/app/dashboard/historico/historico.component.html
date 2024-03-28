@@ -7,24 +7,27 @@
   </select>
 </div>
 
-<div *ngFor="let avaliacao of historicoAvaliacoes">
-  <p><span>Avaliado por:</span> {{ avaliacao.avaliador }}</p>
-  <p><span>Data:</span> {{ avaliacao.dataFormatada }}</p>
-  <p><span>Nota Individual:</span> {{ avaliacao.mediaIndividual }}<span>
-    <span class="performance-prata" *ngIf="avaliacao.mediaIndividual < 8">Prata</span>
-    <span class="performance-ouro" *ngIf="avaliacao.mediaIndividual >= 8 && avaliacao.mediaIndividual < 9">Ouro</span>
-    <span class="performance-diamante" *ngIf="avaliacao.mediaIndividual >= 9">Diamante</span>
-  </span></p>
-  <p><span>Nota do Time:</span> {{ avaliacao.mediaTime }}</p>
-  <p><span>Nota da Empresa:</span> {{ avaliacao.mediaEmpresa }}</p>
-  <p class="nota-final">Média Final: {{ avaliacao.mediaFinalGeral | number:'1.2-2' }}</p>
-  <div>
-    <ul>
-      <li *ngFor="let item of avaliacao.itens">
-        {{ item.nome }}: {{ item.nota }}
-      </li>
-    </ul>
-    <button  (click)="downloadRelatorio(avaliacao)">Baixar Relatório</button>
+<p class="aviso-ultimas"><strong>Últimas avaliações realizadas:</strong></p>
+<div class="wrapper-historico">
+  <div *ngFor="let avaliacao of historicoAvaliacoes">
+    <p><span>Avaliado por:</span> {{ avaliacao.avaliador }}</p>
+    <p><span>Data:</span> {{ avaliacao.dataFormatada }}</p>
+    <p><span>Nota Individual:</span> {{ avaliacao.mediaIndividual }}<span>
+      <span class="performance-prata" *ngIf="avaliacao.mediaIndividual < 8">Prata</span>
+      <span class="performance-ouro" *ngIf="avaliacao.mediaIndividual >= 8 && avaliacao.mediaIndividual < 9">Ouro</span>
+      <span class="performance-diamante" *ngIf="avaliacao.mediaIndividual >= 9">Diamante</span>
+    </span></p>
+    <p><span>Nota do Time:</span> {{ avaliacao.mediaTime }}</p>
+    <p><span>Nota da Empresa:</span> {{ avaliacao.mediaEmpresa }}</p>
+    <p class="nota-final">Média Final: {{ avaliacao.mediaFinalGeral | number:'1.2-2' }}</p>
+    <div>
+      <ul>
+        <li *ngFor="let item of avaliacao.itens">
+          {{ item.nome }}: {{ item.nota }}
+        </li>
+      </ul>
+      <button  (click)="downloadRelatorio(avaliacao)">Baixar Relatório</button>
+    </div>
+    <hr>
   </div>
-  <hr>
 </div>

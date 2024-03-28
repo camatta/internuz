@@ -41,6 +41,17 @@ p span {
   color: #1c1c1c;
 }
 
+p strong {
+  color: #1c1c1c;
+}
+
+.aviso-ultimas {
+  color: #1c1c1c;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+}
+
 .performance-prata {
   background-color: #e1e1e1c7;
   padding: 10px;
@@ -209,4 +220,14 @@ p span {
   padding-top: 10px;
   width: 280px;
   text-align: center;
+}
+
+.wrapper-historico {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 35px;
+}
+
+.wrapper-historico > div {
+  width: 23%;
 }
