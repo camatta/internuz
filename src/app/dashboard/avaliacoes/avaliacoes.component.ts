@@ -1200,7 +1200,7 @@ export class AvaliacoesComponent implements OnInit {
       { tipo: 'qualificacao', nome: 'Cursos/treinamentos da área de atuação', requisito: 'Diferencial', peso: 'A', },
       { tipo: 'qualificacao', nome: 'Cursos / treinamentos sobre gestão', requisito: 'Diferencial', peso: 'A', },
       { tipo: 'qualificacao', nome: 'Atualização de cursos / treinamentos', requisito: 'Diferencial', peso: 'A', },
-      { tipo: 'qualificacao', nome: 'Participação em workshops', requisito: 'Diferencial', peso: 'A', },
+      { tipo: 'qualificacao', nome: 'Participação em feiras, eventos e workshops', requisito: 'Diferencial', peso: 'A', },
       { tipo: 'ferramenta', nome: 'Windows', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'ferramenta', nome: 'Microsoft Office (pacote)', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'ferramenta', nome: 'Teams', requisito: 'Obrigatório', peso: 'A', },
