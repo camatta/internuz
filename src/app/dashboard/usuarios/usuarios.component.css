@@ -8,7 +8,7 @@ h1 {
 }
 
 .wrapper-table {
-  width: 90%;
+  width: 100%;
   margin-top: 2rem;
   background-color: #ffffff30;
   color: #fff;
@@ -16,6 +16,7 @@ h1 {
   border: unset;
   padding: 10px;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  margin-bottom: 40px;
 }
 
 table {
@@ -60,4 +61,17 @@ button {
 
 .edit-icon i {
   color: #61dcab;
+}
+
+thead th {
+  padding: 10px;
+}
+
+tbody td {
+  width: 19.5%;
+  padding: 10px;
+}
+
+tbody td.editar-funcionairuz {
+  width: 2.5%;
 }

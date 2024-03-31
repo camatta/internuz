@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./usuarios.component.css']
 })
 export class UsuariosComponent implements OnInit {
-  users: any[] = [];
+
+  users: any[] = []; // Array de Usuários
 
   constructor(private userService: UserService, private router: Router) {}
 
@@ -23,9 +24,5 @@ export class UsuariosComponent implements OnInit {
         console.error(error);
       }
     );
-  }
-
-  editarUsuario(userId: string) {
-    
   }
 }

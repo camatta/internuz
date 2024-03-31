@@ -13,19 +13,19 @@
     </thead>
     <tbody>
       <tr *ngFor="let user of users">
-        <td>{{ user.name }}</td>
-        <td>
+        <td class="nome-funcionairuz">{{ user.name }}</td>
+        <td class="time-funcionairuz">
           {{ user.team }}
         </td>
-        <td>
+        <td class="setor-funcionairuz">
           {{ user.setorTratado }}
         </td>
-        <td>Não Atribuída</td>
-        <td>
+        <td class="funcao-funcionairuz">{{ user.funcao }}</td>
+        <td class="permissao-funcionairuz">
           {{ user.accessLevel }}
         </td>
-        <td>
-          <span class="edit-icon" (click)="editarUsuario(user._id)"><i class="fa-solid fa-pen"></i></span>
+        <td class="editar-funcionairuz">
+          <span class="edit-icon"><i class="fa-solid fa-pen"></i></span>
         </td>
       </tr>          
     </tbody>

@@ -35,6 +35,10 @@ const userSchema = new mongoose.Schema ({
   setorTratado: {
     type: String,
     required: true,
+  },
+  funcao: {
+    type: String,
+    required: false,
   }
 });
 

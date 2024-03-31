@@ -187,9 +187,9 @@ app.post('/api/auth/login', async (req, res) => {
     const token = jwt.sign({ userId: existingUser._id }, 'ef1c8080fd1db32bf420fac3bc22bc567b6c25d41d17eef10e3e4f54becc31aa');
 
     // Autenticação bem-sucedida
-    const { name, team, accessLevel, setor } = existingUser;
+    const { name, team, accessLevel, setor, funcao } = existingUser;
 
-    res.status(200).json({ message: 'Login bem-sucedido.', user: { name, email, team, accessLevel, setor }, token });
+    res.status(200).json({ message: 'Login bem-sucedido.', user: { name, email, team, accessLevel, setor, funcao }, token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Ocorreu um erro durante o login.' });
@@ -228,6 +228,7 @@ app.get('/api/users/me', authMiddleware, async (req, res) => {
       funcao: req.user.accessLevel,
       setor: req.user.setor,
       setorTratado: req.user.setorTratado,
+      funcao: req.user.funcao
     };
 
     res.status(200).json(userInfo);
