@@ -81,6 +81,11 @@ p strong {
   font-weight: 700;
 }
 
+.absenteismo {
+  color: #ff9df3 !important;
+  font-weight: 600;
+}
+
 /* Relatório */
 
 .title {

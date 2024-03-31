@@ -104,6 +104,14 @@ export class HistoricoComponent implements OnInit {
     }
   }
 
+  getAbsenteismo(avaliacao: any): string {
+    if (avaliacao && avaliacao.notas) {
+      const absenteismoNota = avaliacao.notas.find((nota: any) => nota.nome.includes('Absenteísmo'));
+      return absenteismoNota ? absenteismoNota.avaliacao : 'N/A';
+    } else {
+      return 'N/A';
+    }
+  }
 
   downloadRelatorio(avaliacao: any) {
     const doc = new jsPDF();

@@ -12,13 +12,14 @@
   <div *ngFor="let avaliacao of historicoAvaliacoes">
     <p><span>Avaliado por:</span> {{ avaliacao.avaliador }}</p>
     <p><span>Data:</span> {{ avaliacao.dataFormatada }}</p>
-    <p><span>Nota Individual:</span> {{ avaliacao.mediaIndividual }}<span>
+    <p><span>Nota Individual:</span> {{ avaliacao.mediaIndividual | number:'1.2-2' }}<span>
       <span class="performance-prata" *ngIf="avaliacao.mediaIndividual < 8">Prata</span>
       <span class="performance-ouro" *ngIf="avaliacao.mediaIndividual >= 8 && avaliacao.mediaIndividual < 9">Ouro</span>
       <span class="performance-diamante" *ngIf="avaliacao.mediaIndividual >= 9">Diamante</span>
     </span></p>
-    <p><span>Nota do Time:</span> {{ avaliacao.mediaTime }}</p>
-    <p><span>Nota da Empresa:</span> {{ avaliacao.mediaEmpresa }}</p>
+    <p><span>Nota do Time:</span> {{ avaliacao.mediaTime | number:'1.2-2' }}</p>
+    <p><span>Nota da Empresa:</span> {{ avaliacao.mediaEmpresa | number:'1.2-2' }}</p>
+    <p><span>Absenteísmo: </span> <span class="absenteismo">{{ getAbsenteismo(avaliacao) }}</span></p>
     <p class="nota-final">Média Final: {{ avaliacao.mediaFinalGeral | number:'1.2-2' }}</p>
     <div>
       <ul>
