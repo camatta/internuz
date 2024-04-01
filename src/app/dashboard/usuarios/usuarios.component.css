@@ -61,6 +61,7 @@ button {
 
 .edit-icon i {
   color: #61dcab;
+  cursor: pointer;
 }
 
 thead th {
@@ -74,4 +75,60 @@ tbody td {
 
 tbody td.editar-funcionairuz {
   width: 2.5%;
+}
+
+.modal.show {
+  display: block;
+  background-color: #28282840;
+}
+
+.form-label {
+  color: #00175d;
+  font-weight: 700;
+}
+
+.modal-title {
+  color: #00175d;
+  font-weight: 800;
+}
+
+.modal-content {
+  border: unset;
+}
+
+.modal-dialog {
+  left: 8.5%;
+}
+
+.btn-close {
+  background-color: unset;
+}
+
+.form-control {
+  color: #00175d;
+  font-size: 14px;
+}
+
+.btn.btn-primary {
+  border: unset;
+  background-color: #61dcab;
+  border-radius: 5px;
+  color: #00175d;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn.btn-secondary {
+  border: unset;
+  background-color: #00175d;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
 }

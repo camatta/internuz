@@ -23,5 +23,9 @@ export class UserService {
   getUserById(userId: string): Observable<any> {
     return this.http.get<any>(environment.URL_API + `/api/users/${userId}`);
   }
+
+  updateUser(user: any) {
+    return this.http.put<any>(environment.URL_API + '/api/editar-usuario', user);
+  }
   
 }

@@ -82,6 +82,8 @@ app.post('/api/auth/esqueci-senha', async (req, res) => {
   }
 });
 
+
+
 // Importe o modelo de Avaliacao
 const Avaliacao = require('./src/app/models/Avaliacao');
 
@@ -235,6 +237,38 @@ app.get('/api/users/me', authMiddleware, async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Ocorreu um erro ao obter as informações do usuário.' });
+  }
+});
+
+// Rota para atualizar um usuário
+app.put('/api/editar-usuario', async (req, res) => {
+  try {
+    const { _id, name, email, team, setorTratado, funcao, accessLevel } = req.body;
+
+    // Encontre o usuário pelo ID
+    const user = await User.findById(_id);
+
+    // Se o usuário não existir, retorne um erro
+    if (!user) {
+      return res.status(404).json({ message: 'Usuário não encontrado.' });
+    }
+
+    // Atualize os dados do usuário
+    user.name = name;
+    user.email = email;
+    user.team = team;
+    user.setorTratado = setorTratado;
+    user.funcao = funcao;
+    user.accessLevel = accessLevel;
+
+    // Salve as alterações no banco de dados
+    await user.save();
+
+    // Responda com os dados do usuário atualizados
+    return res.json(user);
+  } catch (error) {
+    console.error('Erro ao atualizar usuário:', error);
+    return res.status(500).json({ message: 'Erro ao atualizar usuário.' });
   }
 });
 

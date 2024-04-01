@@ -25,9 +25,53 @@
           {{ user.accessLevel }}
         </td>
         <td class="editar-funcionairuz">
-          <span class="edit-icon"><i class="fa-solid fa-pen"></i></span>
+          <span class="edit-icon" (click)="openEditUserModal(user)"><i class="fa-solid fa-pen"></i></span>
         </td>
       </tr>          
     </tbody>
   </table>
+</div>
+
+<!-- Modal de edição de usuário -->
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+  <div class="modal-dialog pulse  animated modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editUserModalLabel">Editar Usuário</h5>
+        <button type="button" class="btn-close" (click)="closeEditUserModal()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="userName" class="form-label">Nome:</label>
+            <input type="text" class="form-control" id="userName" name="userName" [(ngModel)]="editedUser.name">
+          </div>
+          <div class="mb-3">
+            <label for="userEmail" class="form-label">Email:</label>
+            <input type="email" class="form-control" id="userEmail" name="userEmail" [(ngModel)]="editedUser.email">
+          </div>
+          <div class="mb-3">
+            <label for="userTeam" class="form-label">Time:</label>
+            <input type="text" class="form-control" id="userTeam" [(ngModel)]="editedUser.team" [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="mb-3">
+            <label for="userSector" class="form-label">Setor:</label>
+            <input type="text" class="form-control" id="userSector" [(ngModel)]="editedUser.setorTratado" [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="mb-3">
+            <label for="userFunction" class="form-label">Função:</label>
+            <input type="text" class="form-control" id="userFunction" [(ngModel)]="editedUser.funcao" [ngModelOptions]="{standalone: true}">
+          </div>
+          <div class="mb-3">
+            <label for="userPermission" class="form-label">Permissão:</label>
+            <input type="text" class="form-control" id="userPermission" [(ngModel)]="editedUser.accessLevel" [ngModelOptions]="{standalone: true}">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeEditUserModal()">Fechar</button>
+        <button type="button" class="btn btn-primary" (click)="salvarEdicaoUsuario()">Salvar</button>
+      </div>
+    </div>
+  </div>
 </div>
