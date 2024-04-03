@@ -46,7 +46,7 @@ input, select, option {
 .submit-cadastro {
   border: unset;
   background-color: #61dcab;
-  border-radius: 5px;
+  border-radius: 100px;
   width: 100%;
   color: #00175d;
   font-weight: 600;

@@ -52,11 +52,19 @@
           </div>
           <div class="mb-3">
             <label for="userTeam" class="form-label">Time:</label>
-            <input type="text" class="form-control" id="userTeam" [(ngModel)]="editedUser.team" [ngModelOptions]="{standalone: true}">
+            <select class="form-select" id="userTeam" [(ngModel)]="editedUser.team" (change)="updateSectorOptions()" [ngModelOptions]="{standalone: true}">
+                <option value="Tecnologia">Tecnologia</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Customer Success">Customer Success</option>
+                <option value="Comercial">Comercial</option>
+                <option value="Administrativo">Administrativo</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="userSector" class="form-label">Setor:</label>
-            <input type="text" class="form-control" id="userSector" [(ngModel)]="editedUser.setorTratado" [ngModelOptions]="{standalone: true}">
+            <select class="form-select" id="userSector" [(ngModel)]="editedUser.setorTratado" [ngModelOptions]="{standalone: true}">
+                <option *ngFor="let sectorOption of sectorOptions" [value]="sectorOption">{{ sectorOption }}</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="userFunction" class="form-label">Função:</label>
@@ -64,7 +72,11 @@
           </div>
           <div class="mb-3">
             <label for="userPermission" class="form-label">Permissão:</label>
-            <input type="text" class="form-control" id="userPermission" [(ngModel)]="editedUser.accessLevel" [ngModelOptions]="{standalone: true}">
+            <select class="form-select" id="userPermission" [(ngModel)]="editedUser.accessLevel" [ngModelOptions]="{standalone: true}">
+                <option value="Funcionário">Funcionário</option>
+                <option value="Líder de Equipe">Líder de Equipe</option>
+                <option value="Administrador">Administrador</option>
+            </select>
           </div>
         </form>
       </div>

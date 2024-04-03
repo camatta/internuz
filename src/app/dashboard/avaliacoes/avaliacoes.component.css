@@ -10,9 +10,9 @@ h1 {
 .form-select {
   background-color: #ffffff30;
   color: #00175d;
-  border-radius: 5px;
+  border-radius: 100px;
   border: unset;
-  padding: 10px;
+  padding: 10px 15px;
   width: 80%;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   font-weight: 600;

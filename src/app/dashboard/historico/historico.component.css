@@ -1,9 +1,9 @@
 .form-select {
   background-color: #ffffff30;
   color: #00175d;
-  border-radius: 5px;
+  border-radius: 100px;
   border: unset;
-  padding: 10px;
+  padding: 10px 15px;
   width: 80%;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
   font-weight: 600;
@@ -32,7 +32,7 @@ button {
   color: #00175d;
   font-size: 14px;
   font-weight: 600;
-  border-radius: 5px;
+  border-radius: 100px;
   padding: 10px 20px;
   margin-bottom: 1rem;
 }
@@ -79,6 +79,10 @@ p strong {
 .nota-final {
   margin-bottom: 1.5rem;
   font-weight: 700;
+  background-color: #dddfe1;
+  padding: 10px;
+  text-align: center;
+  width: 170px;
 }
 
 .absenteismo {

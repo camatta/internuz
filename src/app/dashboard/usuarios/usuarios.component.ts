@@ -13,15 +13,29 @@ export class UsuariosComponent implements OnInit {
 
   users: any[] = []; // Array de Usuários
   editedUser: any = {}; // Objeto que vai armazenar os dados do usuário editado
-
-
+  sectorOptions: any[] = [];
 
   constructor(private userService: UserService, private router: Router) {}
+
+  updateSectorOptions() {
+    if (this.editedUser.team === 'Tecnologia') {
+        this.sectorOptions = ['Desenvolvimento', 'Design UI/UX', 'CS Tecnologia', 'Head'];
+    } else if (this.editedUser.team === 'Marketing') {
+        this.sectorOptions = ['Redação', 'Design Publicitário', 'Tráfego Pago', 'Inbound Marketing', 'SEO', 'Head']; 
+    } else if (this.editedUser.team === 'Customer Success') {
+      this.sectorOptions = ['CS', 'Head']; 
+    } else if (this.editedUser.team === 'Comercial') {
+      this.sectorOptions = ['Vendas', 'Pré-Vendas', 'Head']; 
+    } else if (this.editedUser.team === 'Administrativo') {
+      this.sectorOptions = ['RH', 'Financeiro', 'Head']; 
+    }
+}
 
   // Função para abrir o modal e definir o usuário a ser editado
   openEditUserModal(user: any) {
     // Define o usuário a ser editado
     this.editedUser = { ...user };
+    this.updateSectorOptions();
     
     // Abre o modal
     const modal = document.getElementById('editUserModal');

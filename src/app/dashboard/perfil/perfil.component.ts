@@ -17,5 +17,6 @@ export class PerfilComponent implements OnInit {
 
   getUserInfo(): void {
     this.userInfo = this.authService.getUser();
+    console.log(this.userInfo)
   }
 }
