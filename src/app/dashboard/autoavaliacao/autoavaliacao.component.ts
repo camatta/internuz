@@ -331,7 +331,7 @@ export class AutoavaliacaoComponent implements OnInit {
       { tipo: 'individual', nome: 'Cumprimento de prazo das tarefas', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'Cumprimento de prazo contratual dos projetos (go-live)', requisito: 'Indispensável', peso: 'A', },
       { tipo: 'individual', nome: 'SLA de resposta interna 24h', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'individual', nome: 'Resposta NPS > 70%', requisito: 'Indispensável', peso: 'A', },
+      { tipo: 'individual', nome: 'Resposta NPS > 50%', requisito: 'Indispensável', peso: 'A', },
     ],
     Vendas: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
