@@ -26,6 +26,7 @@ const routes: Routes = [
   ]},
   { path: 'cadastro', component: CadastroComponent },
   { path: 'redefinir-senha', component: RedefinirSenhaComponent },
+  { path: 'redefinir-senha/:token', component: RedefinirSenhaComponent },
 ];
 
 @NgModule({

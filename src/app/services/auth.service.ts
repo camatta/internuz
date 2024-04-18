@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -66,7 +67,16 @@ export class AuthService {
   }
 
   solicitarRedefinicaoSenha(email: string): Observable<any> {
-    return this.http.post(`${environment.URL_API}/api/auth/esqueci-senha`, { email });
+    return this.http.post(`${environment.URL_API}/api/auth/esqueci-senha`, { email }).pipe(
+      catchError(error => {
+        console.error('Erro ao solicitar redefinição de senha:', error);
+        throw error; // Rejeitar o erro para que possa ser tratado no componente
+      })
+    );
+  }
+
+  redefinirSenha(token: string, novaSenha: string): Observable<any> {
+    return this.http.post(`${environment.URL_API}/api/auth/redefinir-senha`, { token, novaSenha });
   }
   
 }
