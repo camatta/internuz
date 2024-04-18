@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import * as alertifyjs from 'alertifyjs';
 
 @Component({
   selector: 'app-cadastro',
@@ -47,7 +48,7 @@ export class CadastroComponent {
         },
         (error) => {
           console.error('Erro ao cadastrar usuário', error);
-          // Exibir mensagem de erro ou fazer alguma ação adicional
+          alertifyjs.error(error.error.message); 
         }
       );
   }

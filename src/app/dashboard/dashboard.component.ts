@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 
 export class DashboardComponent implements OnInit {
   userName: string = '';
+  usersCount: number = 0;
 
   constructor(private authService: AuthService, private router: Router) { }
 

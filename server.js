@@ -57,26 +57,18 @@ app.post('/api/auth/esqueci-senha', async (req, res) => {
     user.resetTokenExpiry = new Date(Date.now() + 3600000); // 1 hora de expiração
     await user.save();
 
-    const nodemailer = require('nodemailer');
-
-    // Configurar o nodemailer com suas credenciais de e-mail
-    const transporter = nodemailer.createTransport({
-      service: 'sendgrid', 
-      auth: {
-        user: 'MS_pnOOTF@internuz.com.br',
-        pass: 'f2uPLdrTFLYBjflu',
-      },
+    const mailerSend = new MailerSend({
+      apiKey: process.env.API_KEY,
     });
 
     const sentFrom = new Sender('no-reply@internuz.com.br', 'Internuz - Nairuz Agência de Marketing e Tecnologia');
     const recipient = new Recipient(email, 'Your Client');
 
-    const mailOptions = {
-      from: 'MS_pnOOTF@internuz.com.br',
-      to: email,
-      subject: 'Redefinição de Senha',
-      html: `<p>Clique no link a seguir para redefinir sua senha: <a href="${resetLink}">${resetLink}</a></p>`,
-    };
+    const emailParams = new EmailParams()
+      .setFrom(sentFrom)
+      .setTo([recipient])
+      .setSubject('Redefinição de Senha')
+      .setHtml(`<h1>Olá, Funcionairuz!</h1><p>Clique no link a seguir para redefinir sua senha:<br> <a href="http://localhost:4200/redefinir-senha/${resetToken}">Clique Aqui</a></p>`);
 
     await mailerSend.email
       .send(emailParams);
@@ -109,8 +101,8 @@ app.post('/api/auth/redefinir-senha', async (req, res) => {
     }
 
     // Atualize a senha do usuário
-    user.senha = await bcrypt.hash(novaSenha, 10); // Você precisa ter o campo 'senha' em seu modelo de usuário
-    await user.save();
+  user.password = await bcrypt.hash(novaSenha, 10);
+  await user.save();
 
     res.status(200).json({ message: 'Senha redefinida com sucesso.' });
   } catch (error) {

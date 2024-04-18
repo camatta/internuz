@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import * as alertifyjs from 'alertifyjs';
 
@@ -15,11 +16,13 @@ export class RedefinirSenhaComponent implements OnInit {
   redefinirSenhaForm!: FormGroup;
   novaSenhaForm!: FormGroup;
   token: string | null = null;
+  senhaModificada: boolean = false;
 
   constructor(
     private fb: FormBuilder, 
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -60,6 +63,18 @@ export class RedefinirSenhaComponent implements OnInit {
   redefinirSenha(): void {
     if (this.novaSenhaForm.valid && this.token) {
       const novaSenha = this.novaSenhaForm.value.novaSenha;
+      this.authService.redefinirSenha(this.token, novaSenha).subscribe({
+        next: (response) => {
+          console.log(response);
+          alertifyjs.success('Senha redefinida com sucesso.');
+          this.router.navigate(['/dashboard']);
+          this.senhaModificada = true; 
+        },
+        error: (error) => {
+          console.error(error);
+          alertifyjs.error(error.error.message); 
+        }
+      });
     }
   }
 }

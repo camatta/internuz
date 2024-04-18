@@ -44,13 +44,16 @@ const userSchema = new mongoose.Schema ({
 
 // Criptografar senha do usuário
 
+let senhaModificada = false;
+
 userSchema.pre('save', async function (next) {
   const user = this;
-  if (!user.isModified('password')) return next();
+  if (!user.isModified('password') || (!senhaModificada && !user.isNew)) return next();
 
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(user.password, salt);
   user.password = hashedPassword;
+  senhaModificada = false; // Resetar a flag para evitar criptografia adicional
   next();
 });
 
