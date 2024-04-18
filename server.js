@@ -68,7 +68,7 @@ app.post('/api/auth/esqueci-senha', async (req, res) => {
       .setFrom(sentFrom)
       .setTo([recipient])
       .setSubject('Redefinição de Senha')
-      .setHtml(`<h1>Olá, Funcionairuz!</h1><p>Clique no link a seguir para redefinir sua senha:<br> <a href="http://localhost:4200/redefinir-senha/${resetToken}">Clique Aqui</a></p>`);
+      .setHtml(`<h1>Olá, Funcionairuz!</h1><p>Clique no link a seguir para redefinir sua senha:<br> <a href="http://internuz.com.br/redefinir-senha/${resetToken}">Clique Aqui</a></p>`);
 
     await mailerSend.email
       .send(emailParams);
