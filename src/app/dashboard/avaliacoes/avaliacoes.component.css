@@ -64,18 +64,10 @@ span {
   font-weight: 600;
 }
 
-.table-avaliacao thead tr th:nth-child(3),
-.table-avaliacao thead tr th:nth-child(4),
-.table-avaliacao thead tr th:nth-child(5),
-.table-avaliacao thead tr th:nth-child(6) {
+.table-avaliacao thead tr th:not(:first-child),
+.table-avaliacao tbody tr td:not(:first-child) {
   text-align: center;
-}
-
-.table-avaliacao tbody tr td:nth-child(3),
-.table-avaliacao tbody tr td:nth-child(4),
-.table-avaliacao tbody tr td:nth-child(5),
-.table-avaliacao tbody tr td:nth-child(6) {
-  text-align: center;
+  width: 13%;
 }
 
 .enviar-avaliacao button {
@@ -131,7 +123,6 @@ span {
 
 .hidden {
   opacity: 0;
-  width: 15%;
 }
 
 .aviso-disponibilidade {

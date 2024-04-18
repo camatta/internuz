@@ -57,17 +57,17 @@ app.post('/api/auth/esqueci-senha', async (req, res) => {
 
     // Configurar o nodemailer com suas credenciais de e-mail
     const transporter = nodemailer.createTransport({
-      service: 'outlook', 
+      service: 'sendgrid', 
       auth: {
-        user: 'ti@nairuz.com.br',
-        pass: 'xxx*',
+        user: 'MS_pnOOTF@internuz.com.br',
+        pass: 'f2uPLdrTFLYBjflu',
       },
     });
 
     const resetLink = `http://localhost:4200/redefinir-senha/${resetToken}`;
 
     const mailOptions = {
-      from: 'ti@nairuz.com.br',
+      from: 'MS_pnOOTF@internuz.com.br',
       to: email,
       subject: 'Redefinição de Senha',
       html: `<p>Clique no link a seguir para redefinir sua senha: <a href="${resetLink}">${resetLink}</a></p>`,
