@@ -57,7 +57,6 @@ app.post('/api/auth/esqueci-senha', async (req, res) => {
     user.resetTokenExpiry = new Date(Date.now() + 3600000); // 1 hora de expiração
     await user.save();
 
-<<<<<<< HEAD
     const nodemailer = require('nodemailer');
 
     // Configurar o nodemailer com suas credenciais de e-mail
@@ -67,29 +66,17 @@ app.post('/api/auth/esqueci-senha', async (req, res) => {
         user: 'MS_pnOOTF@internuz.com.br',
         pass: 'f2uPLdrTFLYBjflu',
       },
-=======
-    const mailerSend = new MailerSend({
-      apiKey: process.env.API_KEY,
->>>>>>> 14b63fafb876f8b7142bc1cb198346ac549eb51b
     });
 
     const sentFrom = new Sender('no-reply@internuz.com.br', 'Internuz - Nairuz Agência de Marketing e Tecnologia');
     const recipient = new Recipient(email, 'Your Client');
 
-<<<<<<< HEAD
     const mailOptions = {
       from: 'MS_pnOOTF@internuz.com.br',
       to: email,
       subject: 'Redefinição de Senha',
       html: `<p>Clique no link a seguir para redefinir sua senha: <a href="${resetLink}">${resetLink}</a></p>`,
     };
-=======
-    const emailParams = new EmailParams()
-      .setFrom(sentFrom)
-      .setTo([recipient])
-      .setSubject('Redefinição de Senha')
-      .setHtml(`<p>Clique no link a seguir para redefinir sua senha: <a href="http://localhost:4200/redefinir-senha/${resetToken}">http://localhost:4200/redefinir-senha/${resetToken}</a></p>`);
->>>>>>> 14b63fafb876f8b7142bc1cb198346ac549eb51b
 
     await mailerSend.email
       .send(emailParams);
@@ -224,14 +211,14 @@ app.post('/api/auth/login', async (req, res) => {
     const existingUser = await User.findOne({ email });
 
     if (!existingUser) {
-      return res.status(400).json({ message: 'Usuário não encontrado.' });
+      return res.status(400).json({ message: 'Usuário ou senha incorretos.' });
     }
 
     // Verifique se a senha está correta
     const isPasswordValid = await bcrypt.compare(password, existingUser.password);
 
     if (!isPasswordValid) {
-      return res.status(401).json({ message: 'Senha incorreta.' });
+      return res.status(401).json({ message: 'Usuário ou senha incorretos.' });
     }
 
     // Gerar token

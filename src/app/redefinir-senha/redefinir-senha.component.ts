@@ -50,7 +50,7 @@ export class RedefinirSenhaComponent implements OnInit {
         },
         error: (error) => {
           console.error(error);
-          alertifyjs.error('Ocorreu um erro ao enviar o e-mail.'); 
+          alertifyjs.error(error.error.message); 
         }
       });
     }

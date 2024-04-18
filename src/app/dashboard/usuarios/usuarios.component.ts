@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import * as alertifyjs from 'alertifyjs';
 
 
 @Component({
@@ -58,11 +59,13 @@ export class UsuariosComponent implements OnInit {
     this.userService.updateUser(this.editedUser).subscribe(
       (response) => {
         console.log('Usuário atualizado com sucesso:', response);
+        alertifyjs.success('Usuário atualizado com sucesso.'); 
         this.closeEditUserModal();
         this.updateUserInList(response);
       },
       (error) => {
         console.error('Erro ao atualizar usuário:', error);
+        alertifyjs.error('Erro ao atualizar usuário.'); 
       }
     );
   }

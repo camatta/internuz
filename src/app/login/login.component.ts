@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import * as alertifyjs from 'alertifyjs';
 
 @Component({
   selector: 'app-login',
@@ -37,7 +38,7 @@ export class LoginComponent implements OnInit {
       },
       (error) => {
         console.log('Erro de autenticação:', error);
-        this.errorMessage = 'Usuário ou senha inválidos';
+        alertifyjs.error(error.error.message);
       }
     );
   }
