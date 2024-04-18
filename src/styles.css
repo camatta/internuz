@@ -1,7 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import "../node_modules/alertifyjs/build/css/alertify.css";
+@import "../node_modules/alertifyjs/build/css/themes/bootstrap.min.css";
+@import "../node_modules/alertifyjs//build/css/themes/default.min.css";
+
 * {
   color: #fff;
+}
+
+.alertify-notifier.ajs-bottom.ajs-right {
+  width: auto !important;
+}
+
+.ajs-message.ajs-error {
+  background-color: #e61476 !important;
+  color: #fff !important;
+  text-shadow: unset !important;
+  border: unset !important;
+  border-radius: 5px !important;
+  width: 100% !important;
+  right: 40px !important;
+  bottom: 40px !important;
+}
+
+.ajs-message.ajs-success.ajs-visible {
+  background-color: #61dcab !important;
+  color: #00175d !important;
+  text-shadow: unset !important;
+  border: unset !important;
+  border-radius: 5px !important;
+  width: 100% !important;
+  right: 40px !important;
+  bottom: 40px !important;
 }
 
 body {

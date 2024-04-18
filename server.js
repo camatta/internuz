@@ -1,3 +1,6 @@
+require('dotenv').config();
+const { MailerSend, EmailParams, Sender, Recipient } = require("mailersend");
+
 const express = require('express');
 const cors = require('cors');
 const app = express(); 
@@ -5,6 +8,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const authMiddleware = require('./src/app/middleware/auth');
 const bodyParser = require('body-parser');
+
 
 app.use(cors());
 
@@ -33,7 +37,7 @@ app.use(express.json());
 // Middleware para analisar o corpo das solicitações como JSON
 app.use(bodyParser.json());
 
-// Rota para solicitar redefinição de senha
+// Esqueci a Senha
 app.post('/api/auth/esqueci-senha', async (req, res) => {
   const { email } = req.body;
 
@@ -53,27 +57,21 @@ app.post('/api/auth/esqueci-senha', async (req, res) => {
     user.resetTokenExpiry = new Date(Date.now() + 3600000); // 1 hora de expiração
     await user.save();
 
-    const nodemailer = require('nodemailer');
-
-    // Configurar o nodemailer com suas credenciais de e-mail
-    const transporter = nodemailer.createTransport({
-      service: 'outlook', 
-      auth: {
-        user: 'ti@nairuz.com.br',
-        pass: 'xxx*',
-      },
+    const mailerSend = new MailerSend({
+      apiKey: process.env.API_KEY,
     });
 
-    const resetLink = `http://localhost:4200/redefinir-senha/${resetToken}`;
+    const sentFrom = new Sender('no-reply@internuz.com.br', 'Internuz - Nairuz Agência de Marketing e Tecnologia');
+    const recipient = new Recipient(email, 'Your Client');
 
-    const mailOptions = {
-      from: 'ti@nairuz.com.br',
-      to: email,
-      subject: 'Redefinição de Senha',
-      html: `<p>Clique no link a seguir para redefinir sua senha: <a href="${resetLink}">${resetLink}</a></p>`,
-    };
+    const emailParams = new EmailParams()
+      .setFrom(sentFrom)
+      .setTo([recipient])
+      .setSubject('Redefinição de Senha')
+      .setHtml(`<p>Clique no link a seguir para redefinir sua senha: <a href="http://localhost:4200/redefinir-senha/${resetToken}">http://localhost:4200/redefinir-senha/${resetToken}</a></p>`);
 
-    await transporter.sendMail(mailOptions);
+    await mailerSend.email
+      .send(emailParams);
 
     res.status(200).json({ message: 'E-mail enviado com sucesso.' });
   } catch (error) {
@@ -82,6 +80,36 @@ app.post('/api/auth/esqueci-senha', async (req, res) => {
   }
 });
 
+app.post('/api/auth/redefinir-senha', async (req, res) => {
+  const { token, novaSenha } = req.body;
+
+  try {
+    // Verifique se o token é válido
+    const decodedToken = jwt.verify(token, 'seu-segredo');
+
+    // Verifique se o token ainda é válido para redefinição de senha
+    if (Date.now() > decodedToken.exp * 1000) {
+      return res.status(400).json({ message: 'Token de redefinição de senha expirado.' });
+    }
+
+    // Encontre o usuário pelo e-mail no token
+    const user = await User.findOne({ email: decodedToken.email });
+
+    // Verifique se o usuário existe
+    if (!user) {
+      return res.status(404).json({ message: 'Usuário não encontrado.' });
+    }
+
+    // Atualize a senha do usuário
+    user.senha = await bcrypt.hash(novaSenha, 10); // Você precisa ter o campo 'senha' em seu modelo de usuário
+    await user.save();
+
+    res.status(200).json({ message: 'Senha redefinida com sucesso.' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao redefinir a senha.' });
+  }
+});
 
 
 // Importe o modelo de Avaliacao

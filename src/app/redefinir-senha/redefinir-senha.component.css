@@ -57,3 +57,15 @@ input {
 .wrapper {
   width: 30%;
 }
+
+.ajs-message.ajs-error {
+  border: unset;
+  background-color: #e61476 !important;
+  border-radius: 5px;
+  width: 100%;
+  color: #ffffff;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding: 10px;
+  cursor: pointer;
+}
