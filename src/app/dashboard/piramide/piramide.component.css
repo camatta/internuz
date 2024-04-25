@@ -46,6 +46,10 @@ body {
   font-weight: 700;
 }
 
+.legenda {
+  margin-bottom: 3rem;
+}
+
 .legenda strong {
   color: #00175d;
 }
