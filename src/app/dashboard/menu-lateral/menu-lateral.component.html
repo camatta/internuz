@@ -10,10 +10,7 @@
       <button routerLink="/dashboard/avaliacoes" [class.link-ativo]="isLinkAtivo('/dashboard/avaliacoes')"><i class="fas fa-star"></i>Avaliações</button>
     </li>
     <li><button routerLink="/dashboard/autoavaliacao" [class.link-ativo]="isLinkAtivo('/dashboard/autoavaliacao')"><i class="fa-solid fa-face-smile"></i>Autoavaliação</button></li>
-    <!-- <li><button routerLink="/dashboard/piramide" [class.link-ativo]="isLinkAtivo('/dashboard/piramide')">Pirâmide de Nairuz</button></li> -->
-    <!-- <li *ngIf="showComercialLink">
-      <button routerLink="/dashboard/comercial" [class.link-ativo]="isLinkAtivo('/dashboard/comercial')">Comercial</button>
-    </li> -->
+    <li><button routerLink="/dashboard/piramide" [class.link-ativo]="isLinkAtivo('/dashboard/piramide')"><i class="fa-regular fa-square-caret-up"></i>Pirâmide de Nairuz</button></li>
     <li><button routerLink="/" [class.link-ativo]="isLinkAtivo('/')" (click)="logout()"><i class="fas fa-sign-out-alt"></i>Sair</button></li>
   </ul>
 </div>
