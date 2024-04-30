@@ -125,8 +125,8 @@ export class AvaliacoesComponent implements OnInit {
       { tipo: 'competencia', nome: 'Abordagem', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'competencia', nome: 'Resolução de problemas', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'competencia', nome: 'Padronização', requisito: 'Obrigatório', peso: 'A', },
-      { tipo: 'competencia', nome: 'Pesquisa', requisito: 'Obrigatório', peso: 'A', },
-      { tipo: 'competencia', nome: 'Inovação', requisito: 'Obrigatório', peso: 'A', },
+      { tipo: 'competencia', nome: 'Pesquisa', requisito: 'Diferencial', peso: 'A', },
+      { tipo: 'competencia', nome: 'Inovação', requisito: 'Diferencial', peso: 'A', },
       { tipo: 'competencia', nome: 'Confiabilidade', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'competencia', nome: 'Técnicas de redação', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'competencia', nome: 'Produção de texto', requisito: 'Obrigatório', peso: 'A', },
@@ -1299,9 +1299,6 @@ isSameIndex(index: number, notaIndex: number): boolean {
           case 'Regular':
             item.nota = 5;
             break;
-          case 'Satisfatório':
-            item.nota = 10;
-            break;
           case 'Insatisfatório':
             item.nota = 0;
             break;
@@ -1384,7 +1381,7 @@ isSameIndex(index: number, notaIndex: number): boolean {
 
       // Percorrer os itens e somar as notas dos itens com requisito "Obrigatório", "nulo", "desejado" ou "diferencial" por tipo
       for (const item of this.avaliacoes) {
-        if (item.requisito === 'Obrigatório' || item.requisito === 'nulo') {
+        if (item.requisito === 'Obrigatório' || item.requisito === 'Indispensável') {
           if (!notasObrigatorioNuloPorTipo[item.tipo]) {
             notasObrigatorioNuloPorTipo[item.tipo] = { quantidade: 1, notaTotal: item.nota };
           } else {

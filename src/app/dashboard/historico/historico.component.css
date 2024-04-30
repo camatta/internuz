@@ -92,7 +92,7 @@ p strong {
 
 .wrapper-performance {
   margin-top: 20px;
-  text-align: center;
+  text-align: left;
 }
 
 .wrapper-performance span {
@@ -249,4 +249,8 @@ p strong {
 
 .wrapper-historico > div {
   width: 23%;
+}
+
+.wrapper-performance {
+  margin-bottom: 40px;
 }

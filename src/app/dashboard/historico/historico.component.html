@@ -33,7 +33,14 @@
   </div>
 </div>
 
-<!-- <div class="wrapper-performance">
-  <p><strong>Sua performance baseada nas últimas 4 avaliações é: <span>Diamante</span></strong></p>
-  <p>Parabéns! Você está apto para promoção!</p>
-</div> -->
+<div class="wrapper-performance">
+  <div *ngIf="historicoAvaliacoes && historicoAvaliacoes.length >= 4">
+    <p>Apto para promoção: <span>{{ verificarAptoPromocao() }}</span></p>
+    <p>Apto para bonificação: <span>{{ verificarAptoBonificacao(historicoAvaliacoes) }}</span></p>
+  </div>
+  <div *ngIf="historicoAvaliacoes && historicoAvaliacoes.length < 4">
+    <p>É necessário pelo menos 4 avaliações para avaliar o nível do funcionairuz.</p>
+  </div>
+</div>
+
+

@@ -113,6 +113,75 @@ export class HistoricoComponent implements OnInit {
     }
   }
 
+  calcularPerformance(): string {
+    let somaMediaIndividual = 0;
+    let todasNotasAcimaNove = true;
+
+    if (this.historicoAvaliacoes.length < 4) {
+      return 'É necessário pelo menos 4 avaliações para avaliar o nível do funcionário.';
+    }
+
+    for (let avaliacao of this.historicoAvaliacoes) {
+      somaMediaIndividual += avaliacao.mediaIndividual;
+      if (avaliacao.mediaIndividual < 9) {
+        todasNotasAcimaNove = false;
+      }
+    }
+
+    const mediaPerformance = somaMediaIndividual / this.historicoAvaliacoes.length;
+
+    if (mediaPerformance >= 9) {
+      return 'Diamante';
+    } else if (mediaPerformance >= 8) {
+      return 'Ouro';
+    } else {
+      return 'Prata';
+    }
+  }
+
+  verificarAptoPromocao(): string {
+    let todasNotasAcimaNove = true;
+
+    if (this.historicoAvaliacoes.length < 4) {
+      return 'Não';
+    }
+
+    for (let avaliacao of this.historicoAvaliacoes) {
+      if (avaliacao.mediaIndividual < 9) {
+        todasNotasAcimaNove = false;
+      }
+    }
+
+    return todasNotasAcimaNove ? 'Sim' : 'Não';
+  }
+
+  verificarAptoBonificacao(historicoAvaliacoes: any[]): string {
+    // Verificar se há pelo menos duas avaliações
+    if (historicoAvaliacoes && historicoAvaliacoes.length >= 2) {
+      // Pegar as duas últimas avaliações
+      const ultimasAvaliacoes = historicoAvaliacoes.slice(-2);
+  
+      // Verificar se a média individual das últimas duas avaliações é maior que 9
+      const mediaIndividualSuficiente = ultimasAvaliacoes.every(avaliacao => avaliacao.mediaIndividual >= 9);
+  
+      // Verificar se o absenteísmo nas últimas duas avaliações é maior ou igual a 7
+      const absenteismoSuficiente = ultimasAvaliacoes.every(avaliacao => {
+        const absenteismoNota = avaliacao.notas.find((nota: any) => nota.nome.includes('Absenteísmo'));
+        return absenteismoNota && absenteismoNota.nota >= 7;
+      });
+  
+      // Se ambas as condições forem verdadeiras, o usuário está apto para promoção
+      if (mediaIndividualSuficiente && absenteismoSuficiente) {
+        return 'Sim';
+      } else {
+        return 'Não';
+      }
+    } else {
+      return 'Não'; // Não há avaliações suficientes para determinar a aptidão para promoção
+    }
+  }
+  
+
   downloadRelatorio(avaliacao: any) {
     const doc = new jsPDF();
   
