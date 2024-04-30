@@ -68,7 +68,18 @@ app.post('/api/auth/esqueci-senha', async (req, res) => {
       .setFrom(sentFrom)
       .setTo([recipient])
       .setSubject('Redefinição de Senha')
-      .setHtml(`<h1>Olá, Funcionairuz!</h1><p>Clique no link a seguir para redefinir sua senha:<br> <a href="http://internuz.com.br/redefinir-senha/${resetToken}">Clique Aqui</a></p>`);
+      .setHtml(`
+      <body style="margin: 0; padding: 0; padding-bottom: 20px; padding-left: 15px; background-image: url('https://i.imgur.com/YZqid8h.png'); background-size: contain; background-repeat: no-repeat; font-family: Poppins, Montserrat, sans-serif;">
+        <div style="padding: 20px;">
+          <h1 style="color: #fff; font-weight: 400; margin-bottom: 30px;">Olá, <strong>Funcionairuz!</strong></h1>
+          <p style="color: #fff; font-size: 14px; margin-bottom: 20px;">Clique no botão abaixo para redefinir sua senha:</p>
+          <p style="margin-bottom: 30px; width: max-content; font-size: 14px; font-weight: bold; color: darkblue !important; text-decoration: none;"><a href="http://internuz.com.br/redefinir-senha/${resetToken}" style="color: darkblue !important; border-radius: 25px; font-size: 14px; font-weight: 600; text-decoration: none;"><img src="https://i.imgur.com/d1idUeT.png" alt="Redefinir Senha" style="max-width: 200px;"></a></p>
+          <p style="color: #fff; font-size: 10px;">*Por favor, não responda este e-mail.</p>
+        </div>
+      </body>
+    `);
+
+    
 
     await mailerSend.email
       .send(emailParams);
