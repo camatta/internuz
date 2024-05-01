@@ -33,6 +33,7 @@ h1 {
   border: unset;
   padding: 10px;
   box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  margin-bottom: 4rem;
 }
 
 table {
@@ -95,6 +96,7 @@ span {
 
 .text-info {
   margin-top: 2rem;
+  display: none;
 }
 
 .text-info p {
