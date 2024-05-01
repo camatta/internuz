@@ -9,7 +9,7 @@
 
 <p class="aviso-ultimas"><strong>Últimas avaliações realizadas:</strong></p>
 <div class="wrapper-historico">
-  <div *ngFor="let avaliacao of historicoAvaliacoes">
+  <div class="avaliacao" *ngFor="let avaliacao of historicoAvaliacoes">
     <p><span>Avaliado por:</span> {{ avaliacao.avaliador }}</p>
     <p><span>Data:</span> {{ avaliacao.dataFormatada }}</p>
     <p><span>Nota Individual:</span> {{ avaliacao.mediaIndividual | number:'1.2-2' }}<span>

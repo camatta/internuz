@@ -254,3 +254,7 @@ p strong {
 .wrapper-performance {
   margin-bottom: 40px;
 }
+
+.wrapper-historico .avaliacao:not(:nth-last-child(-n+4)) {
+  display: none;
+}

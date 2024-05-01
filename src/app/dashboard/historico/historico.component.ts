@@ -161,32 +161,41 @@ export class HistoricoComponent implements OnInit {
       // Pegar as duas últimas avaliações
       const ultimasAvaliacoes = historicoAvaliacoes.slice(-2);
   
-      // Verificar se o absenteísmo nas últimas duas avaliações é maior ou igual a 7
-      const absenteismoSuficiente = ultimasAvaliacoes.every(avaliacao => {
+      // Verificar se a média individual mínima é 8 e absenteísmo mínimo é 7 nas últimas duas avaliações
+      const mediaIndividualApta = ultimasAvaliacoes.every(avaliacao => avaliacao.mediaIndividual >= 8);
+      const absenteismoApto = ultimasAvaliacoes.every(avaliacao => {
         const absenteismoNota = avaliacao.notas.find((nota: any) => nota.nome.includes('Absenteísmo'));
         return absenteismoNota && absenteismoNota.nota >= 7;
       });
   
-      // Verificar se o absenteísmo nas últimas duas avaliações é igual a 10
-      const absenteismoMaximo = ultimasAvaliacoes.every(avaliacao => {
-        const absenteismoNota = avaliacao.notas.find((nota: any) => nota.nome.includes('Absenteísmo'));
-        return absenteismoNota && absenteismoNota.nota === 10;
-      });
-  
-      // Se o absenteísmo nas últimas duas avaliações for 10, o usuário é Diamante
-      if (absenteismoMaximo) {
-        return 'Sim - Nível Diamante';
-      } 
-      // Se o absenteísmo nas últimas duas avaliações for maior ou igual a 7, o usuário é Ouro
-      else if (absenteismoSuficiente) {
-        return 'Sim - Nível Ouro';
-      } 
-      // Caso contrário, o usuário não está apto para bonificação
-      else {
-        return 'Não';
+      // Verificar se o funcionário é apto para bonificação no nível Ouro
+      if (mediaIndividualApta && absenteismoApto) {
+        // Se tiver nota na médiaIndividual de 8 até menor que 9 em uma das avaliações, ou absenteísmo menor que 10 em uma das avaliações, é apto Ouro
+        const ouro = ultimasAvaliacoes.some(avaliacao => {
+          return avaliacao.mediaIndividual >= 8 && avaliacao.mediaIndividual < 9 ||
+            avaliacao.notas.some((nota: any) => nota.nome.includes('Absenteísmo') && nota.nota < 10);
+        });
+        if (ouro) {
+          return 'Sim - Nível Ouro';
+        }
       }
+  
+      // Verificar se o funcionário é apto para bonificação no nível Diamante
+      if (mediaIndividualApta && absenteismoApto) {
+        // Se tiver nota igual ou maior que 9 na médiaIndividual em ambas as avaliações e nota 10 nas duas de absenteísmo, é apto Diamante
+        const diamante = ultimasAvaliacoes.every(avaliacao => {
+          return avaliacao.mediaIndividual >= 9 &&
+            avaliacao.notas.every((nota: any) => nota.nome.includes('Absenteísmo') && nota.nota === 10);
+        });
+        if (diamante) {
+          return 'Sim - Nível Diamante';
+        }
+      }
+  
+      // Caso não seja apto para nenhum nível de bonificação
+      return 'Não';
     } else {
-      return 'Não'; // Não há avaliações suficientes para determinar a aptidão para bonificação
+      return 'Não apto'; // Não há avaliações suficientes para determinar a aptidão para bonificação
     }
   }
 
