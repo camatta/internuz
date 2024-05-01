@@ -161,26 +161,34 @@ export class HistoricoComponent implements OnInit {
       // Pegar as duas últimas avaliações
       const ultimasAvaliacoes = historicoAvaliacoes.slice(-2);
   
-      // Verificar se a média individual das últimas duas avaliações é maior que 9
-      const mediaIndividualSuficiente = ultimasAvaliacoes.every(avaliacao => avaliacao.mediaIndividual >= 9);
-  
       // Verificar se o absenteísmo nas últimas duas avaliações é maior ou igual a 7
       const absenteismoSuficiente = ultimasAvaliacoes.every(avaliacao => {
         const absenteismoNota = avaliacao.notas.find((nota: any) => nota.nome.includes('Absenteísmo'));
         return absenteismoNota && absenteismoNota.nota >= 7;
       });
   
-      // Se ambas as condições forem verdadeiras, o usuário está apto para promoção
-      if (mediaIndividualSuficiente && absenteismoSuficiente) {
-        return 'Sim';
-      } else {
+      // Verificar se o absenteísmo nas últimas duas avaliações é igual a 10
+      const absenteismoMaximo = ultimasAvaliacoes.every(avaliacao => {
+        const absenteismoNota = avaliacao.notas.find((nota: any) => nota.nome.includes('Absenteísmo'));
+        return absenteismoNota && absenteismoNota.nota === 10;
+      });
+  
+      // Se o absenteísmo nas últimas duas avaliações for 10, o usuário é Diamante
+      if (absenteismoMaximo) {
+        return 'Sim - Nível Diamante';
+      } 
+      // Se o absenteísmo nas últimas duas avaliações for maior ou igual a 7, o usuário é Ouro
+      else if (absenteismoSuficiente) {
+        return 'Sim - Nível Ouro';
+      } 
+      // Caso contrário, o usuário não está apto para bonificação
+      else {
         return 'Não';
       }
     } else {
-      return 'Não'; // Não há avaliações suficientes para determinar a aptidão para promoção
+      return 'Não'; // Não há avaliações suficientes para determinar a aptidão para bonificação
     }
   }
-  
 
   downloadRelatorio(avaliacao: any) {
     const doc = new jsPDF();
