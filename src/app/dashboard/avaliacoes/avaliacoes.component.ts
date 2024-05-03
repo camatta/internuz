@@ -1391,7 +1391,7 @@ isSameIndex(index: number, notaIndex: number): boolean {
 
       // Percorrer os itens e somar as notas dos itens com requisito "Obrigatório", "nulo", "desejado" ou "diferencial" por tipo
       for (const item of this.avaliacoes) {
-        if (item.requisito === 'Obrigatório' || item.requisito === 'Indispensável') {
+        if (item.requisito === 'Obrigatório' || item.requisito === 'Individual' || item.requisito === 'Indispensável' ) {
           if (!notasObrigatorioNuloPorTipo[item.tipo]) {
             notasObrigatorioNuloPorTipo[item.tipo] = { quantidade: 1, notaTotal: item.nota };
           } else {
