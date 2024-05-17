@@ -12,6 +12,7 @@ import { AuthGuard } from './routes/auth.guard';
 import { PiramideComponent } from './dashboard/piramide/piramide.component';
 import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.component';
 import { AutoavaliacaoComponent } from './dashboard/autoavaliacao/autoavaliacao.component';
+import { DocsComponent } from './docs/docs.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -27,6 +28,8 @@ const routes: Routes = [
   { path: 'cadastro', component: CadastroComponent },
   { path: 'redefinir-senha', component: RedefinirSenhaComponent },
   { path: 'redefinir-senha/:token', component: RedefinirSenhaComponent },
+
+  { path: 'docs', component: DocsComponent}
 ];
 
 @NgModule({

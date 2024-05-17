@@ -1,0 +1,82 @@
+<div class="container-fluid" id="dashboard">
+  <div class="row">
+    <div class="col-2">
+      <div class="lateral">
+          <!-- LOGO -->
+        <div class="topbar-left">
+            <div class="text-center">
+                <a routerLink="/dashboard" class="logo">
+                  <img src="../../assets/images/logo-novo.svg" alt="logo-Nairuz" class="logo-large">
+                </a>
+            </div>
+        </div>
+        <div class="menu-lateral docs">
+          <p class="title-menu-lateral-docs">Documentação</p>
+          <ul>
+            <li><button>Introdução</button></li>
+            <li><button>Acessos</button></li>
+            <li><button>Primeiros Passos</button></li>
+          </ul>
+        </div>
+        
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="conteudo">
+        <div class="main-content">
+          <div class="conteudo-docs">
+            <div class="title-docs">
+              <h1>Documentação Internuz</h1>
+            </div>
+            <div class="content-docs">
+              <section id="introducao">
+                <h2>Introdução</h2>
+                <p>Bem-vindo à documentação do <strong>Projeto Internuz</strong>, uma plataforma dinâmica projetada para centralizar os canais de comunicação interno e a conexão entre colaboradores. Desenvolvido com a combinação de AngularJS no frontend e Node.js no backend, juntamente com o banco de dados MongoDB, o Internuz é uma solução versátil e escalável para atender às demandas internas da Nairuz.</p>
+                <p>Nesta documentação, você encontrará informações detalhadas sobre a arquitetura, funcionalidades e uso do Projeto Internuz. Desde a configuração inicial até a implementação e manutenção para orientar os desenvolvedores e administradores.</p>
+              </section>
+              
+              <section id="acessos">
+                <h2>Acessos</h2>
+                <p>O código-fonte e repositório de todo projeto está disponível no GitHub da Nairuz. Para realizar manutenção no projeto, insira seu perfil do GitHub como colaborador do projeto e faça o clone de todo repositório para seu ambiente local.</p>
+              </section>
+
+              <section id="primeiros-passos">
+                <h2>Primeiros Passos</h2>
+                <h3>Rodando o projeto localmente</h3>
+                <p>Após clonar o repositório, navegue até o diretório do projeto e instale as dependências tanto para o frontend quanto para o backend. Você pode fazer isso utilizando o npm ou o Yarn. Abra o terminal e execute um dos seguintes comandos:</p>
+                  <p class="demo-code">npm install</p>
+                  <p>ou</p>
+                  <p class="demo-code">yarn install</p>
+                  <p>Com as dependências instaladas com sucesso, você está pronto para iniciar o servidor localmente. O Projeto Internuz utiliza o npm script dev para iniciar tanto o servidor backend quanto o frontend simultaneamente. No terminal, execute o seguinte comando:</p>
+                    <p class="demo-code">npm run dev</p>
+                    <p>Este comando irá iniciar o servidor backend na porta 3000 e o servidor frontend na porta 4200.
+                    </p>
+                  <p>Uma vez que ambos os servidores estejam em execução, você pode acessar a aplicação em desenvolvimento digitando http://localhost:4200 em seu navegador web.</p>
+                <h3>Enviando um commit para o repositório</h3>
+                <p>Após concluir as alterações necessárias no Projeto Internuz e validar que tudo está funcionando conforme o esperado, é hora de realizar o envio das atualizações para o repositório no GitHub. Siga os passos abaixo:</p>
+                <p><strong>Importante:</strong> Antes de atualizar o repositório, é necessário buildar o projeto para validar se não é exibido nenhum erro durante o build. Execute o seguinte comando:</p>
+                <p class="demo-code">ng build</p>
+                <p>Uma vez que o build do projeto foi concluído com sucesso, é hora de fazer um commit das alterações para o repositório no GitHub. Primeiro, adicione todas as alterações ao índice de preparação executando o comando:</p>
+                <p class="demo-code">git add .</p>
+                <p>Em seguida, faça o commit das alterações utilizando o comando git commit. Certifique-se de fornecer uma mensagem descritiva para o commit, explicando as alterações realizadas.</p>
+                <p class="demo-code">git commit -m "Descrição do que foi realizado"</p>
+                <p>Finalmente, envie as alterações para o repositório no GitHub utilizando o comando git push. Isso garantirá que as alterações sejam sincronizadas com o repositório remoto.</p>
+                <p class="demo-code">git push origin master</p>
+                <h3>Validando Deploy</h3>
+                <p>Após enviar as alterações para o repositório, o deploy automático ocorre geralmente entre 5 a 10 minutos. Após esse período, acesse o site em produção (https://internuz.com.br) para validar se as alterações foram refletidas conforme esperado.</p>
+                <p>Em caso de qualquer problema, verifique na hospedagem do Google Cloud se a nova versão foi implantada corretamente ou se ocorreu alguma falha durante o processo. Isso ajudará a identificar e resolver qualquer questão que possa ter surgido durante o deploy.</p>
+              </section>
+            </div>
+            
+          </div>
+          <router-outlet></router-outlet>
+          <footer class="footer-wrapper">
+            <div class="footer">
+              <p>© Nairuz Marketing e Tecnologia® 2024 / todos os direitos reservados</p>
+            </div>
+        </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

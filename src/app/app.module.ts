@@ -21,6 +21,7 @@ import { RedefinirSenhaComponent } from './redefinir-senha/redefinir-senha.compo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxPrintModule } from 'ngx-print';
 import { AutoavaliacaoComponent } from './dashboard/autoavaliacao/autoavaliacao.component';
+import { DocsComponent } from './docs/docs.component';
 
 @NgModule({
   imports: [
@@ -45,7 +46,8 @@ import { AutoavaliacaoComponent } from './dashboard/autoavaliacao/autoavaliacao.
     ComercialComponent,
     PiramideComponent,
     RedefinirSenhaComponent,
-    AutoavaliacaoComponent
+    AutoavaliacaoComponent,
+    DocsComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

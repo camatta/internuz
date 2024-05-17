@@ -290,7 +290,7 @@ export class HistoricoComponent implements OnInit {
 Critérios:
 
 1. Para receber as bonificações* é necessário ter nota individual no mínimo de 9,0 em duas avaliações consecutivas e absenteísmo
-"Muito Bom";
+"Muito Bom" ou "Bom";
 
 Notas:
  a) Se o colaborador obter nota maior ou igual a 9,0 e o absenteísmo for "Bom", receberá a bonificação da Performance Ouro;
@@ -310,8 +310,8 @@ Diamante, só será bonificado mediante a aprovação do Financeiro.
  b) Em caso de empate na pontuação, o colaborador que tiver maior tempo de contratação (não considerando o tempo de estágio).
 
 6. Definição de performance individual:
- a) Nota 0 até 6,99 = Prata
- b) Nota entre 7 e 8,99 = Ouro
+ a) Nota 0 até 7,99 = Prata
+ b) Nota entre 8 e 8,99 = Ouro
  c) Nota igual ou maior que 9 = Diamante
 
 7. Absenteísmo:
