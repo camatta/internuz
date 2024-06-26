@@ -331,8 +331,8 @@ Diamante, só será bonificado mediante a aprovação do Financeiro.
 
  addPageNumber();
 
-  doc.setFontSize(9); // Tamanho da fonte
-  addFormattedText(doc, formattedText, 10, 155, 10);
+  // doc.setFontSize(9); // Tamanho da fonte
+  // addFormattedText(doc, formattedText, 10, 155, 10);
 
   doc.addPage(); // Adiciona uma nova página
   currentPage++
