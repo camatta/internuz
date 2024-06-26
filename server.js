@@ -191,7 +191,9 @@ app.post('/api/auth/cadastro', async (req, res) => {
       team,
       accessLevel,
       setor,
-      setorTratado
+      setorTratado,
+      status: 'Ativo',
+      funcao: 'Não Atribuída'
     });
 
     // Salvar o novo usuário no banco de dados
@@ -282,7 +284,7 @@ app.get('/api/users/me', authMiddleware, async (req, res) => {
 // Rota para atualizar um usuário
 app.put('/api/editar-usuario', async (req, res) => {
   try {
-    const { _id, name, email, team, setorTratado, funcao, accessLevel } = req.body;
+    const { _id, name, email, team, setorTratado, funcao, accessLevel, status } = req.body;
 
     // Encontre o usuário pelo ID
     const user = await User.findById(_id);
@@ -299,6 +301,7 @@ app.put('/api/editar-usuario', async (req, res) => {
     user.setorTratado = setorTratado;
     user.funcao = funcao;
     user.accessLevel = accessLevel;
+    user.status = status;
 
     // Salve as alterações no banco de dados
     await user.save();

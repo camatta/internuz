@@ -39,6 +39,11 @@ const userSchema = new mongoose.Schema ({
   funcao: {
     type: String,
     required: false,
+  },
+  status: {
+    type: String,
+    enum: ['Ativo', 'Inativo'],
+    required: false,
   }
 });
 

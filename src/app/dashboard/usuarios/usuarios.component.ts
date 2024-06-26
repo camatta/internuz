@@ -13,8 +13,11 @@ import * as alertifyjs from 'alertifyjs';
 export class UsuariosComponent implements OnInit {
 
   users: any[] = []; // Array de Usuários
+  usersAtivos: any[] = []; // Array de usuários ativos
+  usersInativos: any[] = []; // Array de usuários inativos
   editedUser: any = {}; // Objeto que vai armazenar os dados do usuário editado
   sectorOptions: any[] = [];
+  selectedTab: 'ativos' | 'inativos' = 'ativos'; // Aba selecionada
 
   constructor(private userService: UserService, private router: Router) {}
 
@@ -22,7 +25,7 @@ export class UsuariosComponent implements OnInit {
     if (this.editedUser.team === 'Tecnologia') {
         this.sectorOptions = ['Desenvolvimento', 'Design UI/UX', 'CS Tecnologia', 'Head'];
     } else if (this.editedUser.team === 'Marketing') {
-        this.sectorOptions = ['Redação', 'Design Publicitário', 'Tráfego Pago', 'Inbound Marketing', 'SEO', 'Head']; 
+        this.sectorOptions = ['Redação', 'Design Publicitário', 'Mídias Pagas', 'Inbound Marketing', 'SEO', 'Head']; 
     } else if (this.editedUser.team === 'Customer Success') {
       this.sectorOptions = ['CS', 'Head']; 
     } else if (this.editedUser.team === 'Comercial') {
@@ -37,6 +40,9 @@ export class UsuariosComponent implements OnInit {
     // Define o usuário a ser editado
     this.editedUser = { ...user };
     this.updateSectorOptions();
+
+    // Converte o status para booleano
+    this.editedUser.status = user.status === 'Ativo';
     
     // Abre o modal
     const modal = document.getElementById('editUserModal');
@@ -51,16 +57,23 @@ export class UsuariosComponent implements OnInit {
     if (modal) {
       modal.classList.remove('show');
     }
-    this.editedUser = {}; // Limpa os detalhes do usuário
+    // this.editedUser = {}; // Limpa os detalhes do usuário
   }
+
+
 
   // Função para salvar as alterações do usuário
   salvarEdicaoUsuario() {
+
+    this.closeEditUserModal();
+
+    // Converte o status para string antes de salvar
+    this.editedUser.status = this.editedUser.status ? 'Ativo' : 'Inativo';
+
     this.userService.updateUser(this.editedUser).subscribe(
       (response) => {
         console.log('Usuário atualizado com sucesso:', response);
         alertifyjs.success('Usuário atualizado com sucesso.'); 
-        this.closeEditUserModal();
         this.updateUserInList(response);
       },
       (error) => {
@@ -76,16 +89,32 @@ updateUserInList(updatedUser: any) {
   if (index !== -1) {
     this.users[index] = updatedUser;
   }
+
+  // Atualiza arrays de usuários ativos e inativos
+  this.updateUsersStatusArrays();
 }
+
+  // Atualiza arrays de usuários ativos e inativos
+  updateUsersStatusArrays() {
+    this.usersAtivos = this.users.filter(user => user.status === 'Ativo');
+    this.usersInativos = this.users.filter(user => user.status === 'Inativo');
+  }
+  
+  // Seleciona a aba de usuários ativos ou inativos
+  selectTab(tab: 'ativos' | 'inativos') {
+    this.selectedTab = tab;
+  }
 
   ngOnInit(): void {
     this.userService.getUsers().subscribe(
       (data) => {
         this.users = data;
+        this.updateUsersStatusArrays(); // Inicializa os arrays de usuários ativos e inativos
       },
       (error) => {
         console.error(error);
       }
     );
   }
+
 }

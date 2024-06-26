@@ -7,9 +7,25 @@ h1 {
   color: #00175d;
 }
 
+.tabs {
+  display: flex;
+  gap: 10px;
+}
+
+.tabs .tab-button {
+  border-radius: 20px;
+  background-color: #ECECEC;
+  color: #000000;
+  font-size: 14px;
+  padding: 10px 20px;
+}
+
+.tabs .tab-button.active {
+  background-color: #61dcab;
+}
+
 .wrapper-table {
   width: 100%;
-  margin-top: 2rem;
   background-color: #ffffff30;
   color: #fff;
   border-radius: 5px;
@@ -123,4 +139,28 @@ tbody td.editar-funcionairuz {
   padding: 10px 15px;
   cursor: pointer;
   font-size: 14px;
+}
+
+.form-check-input:checked {
+  background-color: #61dcab;
+  border-color: #61dcab;
+}
+
+.usuario-ativo {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  padding: 0
+}
+
+.form-check-input {
+  background-color: #fff5f6;
+  border-color: #dfdfdf;
+  width: 3em;
+  height: 1.5em;
+  cursor: pointer;
+}
+
+.form-switch .form-check-input:focus {
+  box-shadow: none;
 }

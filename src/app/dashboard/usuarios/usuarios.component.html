@@ -1,5 +1,11 @@
 <h1>Lista de Usuários:</h1>
 
+
+<div class="tabs">
+  <button class="tab-button" [class.active]="selectedTab === 'ativos'" (click)="selectTab('ativos')">Usuários Ativos</button>
+  <button class="tab-button" [class.active]="selectedTab === 'inativos'" (click)="selectTab('inativos')">Usuários Inativos</button>
+</div>
+
 <div class="wrapper-table">
   <table>
     <thead>
@@ -12,26 +18,37 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users">
-        <td class="nome-funcionairuz">{{ user.name }}</td>
-        <td class="time-funcionairuz">
-          {{ user.team }}
-        </td>
-        <td class="setor-funcionairuz">
-          {{ user.setorTratado }}
-        </td>
-        <td class="funcao-funcionairuz">{{ user.funcao }}</td>
-        <td class="permissao-funcionairuz">
-          {{ user.accessLevel }}
-        </td>
-        <td class="editar-funcionairuz">
-          <span class="edit-icon" (click)="openEditUserModal(user)"><i class="fa-solid fa-pen"></i></span>
-        </td>
-      </tr>          
+      <ng-container *ngIf="selectedTab === 'ativos'">
+        <tr *ngFor="let user of usersAtivos">
+          <td class="nome-funcionario">{{ user.name }}</td>
+          <td class="time-funcionario">{{ user.team }}</td>
+          <td class="setor-funcionario">{{ user.setorTratado }}</td>
+          <td class="funcao-funcionario">{{ user.funcao }}</td>
+          <td class="permissao-funcionario">{{ user.accessLevel }}</td>
+          <td class="editar-funcionario">
+            <span class="edit-icon" (click)="openEditUserModal(user)">
+              <i class="fa-solid fa-pen"></i>
+            </span>
+          </td>
+        </tr>
+      </ng-container>
+      <ng-container *ngIf="selectedTab === 'inativos'">
+        <tr *ngFor="let user of usersInativos">
+          <td class="nome-funcionario">{{ user.name }}</td>
+          <td class="time-funcionario">{{ user.team }}</td>
+          <td class="setor-funcionario">{{ user.setorTratado }}</td>
+          <td class="funcao-funcionario">{{ user.funcao }}</td>
+          <td class="permissao-funcionario">{{ user.accessLevel }}</td>
+          <td class="editar-funcionario">
+            <span class="edit-icon" (click)="openEditUserModal(user)">
+              <i class="fa-solid fa-pen"></i>
+            </span>
+          </td>
+        </tr>
+      </ng-container>
     </tbody>
   </table>
 </div>
-
 <!-- Modal de edição de usuário -->
 <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
   <div class="modal-dialog pulse  animated modal-dialog-centered">
@@ -77,6 +94,12 @@
                 <option value="Líder de Equipe">Líder de Equipe</option>
                 <option value="Administrador">Administrador</option>
             </select>
+          </div>
+          <div class="mb-3">
+            <div class="form-check form-switch usuario-ativo">
+              <label class="form-check-label form-label" for="flexSwitchCheckDefault">Ativo?</label>
+              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [(ngModel)]="editedUser.status" [ngModelOptions]="{standalone: true}">
+            </div>
           </div>
         </form>
       </div>
