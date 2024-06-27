@@ -10,16 +10,31 @@
   <table>
     <thead>
       <tr>
-        <th>Nome</th>
-        <th>Time</th>
-        <th>Setor</th>
-        <th>Função</th>
-        <th>Permissão</th>
+        <th (click)="sortUsers('name')">
+          Nome 
+          <span>{{ sortField === 'name' && sortDirection === 'asc' ? '▲' : '▼' }}</span>
+        </th>
+        <th (click)="sortUsers('team')">
+          Time 
+          <span>{{ sortField === 'team' && sortDirection === 'asc' ? '▲' : '▼' }}</span>
+        </th>
+        <th (click)="sortUsers('setorTratado')">
+          Setor 
+          <span>{{ sortField === 'setorTratado' && sortDirection === 'asc' ? '▲' : '▼' }}</span>
+        </th>
+        <th (click)="sortUsers('funcao')">
+          Função 
+          <span>{{ sortField === 'funcao' && sortDirection === 'asc' ? '▲' : '▼' }}</span>
+        </th>
+        <th (click)="sortUsers('accessLevel')">
+          Permissão 
+          <span>{{ sortField === 'accessLevel' && sortDirection === 'asc' ? '▲' : '▼' }}</span>
+        </th>
       </tr>
     </thead>
     <tbody>
       <ng-container *ngIf="selectedTab === 'ativos'">
-        <tr *ngFor="let user of usersAtivos">
+        <tr *ngFor="let user of (selectedTab === 'ativos' ? sortedUsersAtivos : sortedUsersInativos)">
           <td class="nome-funcionario">{{ user.name }}</td>
           <td class="time-funcionario">{{ user.team }}</td>
           <td class="setor-funcionario">{{ user.setorTratado }}</td>

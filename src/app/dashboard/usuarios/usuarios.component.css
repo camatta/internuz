@@ -35,6 +35,18 @@ h1 {
   margin-bottom: 40px;
 }
 
+.wrapper-table th span {
+  color: #00175d;
+  font-size: 10px;
+  cursor: pointer;
+  position: relative;
+  bottom: 1.5px;
+}
+
+.wrapper-table th {
+  cursor: pointer;
+}
+
 table {
   width: 100%;
 }

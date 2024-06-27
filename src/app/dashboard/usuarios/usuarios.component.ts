@@ -15,9 +15,13 @@ export class UsuariosComponent implements OnInit {
   users: any[] = []; // Array de Usuários
   usersAtivos: any[] = []; // Array de usuários ativos
   usersInativos: any[] = []; // Array de usuários inativos
+  sortedUsersAtivos: any[] = []; // Array de usuários ativos ordenados
+  sortedUsersInativos: any[] = []; // Array de usuários inativos ordenados
   editedUser: any = {}; // Objeto que vai armazenar os dados do usuário editado
   sectorOptions: any[] = [];
   selectedTab: 'ativos' | 'inativos' = 'ativos'; // Aba selecionada
+  sortField: string = ''; // Campo de ordenação
+  sortDirection: 'asc' | 'desc' = 'asc'; // Direção de ordenação
 
   constructor(private userService: UserService, private router: Router) {}
 
@@ -98,11 +102,35 @@ updateUserInList(updatedUser: any) {
   updateUsersStatusArrays() {
     this.usersAtivos = this.users.filter(user => user.status === 'Ativo');
     this.usersInativos = this.users.filter(user => user.status === 'Inativo');
+
+    this.sortedUsersAtivos = [...this.usersAtivos];
+    this.sortedUsersInativos = [...this.usersInativos];
   }
   
   // Seleciona a aba de usuários ativos ou inativos
   selectTab(tab: 'ativos' | 'inativos') {
     this.selectedTab = tab;
+  }
+
+  // Método para ordenar os usuários
+  sortUsers(field: string): void {
+    if (this.sortField === field) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortField = field;
+      this.sortDirection = 'asc';
+    }
+
+    const compare = (a: any, b: any) => {
+      if (a[field] === undefined || b[field] === undefined) return 0;
+      return a[field].localeCompare(b[field], undefined, { sensitivity: 'base' }) * (this.sortDirection === 'asc' ? 1 : -1);
+    };
+
+    if (this.selectedTab === 'ativos') {
+      this.sortedUsersAtivos.sort(compare);
+    } else {
+      this.sortedUsersInativos.sort(compare);
+    }
   }
 
   ngOnInit(): void {
