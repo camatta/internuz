@@ -166,7 +166,7 @@ export class AvaliacoesComponent implements OnInit {
       { tipo: 'ferramenta', nome: 'TypeScript', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'ferramenta', nome: 'Outras plataformas de e-commerce', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'ferramenta', nome: 'Inglês Básico ou intermediário', requisito: 'Obrigatório', peso: 'A', },
-      { tipo: 'ferramenta', nome: 'Photoshop', requisito: 'Desejado', peso: 'A', },
+      { tipo: 'ferramenta', nome: 'Photoshop e/ou ferramentas de edição de imagens.', requisito: 'Desejado', peso: 'A', },
       { tipo: 'ferramenta', nome: 'Banco de Dados (MySQL, Mongodb, Firebase, entre outros)', requisito: 'Desejado', peso: 'A', },
       { tipo: 'ferramenta', nome: 'Otimização SEO on-site', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'ferramenta', nome: 'Noções de UX/ UI', requisito: 'Obrigatório', peso: 'A', },
