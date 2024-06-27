@@ -173,7 +173,7 @@ export class HistoricoComponent implements OnInit {
         // Se tiver nota na médiaIndividual de 8 até menor que 9 em uma das avaliações, ou absenteísmo menor que 10 em uma das avaliações, é apto Ouro
         const ouro = ultimasAvaliacoes.some(avaliacao => {
           return avaliacao.mediaIndividual >= 8 && avaliacao.mediaIndividual < 9 ||
-            avaliacao.notas.some((nota: any) => nota.nome.includes('Absenteísmo') && nota.nota < 10);
+            avaliacao.notas.some((nota: any) => nota.nome.includes('Absenteísmo') && nota.nota < 9);
         });
         if (ouro) {
           return 'Sim - Nível Ouro';
@@ -185,7 +185,7 @@ export class HistoricoComponent implements OnInit {
         // Se tiver nota igual ou maior que 9 na médiaIndividual em ambas as avaliações e nota 10 nas duas de absenteísmo, é apto Diamante
         const diamante = ultimasAvaliacoes.every(avaliacao => {
           return avaliacao.mediaIndividual >= 9 &&
-            avaliacao.notas.every((nota: any) => nota.nome.includes('Absenteísmo') && nota.nota === 10);
+            avaliacao.notas.some((nota: any) => nota.nome.includes('Absenteísmo') && nota.nota === 10);
         });
         if (diamante) {
           return 'Sim - Nível Diamante';
