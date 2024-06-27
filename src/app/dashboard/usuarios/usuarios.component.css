@@ -1,6 +1,8 @@
 h1 {
   color: #00175d;
   font-style: italic;
+  position: absolute;
+  top: 3rem;
 }
 
 .wrapper-table p, .wrapper-table li {
