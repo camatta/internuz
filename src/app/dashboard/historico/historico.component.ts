@@ -114,18 +114,13 @@ export class HistoricoComponent implements OnInit {
   }
 
   calcularPerformance(): string {
-    let somaMediaIndividual = 0;
-    let todasNotasAcimaNove = true;
-
     if (this.historicoAvaliacoes.length < 4) {
       return 'É necessário pelo menos 4 avaliações para avaliar o nível do funcionário.';
     }
 
+    let somaMediaIndividual = 0;
     for (let avaliacao of this.historicoAvaliacoes) {
       somaMediaIndividual += avaliacao.mediaIndividual;
-      if (avaliacao.mediaIndividual < 9) {
-        todasNotasAcimaNove = false;
-      }
     }
 
     const mediaPerformance = somaMediaIndividual / this.historicoAvaliacoes.length;
@@ -140,19 +135,20 @@ export class HistoricoComponent implements OnInit {
   }
 
   verificarAptoPromocao(): string {
-    let todasNotasAcimaNove = true;
-
-    if (this.historicoAvaliacoes.length < 4) {
-      return 'Não';
-    }
-
-    for (let avaliacao of this.historicoAvaliacoes) {
-      if (avaliacao.mediaIndividual < 9) {
-        todasNotasAcimaNove = false;
+    // Verificar se há pelo menos quatro avaliações
+    if (this.historicoAvaliacoes && this.historicoAvaliacoes.length >= 4) {
+      // Pegar as quatro últimas avaliações
+      const ultimasAvaliacoes = this.historicoAvaliacoes.slice(-4);
+  
+      // Verificar se a média individual mínima é 9 nas últimas quatro avaliações
+      const mediaIndividualApta = ultimasAvaliacoes.every(avaliacao => avaliacao.mediaIndividual >= 9);
+  
+      if (mediaIndividualApta) {
+        return 'Sim';
       }
     }
-
-    return todasNotasAcimaNove ? 'Sim' : 'Não';
+  
+    return 'Não';
   }
 
   verificarAptoBonificacao(historicoAvaliacoes: any[]): string {
