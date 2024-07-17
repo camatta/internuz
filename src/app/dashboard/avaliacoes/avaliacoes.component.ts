@@ -1272,7 +1272,7 @@ carregarUltimaAutoAvaliacao(): void {
   if (this.usuarioSelecionado) {
     this.http.get(environment.URL_API + `/api/autoavaliacoes?funcionario=${this.usuarioSelecionado}&_sort=data&_order=desc&_limit=1`)
       .subscribe((response: any) => {
-        this.ultimaAutoAvaliacao = response; // A resposta é um array, então pegamos o primeiro item
+        this.ultimaAutoAvaliacao = response[response.length - 1]; // A resposta é um array, então pegamos o último item
         console.log('Última autoavaliação:', this.ultimaAutoAvaliacao);
       }, (error) => {
         console.log('O usuário não possui autoavaliação');

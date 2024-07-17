@@ -346,9 +346,9 @@ app.get('/api/autoavaliacoes', async (req, res) => {
       const { funcionario } = req.query;
 
       // Consulte a última autoavaliação do funcionário especificado
-      const ultimaAutoAvaliacao = await Autoavaliacao.findOne({ funcionario })
-          .sort({ data: -1 }) // Classifique por data em ordem decrescente para obter a última
-          .limit(1);
+      const ultimaAutoAvaliacao = await Autoavaliacao.find({ funcionario })
+          // .sort({ dataFormatada: -1 }) // Classifique por data em ordem decrescente para obter a última
+          // .limit(1);
 
       if (!ultimaAutoAvaliacao) {
           return res.status(404).json({ message: 'Nenhuma autoavaliação encontrada para o funcionário especificado.' });
