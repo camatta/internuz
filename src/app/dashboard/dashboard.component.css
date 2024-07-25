@@ -147,3 +147,15 @@ h5 {
   margin-bottom: 0;
   color: #01134c;
 }
+
+@media only screen and (max-width: 1440px) {
+
+  .lateral {
+    padding: 2rem 1.2rem;
+  }
+  
+  .main-content {
+    padding: 2rem 2rem;
+  }
+
+}

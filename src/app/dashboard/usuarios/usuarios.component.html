@@ -18,10 +18,10 @@
           Time 
           <span>{{ sortField === 'team' && sortDirection === 'asc' ? '▲' : '▼' }}</span>
         </th>
-        <th (click)="sortUsers('setorTratado')">
+        <!-- <th (click)="sortUsers('setorTratado')">
           Setor 
           <span>{{ sortField === 'setorTratado' && sortDirection === 'asc' ? '▲' : '▼' }}</span>
-        </th>
+        </th> -->
         <th (click)="sortUsers('funcao')">
           Função 
           <span>{{ sortField === 'funcao' && sortDirection === 'asc' ? '▲' : '▼' }}</span>
@@ -30,6 +30,10 @@
           Permissão 
           <span>{{ sortField === 'accessLevel' && sortDirection === 'asc' ? '▲' : '▼' }}</span>
         </th>
+        <th (click)="sortUsers('nivel')">
+          Nível Atual 
+          <span>{{ sortField === 'nivel' && sortDirection === 'asc' ? '▲' : '▼' }}</span>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -37,9 +41,10 @@
         <tr *ngFor="let user of (selectedTab === 'ativos' ? sortedUsersAtivos : sortedUsersInativos)">
           <td class="nome-funcionario">{{ user.name }}</td>
           <td class="time-funcionario">{{ user.team }}</td>
-          <td class="setor-funcionario">{{ user.setorTratado }}</td>
+          <!-- <td class="setor-funcionario">{{ user.setorTratado }}</td> -->
           <td class="funcao-funcionario">{{ user.funcao }}</td>
           <td class="permissao-funcionario">{{ user.accessLevel }}</td>
+          <td class="permissao-funcionario">Diamante</td>
           <td class="editar-funcionario">
             <span class="edit-icon" (click)="openEditUserModal(user)">
               <i class="fa-solid fa-pen"></i>

@@ -144,3 +144,11 @@ span {
   color: #ff9df3;
   font-weight: 600;
 }
+
+@media only screen and (max-width: 1440px) {
+
+  td {
+    font-size: 13px;
+  }
+
+}

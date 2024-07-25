@@ -258,3 +258,11 @@ p strong {
 .wrapper-historico .avaliacao:not(:nth-last-child(-n+4)) {
   display: none;
 }
+
+@media only screen and (max-width: 1440px) {
+
+  .wrapper-historico {
+    gap: 25px;
+  }
+
+}

@@ -44,7 +44,11 @@ const userSchema = new mongoose.Schema ({
     type: String,
     enum: ['Ativo', 'Inativo'],
     required: false,
-  }
+  },
+  nivel: {
+    type: String,
+    required: false,
+  },
 });
 
 // Criptografar senha do usuário

@@ -125,6 +125,7 @@ tbody td.editar-funcionairuz {
 
 .btn-close {
   background-color: unset;
+  font-size: 12px;
 }
 
 .form-control, select, option {

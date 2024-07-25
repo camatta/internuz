@@ -34,3 +34,15 @@
 .link-ativo i {
   color: #61dcab !important;
 }
+
+@media only screen and (max-width: 1440px) {
+
+  .menu-lateral ul li button {
+    font-size: 13px;
+  }
+
+  .menu-lateral ul li button {
+    gap: 8px;
+  }
+  
+}
