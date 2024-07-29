@@ -234,6 +234,7 @@ app.post('/api/auth/login', async (req, res) => {
 
     res.status(200).json({ message: 'Login bem-sucedido.', user: { name, email, team, accessLevel, setor, setorTratado, funcao }, token });
   } catch (error) {
+    console.log(existingUser);
     console.error(error);
     res.status(500).json({ message: 'Ocorreu um erro durante o login.' });
   }
