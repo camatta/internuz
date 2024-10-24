@@ -10,26 +10,93 @@
 <p class="aviso-ultimas"><strong>Últimas avaliações realizadas:</strong></p>
 <div class="wrapper-historico">
   <div class="avaliacao" *ngFor="let avaliacao of historicoAvaliacoes">
-    <p><span>Avaliado por:</span> {{ avaliacao.avaliador }}</p>
-    <p><span>Data:</span> {{ avaliacao.dataFormatada }}</p>
-    <p><span>Nota Individual:</span> {{ avaliacao.mediaIndividual | number:'1.2-2' }}<span>
-      <span class="performance-prata" *ngIf="avaliacao.mediaIndividual < 8">Prata</span>
-      <span class="performance-ouro" *ngIf="avaliacao.mediaIndividual >= 8 && avaliacao.mediaIndividual < 9">Ouro</span>
-      <span class="performance-diamante" *ngIf="avaliacao.mediaIndividual >= 9">Diamante</span>
-    </span></p>
+
+    <div class="data-avaliacao">
+      <p><svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.33333 13.5C0.966667 13.5 0.652778 13.3727 0.391667 13.1181C0.130556 12.8635 0 12.5575 0 12.2V3.1C0 2.7425 0.130556 2.43646 0.391667 2.18187C0.652778 1.92729 0.966667 1.8 1.33333 1.8H2V0.5H3.33333V1.8H8.66667V0.5H10V1.8H10.6667C11.0333 1.8 11.3472 1.92729 11.6083 2.18187C11.8694 2.43646 12 2.7425 12 3.1V12.2C12 12.5575 11.8694 12.8635 11.6083 13.1181C11.3472 13.3727 11.0333 13.5 10.6667 13.5H1.33333ZM1.33333 12.2H10.6667V5.7H1.33333V12.2Z" fill="#666666"/>
+        </svg>{{ avaliacao.dataFormatada }}
+        </p>
+    </div>
+
+    <div class="autor-avaliacao">
+      <p><span>Avaliado por:</span> {{ avaliacao.avaliador }}</p>
+    </div>
+
+    <div class="nota-individual">
+      <div class="nota-numeral">
+        <p><span>Nota Individual:</span> {{ avaliacao.mediaIndividual | number:'1.2-2' }}</p>
+      </div>
+      <div class="nota-nivel">
+        <p>
+          <span class="performance-prata" *ngIf="avaliacao.mediaIndividual < 8">
+              <svg width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_31_142)">
+              <path d="M17.7954 12.4219L17.4473 13.9863C17.3761 14.3055 17.1019 14.5312 16.7857 14.5312H3.21427C2.89806 14.5312 2.62392 14.3055 2.55267 13.9863L2.20456 12.4219H17.7954Z" fill="#1C1C1C"/>
+              <path d="M19.483 4.84567L18.1089 11.0156H1.89106L0.516952 4.84567C0.456559 4.57356 0.556988 4.28949 0.773452 4.12285C0.990595 3.95621 1.2817 3.93863 1.51513 4.07715L5.71481 6.5641L9.43474 0.782306C9.5562 0.593869 9.75706 0.47715 9.97488 0.468712C10.1947 0.458869 10.4017 0.561525 10.5354 0.740119L14.8979 6.55215L18.4448 4.10246C18.6762 3.94356 18.9782 3.94496 19.2068 4.10879C19.4362 4.27262 19.5448 4.56512 19.483 4.84567Z" fill="#1C1C1C"/>
+              </g>
+              <defs>
+              <clipPath id="clip0_31_142">
+              <rect width="19" height="15" fill="white" transform="translate(0.5)"/>
+              </clipPath>
+              </defs>
+              </svg>
+              Prata
+          </span>
+          <span class="performance-ouro" *ngIf="avaliacao.mediaIndividual >= 8 && avaliacao.mediaIndividual < 9"><svg width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_31_142)">
+            <path d="M17.7954 12.4219L17.4473 13.9863C17.3761 14.3055 17.1019 14.5312 16.7857 14.5312H3.21427C2.89806 14.5312 2.62392 14.3055 2.55267 13.9863L2.20456 12.4219H17.7954Z" fill="#1C1C1C"/>
+            <path d="M19.483 4.84567L18.1089 11.0156H1.89106L0.516952 4.84567C0.456559 4.57356 0.556988 4.28949 0.773452 4.12285C0.990595 3.95621 1.2817 3.93863 1.51513 4.07715L5.71481 6.5641L9.43474 0.782306C9.5562 0.593869 9.75706 0.47715 9.97488 0.468712C10.1947 0.458869 10.4017 0.561525 10.5354 0.740119L14.8979 6.55215L18.4448 4.10246C18.6762 3.94356 18.9782 3.94496 19.2068 4.10879C19.4362 4.27262 19.5448 4.56512 19.483 4.84567Z" fill="#1C1C1C"/>
+            </g>
+            <defs>
+            <clipPath id="clip0_31_142">
+            <rect width="19" height="15" fill="white" transform="translate(0.5)"/>
+            </clipPath>
+            </defs>
+            </svg>
+            Ouro
+          </span>
+          <span class="performance-diamante" *ngIf="avaliacao.mediaIndividual >= 9">
+            <svg width="20" height="15" viewBox="0 0 20 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_31_142)">
+              <path d="M17.7954 12.4219L17.4473 13.9863C17.3761 14.3055 17.1019 14.5312 16.7857 14.5312H3.21427C2.89806 14.5312 2.62392 14.3055 2.55267 13.9863L2.20456 12.4219H17.7954Z" fill="#1C1C1C"/>
+              <path d="M19.483 4.84567L18.1089 11.0156H1.89106L0.516952 4.84567C0.456559 4.57356 0.556988 4.28949 0.773452 4.12285C0.990595 3.95621 1.2817 3.93863 1.51513 4.07715L5.71481 6.5641L9.43474 0.782306C9.5562 0.593869 9.75706 0.47715 9.97488 0.468712C10.1947 0.458869 10.4017 0.561525 10.5354 0.740119L14.8979 6.55215L18.4448 4.10246C18.6762 3.94356 18.9782 3.94496 19.2068 4.10879C19.4362 4.27262 19.5448 4.56512 19.483 4.84567Z" fill="#1C1C1C"/>
+              </g>
+              <defs>
+              <clipPath id="clip0_31_142">
+              <rect width="19" height="15" fill="white" transform="translate(0.5)"/>
+              </clipPath>
+              </defs>
+              </svg>
+              Diamante
+            </span>
+        </p>
+      </div>
+    </div>
+
     <p><span>Nota do Time:</span> {{ avaliacao.mediaTime | number:'1.2-2' }}</p>
     <p><span>Nota da Empresa:</span> {{ avaliacao.mediaEmpresa | number:'1.2-2' }}</p>
     <p><span>Absenteísmo: </span> <span class="absenteismo">{{ getAbsenteismo(avaliacao) }}</span></p>
-    <p class="nota-final">Média Final: {{ avaliacao.mediaFinalGeral | number:'1.2-2' }}</p>
+
+    <hr>
+
+    <div class="media-final">
+      <p class="nota-final"><span class="titulo-media-final">Média Final:</span><span class="nota-media-final">{{ avaliacao.mediaFinalGeral | number:'1.2-2' }}</span></p>
+    </div>
     <div>
       <ul>
         <li *ngFor="let item of avaliacao.itens">
           {{ item.nome }}: {{ item.nota }}
         </li>
       </ul>
-      <button  (click)="downloadRelatorio(avaliacao)">Baixar Relatório</button>
+
+      <div class="download-relatorio">
+        <button  (click)="downloadRelatorio(avaliacao)"> <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6.50004 8.83331L2.95837 5.29165L3.95004 4.26456L5.79171 6.10623V0.333313H7.20837V6.10623L9.05004 4.26456L10.0417 5.29165L6.50004 8.83331ZM2.25004 11.6666C1.86046 11.6666 1.52695 11.5279 1.24952 11.2505C0.972089 10.9731 0.833374 10.6396 0.833374 10.25V8.12498H2.25004V10.25H10.75V8.12498H12.1667V10.25C12.1667 10.6396 12.028 10.9731 11.7506 11.2505C11.4731 11.5279 11.1396 11.6666 10.75 11.6666H2.25004Z" fill="#1C1B1F"/>
+          </svg>
+          Baixar Relatório
+        </button>
+      </div>
     </div>
-    <hr>
   </div>
 </div>
 
