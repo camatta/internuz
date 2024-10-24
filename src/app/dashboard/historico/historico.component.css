@@ -183,6 +183,118 @@ p strong {
   color: #61DCAB !important;
 }
 
+.resultado-apto {
+  background-color: #61DCAB;
+  border-radius: 58px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 8px 32px;
+}
+
+.resultado-apto p {
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: #00175D;
+  margin-bottom: 4px;
+}
+
+.resultado-apto p span {
+  font-size: 14px;
+  text-decoration: underline;
+  color: #00175D;
+}
+
+.resultado-apto p strong {
+  color: #00175D;
+}
+
+.resultado-nao-apto {
+  background-color: #ECECEC;
+  border-radius: 58px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 8px 32px;
+}
+
+.resultado-nao-apto p {
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.resultado-nao-apto p span {
+  font-size: 14px;
+  text-decoration: underline;
+  color: #000;
+}
+
+.resultado-nao-apto p strong {
+  color: #000;
+}
+
+.performance-flex {
+  display: flex;
+  gap: 16px;
+}
+
+.promocao, .bonificacao {
+  position: relative;
+}
+
+.tooltip-promocao,
+.tooltip-bonificacao {
+  position: absolute;
+  left: 0;
+  bottom: -2rem;
+  background-color: #fff;
+  box-shadow: 0px 4px 4px 0px #00000026;
+  padding: 12px 16px;
+  visibility: hidden;
+  transition: all .3s;
+  border-radius: 8px;
+}
+
+.tooltip-promocao p,
+.tooltip-promocao a,
+.tooltip-promocao strong,
+.tooltip-bonificacao p,
+.tooltip-bonificacao a,
+.tooltip-bonificacao strong {
+  font-size: 14px;
+  color: #000 !important;
+}
+
+.promocao span:hover .tooltip-promocao {
+  visibility: visible;
+}
+
+.bonificacao span:hover .tooltip-bonificacao {
+  visibility: visible;
+}
+
+.texto-bonificacao p:first-child {
+  position: relative;
+  top: 5px;
+}
+
+.texto-promocao p:first-child {
+  position: relative;
+  top: 5px;
+}
+
 /* Relatório */
 
 .title {
@@ -328,6 +440,7 @@ p strong {
   display: flex;
   flex-wrap: wrap;
   gap: 25px;
+  margin-bottom: 40px;
 }
 
 .wrapper-historico > div {
@@ -335,7 +448,7 @@ p strong {
 }
 
 .wrapper-performance {
-  margin-bottom: 40px;
+  margin-bottom: 80px;
 }
 
 .wrapper-historico .avaliacao:not(:nth-last-child(-n+4)) {

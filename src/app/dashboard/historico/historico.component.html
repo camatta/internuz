@@ -101,9 +101,88 @@
 </div>
 
 <div class="wrapper-performance">
-  <div *ngIf="historicoAvaliacoes && historicoAvaliacoes.length >= 4">
-    <p>Apto para promoção: <span>{{ verificarAptoPromocao() }}</span></p>
-    <p>Apto para bonificação: <span>{{ verificarAptoBonificacao(historicoAvaliacoes) }}</span></p>
+  <div class="performance-flex" *ngIf="historicoAvaliacoes && historicoAvaliacoes.length >= 4">
+
+    <div *ngIf="aptoPromocao; else notApto">
+      <div class="resultado-apto promocao">
+        <div class="icone-promocao">
+          <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.6 21L5.7 17.8L2.1 17L2.45 13.3L0 10.5L2.45 7.7L2.1 4L5.7 3.2L7.6 0L11 1.45L14.4 0L16.3 3.2L19.9 4L19.55 7.7L22 10.5L19.55 13.3L19.9 17L16.3 17.8L14.4 21L11 19.55L7.6 21ZM9.95 14.05L15.6 8.4L14.2 6.95L9.95 11.2L7.8 9.1L6.4 10.5L9.95 14.05Z" fill="#00175D"/>
+          </svg>            
+        </div>
+        <div class="texto-promocao">
+          <p>Apto para <strong>promoção</strong></p>
+          <p><span>Saiba mais
+            <div class="tooltip-promocao">
+              <p>Para um funcionairuz estar apto à uma promoção, é necessário ter passado por 4 (quatro) <strong>avaliações diamante</strong> consecutivas. Para mais informações, consulte nosso <a href="https://d335luupugsy2.cloudfront.net/cms%2Ffiles%2F42350%2F1712154011Nairuz_Plano_de_Carreira_2024_1.pdf?utm_campaign=avaliacao_de_desempenho_-_abril24&utm_medium=email&utm_source=RD+Station">Plano de Carreira</a>.</p>
+            </div>
+          </span></p>
+        </div>
+
+      </div>
+    </div>
+    <ng-template #notApto>
+      
+      <div class="resultado-nao-apto promocao">
+        <div class="icone-promocao">
+          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 15.5H11V9.5H9V15.5ZM10 7.5C10.2833 7.5 10.5208 7.40417 10.7125 7.2125C10.9042 7.02083 11 6.78333 11 6.5C11 6.21667 10.9042 5.97917 10.7125 5.7875C10.5208 5.59583 10.2833 5.5 10 5.5C9.71667 5.5 9.47917 5.59583 9.2875 5.7875C9.09583 5.97917 9 6.21667 9 6.5C9 6.78333 9.09583 7.02083 9.2875 7.2125C9.47917 7.40417 9.71667 7.5 10 7.5ZM10 20.5C8.61667 20.5 7.31667 20.2375 6.1 19.7125C4.88333 19.1875 3.825 18.475 2.925 17.575C2.025 16.675 1.3125 15.6167 0.7875 14.4C0.2625 13.1833 0 11.8833 0 10.5C0 9.11667 0.2625 7.81667 0.7875 6.6C1.3125 5.38333 2.025 4.325 2.925 3.425C3.825 2.525 4.88333 1.8125 6.1 1.2875C7.31667 0.7625 8.61667 0.5 10 0.5C11.3833 0.5 12.6833 0.7625 13.9 1.2875C15.1167 1.8125 16.175 2.525 17.075 3.425C17.975 4.325 18.6875 5.38333 19.2125 6.6C19.7375 7.81667 20 9.11667 20 10.5C20 11.8833 19.7375 13.1833 19.2125 14.4C18.6875 15.6167 17.975 16.675 17.075 17.575C16.175 18.475 15.1167 19.1875 13.9 19.7125C12.6833 20.2375 11.3833 20.5 10 20.5Z" fill="#1C1B1F"/>
+          </svg>                       
+        </div>
+        <div class="texto-promocao">
+          <p>Não apto para <strong>promoção</strong></p>
+          <p><span>Saiba mais
+            <div class="tooltip-promocao">
+              <p>Para um funcionairuz estar apto à uma promoção, é necessário ter passado por 4 (quatro) <strong>avaliações diamante</strong> consecutivas. Para mais informações, consulte nosso <a href="https://d335luupugsy2.cloudfront.net/cms%2Ffiles%2F42350%2F1712154011Nairuz_Plano_de_Carreira_2024_1.pdf?utm_campaign=avaliacao_de_desempenho_-_abril24&utm_medium=email&utm_source=RD+Station">Plano de Carreira</a>.</p>
+            </div>
+          </span></p>
+        </div>
+      </div>
+
+    </ng-template>
+
+    <div *ngIf="verificarAptoBonificacao() as resultado">
+      <div *ngIf="resultado.apto; else notAptoBonificacao">
+        <div class="resultado-apto bonificacao">
+          <div class="icone-bonificacao">
+            <svg width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.6 21L5.7 17.8L2.1 17L2.45 13.3L0 10.5L2.45 7.7L2.1 4L5.7 3.2L7.6 0L11 1.45L14.4 0L16.3 3.2L19.9 4L19.55 7.7L22 10.5L19.55 13.3L19.9 17L16.3 17.8L14.4 21L11 19.55L7.6 21ZM9.95 14.05L15.6 8.4L14.2 6.95L9.95 11.2L7.8 9.1L6.4 10.5L9.95 14.05Z" fill="#00175D"/>
+            </svg> 
+          </div>
+          <div class="texto-bonificacao">
+            <p>Apto para <strong>bonificação - {{ resultado.nivel }}</strong></p>
+            <p><span>Saiba mais
+              <div class="tooltip-bonificacao">
+                <p>Para um funcionairuz estar apto
+                  à uma bonificação, é necessário
+                  ter passado por 2 (duas) avaliações ouro ou diamante consecutivas, e apresentar absenteísmo Bom ou Muito Bom. Para mais informações, consulte nosso <a href="https://d335luupugsy2.cloudfront.net/cms%2Ffiles%2F42350%2F1712154011Nairuz_Plano_de_Carreira_2024_1.pdf?utm_campaign=avaliacao_de_desempenho_-_abril24&utm_medium=email&utm_source=RD+Station">Plano de Carreira</a>.</p>
+              </div>
+            </span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #notAptoBonificacao>
+      <div class="resultado-nao-apto bonificacao">
+        <div class="icone-bonificacao">
+          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 15.5H11V9.5H9V15.5ZM10 7.5C10.2833 7.5 10.5208 7.40417 10.7125 7.2125C10.9042 7.02083 11 6.78333 11 6.5C11 6.21667 10.9042 5.97917 10.7125 5.7875C10.5208 5.59583 10.2833 5.5 10 5.5C9.71667 5.5 9.47917 5.59583 9.2875 5.7875C9.09583 5.97917 9 6.21667 9 6.5C9 6.78333 9.09583 7.02083 9.2875 7.2125C9.47917 7.40417 9.71667 7.5 10 7.5ZM10 20.5C8.61667 20.5 7.31667 20.2375 6.1 19.7125C4.88333 19.1875 3.825 18.475 2.925 17.575C2.025 16.675 1.3125 15.6167 0.7875 14.4C0.2625 13.1833 0 11.8833 0 10.5C0 9.11667 0.2625 7.81667 0.7875 6.6C1.3125 5.38333 2.025 4.325 2.925 3.425C3.825 2.525 4.88333 1.8125 6.1 1.2875C7.31667 0.7625 8.61667 0.5 10 0.5C11.3833 0.5 12.6833 0.7625 13.9 1.2875C15.1167 1.8125 16.175 2.525 17.075 3.425C17.975 4.325 18.6875 5.38333 19.2125 6.6C19.7375 7.81667 20 9.11667 20 10.5C20 11.8833 19.7375 13.1833 19.2125 14.4C18.6875 15.6167 17.975 16.675 17.075 17.575C16.175 18.475 15.1167 19.1875 13.9 19.7125C12.6833 20.2375 11.3833 20.5 10 20.5Z" fill="#1C1B1F"/>
+          </svg>  
+        </div>
+        <div class="texto-bonificacao">
+          <p>Não apto para <strong>bonificação</strong></p>
+          <p><span>Saiba mais
+            <div class="tooltip-bonificacao">
+              <p>Para um funcionairuz estar apto
+                à uma bonificação, é necessário
+                ter passado por 2 (duas) avaliações ouro ou diamante consecutivas, e apresentar absenteísmo Bom ou Muito Bom. Para mais informações, consulte nosso <a href="https://d335luupugsy2.cloudfront.net/cms%2Ffiles%2F42350%2F1712154011Nairuz_Plano_de_Carreira_2024_1.pdf?utm_campaign=avaliacao_de_desempenho_-_abril24&utm_medium=email&utm_source=RD+Station">Plano de Carreira</a>.</p>
+            </div>
+          </span></p>
+        </div>
+      </div>
+    </ng-template>
+
+
   </div>
   <div *ngIf="historicoAvaliacoes && historicoAvaliacoes.length < 4">
     <p>É necessário pelo menos 4 avaliações para avaliar o nível do funcionairuz.</p>

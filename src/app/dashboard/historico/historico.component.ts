@@ -21,6 +21,7 @@ export class HistoricoComponent implements OnInit {
   filteredUsers: any[] = [];
   isAdmin: boolean = false;
   exibirDetalhes = false;
+  aptoPromocao: boolean = false;
 
   constructor(private avaliacoesService: AvaliacoesService, private authService: AuthService, private userService: UserService) { }
 
@@ -29,6 +30,7 @@ export class HistoricoComponent implements OnInit {
     this.getUsers();
     this.getHistoricoAvaliacoes();
   }
+  
 
   checkAuthorization(): void {
     const accessLevel = this.authService.getAccessLevel(); // Método para obter o nível de acesso do usuário
@@ -84,6 +86,7 @@ export class HistoricoComponent implements OnInit {
         (historicoAvaliacoes: any[]) => {
           this.historicoAvaliacoes = historicoAvaliacoes;
           console.log(historicoAvaliacoes);
+          this.verificarAptoPromocao();
         },
         (error: any) => {
           console.error('Erro ao obter histórico de avaliações', error);
@@ -134,66 +137,64 @@ export class HistoricoComponent implements OnInit {
     }
   }
 
-  verificarAptoPromocao(): string {
-    // Verificar se há pelo menos quatro avaliações
+  verificarAptoPromocao(): void {
+    // Inicializa como false
+    this.aptoPromocao = false; 
+  
+    // Verifica se há pelo menos quatro avaliações
     if (this.historicoAvaliacoes && this.historicoAvaliacoes.length >= 4) {
-      // Pegar as quatro últimas avaliações
+      // Pega as quatro últimas avaliações
       const ultimasAvaliacoes = this.historicoAvaliacoes.slice(-4);
   
-      // Verificar se a média individual mínima é 9 nas últimas quatro avaliações
+      // Verifica se a média individual mínima é 9 nas últimas quatro avaliações
       const mediaIndividualApta = ultimasAvaliacoes.every(avaliacao => avaliacao.mediaIndividual >= 9);
   
-      if (mediaIndividualApta) {
-        return 'Sim';
-      }
+      // Atualiza aptoPromocao baseado na média
+      this.aptoPromocao = mediaIndividualApta;
     }
-  
-    return 'Não';
   }
+  
 
-  verificarAptoBonificacao(historicoAvaliacoes: any[]): string {
-    // Verificar se há pelo menos duas avaliações
-    if (historicoAvaliacoes && historicoAvaliacoes.length >= 2) {
-      // Pegar as duas últimas avaliações
-      const ultimasAvaliacoes = historicoAvaliacoes.slice(-2);
-  
-      // Verificar se a média individual mínima é 8 e absenteísmo mínimo é 7 nas últimas duas avaliações
-      const mediaIndividualApta = ultimasAvaliacoes.every(avaliacao => avaliacao.mediaIndividual >= 8);
-      const absenteismoApto = ultimasAvaliacoes.every(avaliacao => {
-        const absenteismoNota = avaliacao.notas.find((nota: any) => nota.nome.includes('Absenteísmo'));
-        return absenteismoNota && absenteismoNota.nota >= 7;
-      });
-  
-      // Verificar se o funcionário é apto para bonificação no nível Ouro
-      if (mediaIndividualApta && absenteismoApto) {
-        // Se tiver nota na médiaIndividual de 8 até menor que 9 em uma das avaliações, ou absenteísmo menor que 10 em uma das avaliações, é apto Ouro
-        const ouro = ultimasAvaliacoes.some(avaliacao => {
-          return avaliacao.mediaIndividual >= 8 && avaliacao.mediaIndividual < 9 ||
-            avaliacao.notas.some((nota: any) => nota.nome.includes('Absenteísmo') && nota.nota < 9);
-        });
-        if (ouro) {
-          return 'Sim - Nível Ouro';
-        }
+ verificarAptoBonificacao(): { apto: boolean; nivel?: string } {
+  // Verificar se há pelo menos duas avaliações
+  if (this.historicoAvaliacoes && this.historicoAvaliacoes.length >= 2) {
+    // Pegar as duas últimas avaliações
+    const ultimasAvaliacoes = this.historicoAvaliacoes.slice(-2);
+
+    // Verificar se a média individual mínima é 8 e absenteísmo mínimo é 7 nas últimas duas avaliações
+    const mediaIndividualApta = ultimasAvaliacoes.every(avaliacao => avaliacao.mediaIndividual >= 8);
+    const absenteismoApto = ultimasAvaliacoes.every(avaliacao => {
+      const absenteismoNota = avaliacao.notas.find((nota: any) => nota.nome.includes('Absenteísmo'));
+      return absenteismoNota && absenteismoNota.nota >= 7;
+    });
+
+    if (mediaIndividualApta && absenteismoApto) {
+      // Verificar nível Ouro
+      const ouro = ultimasAvaliacoes.some(avaliacao => 
+        (avaliacao.mediaIndividual >= 8 && avaliacao.mediaIndividual < 9) ||
+        avaliacao.notas.some((nota: any) => nota.nome.includes('Absenteísmo') && nota.nota < 9)
+      );
+
+      if (ouro) {
+        return { apto: true, nivel: 'Ouro' };
       }
-  
-      // Verificar se o funcionário é apto para bonificação no nível Diamante
-      if (mediaIndividualApta && absenteismoApto) {
-        // Se tiver nota igual ou maior que 9 na médiaIndividual em ambas as avaliações e nota 10 nas duas de absenteísmo, é apto Diamante
-        const diamante = ultimasAvaliacoes.every(avaliacao => {
-          return avaliacao.mediaIndividual >= 9 &&
-            avaliacao.notas.some((nota: any) => nota.nome.includes('Absenteísmo') && nota.nota === 10);
-        });
-        if (diamante) {
-          return 'Sim - Nível Diamante';
-        }
+
+      // Verificar nível Diamante
+      const diamante = ultimasAvaliacoes.every(avaliacao => 
+        (avaliacao.mediaIndividual >= 9 &&
+        avaliacao.notas.some((nota: any) => nota.nome.includes('Absenteísmo') && nota.nota === 10))
+      );
+
+      if (diamante) {
+        return { apto: true, nivel: 'Diamante' };
       }
-  
-      // Caso não seja apto para nenhum nível de bonificação
-      return 'Não';
-    } else {
-      return 'Não apto'; // Não há avaliações suficientes para determinar a aptidão para bonificação
     }
+
+    return { apto: false }; // Não apto para bonificação
   }
+  return { apto: false }; // Não há avaliações suficientes
+}
+
 
   downloadRelatorio(avaliacao: any) {
     const doc = new jsPDF();
