@@ -382,5 +382,23 @@ doc.text('Assinatura do Avaliador', 148, posYAssinaturas + 10);
     doc.save('relatorio.pdf');
   }
 
+
+  getNivelDesempenho(nota: number, dataFormatada: string): 'prata' | 'ouro' | 'diamante' {
+  const dataAvaliacao = new Date(dataFormatada.split('/').reverse().join('-'));
+  const dataCorte = new Date('2025-06-10');
+
+  if (dataAvaliacao < dataCorte) {
+    // Regra antiga
+    if (nota >= 9) return 'diamante';
+    if (nota >= 8) return 'ouro';
+    return 'prata';
+  } else {
+    // Regra nova
+    if (nota >= 9.5) return 'diamante';
+    if (nota >= 8) return 'ouro';
+    return 'prata';
+  }
+}
+
   
 }
