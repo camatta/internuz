@@ -20,8 +20,11 @@ export class HistoricoComponent implements OnInit {
   liderTeam: string = '';
   filteredUsers: any[] = [];
   isAdmin: boolean = false;
-  exibirDetalhes = false;
-  aptoPromocao: boolean = false;
+  avaliacoesPositivasResumo: string = '';
+  aptoParaPromocao: 'Sim' | 'Não' = 'Não';
+  mediaSemestralIndividual: number = 0;
+  mediaSemestralAbsenteismo: number = 0;
+
 
   constructor(private avaliacoesService: AvaliacoesService, private authService: AuthService, private userService: UserService) { }
 
@@ -65,7 +68,7 @@ export class HistoricoComponent implements OnInit {
   }
 
   removeDevTesteUser(): void {
-    this.filteredUsers = this.filteredUsers.filter(user => user.name !== 'Dev Nairuz');
+    this.filteredUsers = this.filteredUsers.filter(user => user.name !== 'Dev Nairuz'); 
   }
 
   sortUsersAlphabetically(): void {
@@ -85,8 +88,8 @@ export class HistoricoComponent implements OnInit {
       this.avaliacoesService.getHistoricoAvaliacoesPorUsuario(usuario).subscribe(
         (historicoAvaliacoes: any[]) => {
           this.historicoAvaliacoes = historicoAvaliacoes;
+          this.atualizarResumoAvaliacoesPositivas();
           console.log(historicoAvaliacoes);
-          this.verificarAptoPromocao();
         },
         (error: any) => {
           console.error('Erro ao obter histórico de avaliações', error);
@@ -98,6 +101,7 @@ export class HistoricoComponent implements OnInit {
       this.avaliacoesService.getHistoricoAvaliacoesPorUsuario(usuarioLogado).subscribe(
         (historicoAvaliacoes: any[]) => {
           this.historicoAvaliacoes = historicoAvaliacoes;
+          this.atualizarResumoAvaliacoesPositivas();
           console.log(historicoAvaliacoes);
         },
         (error: any) => {
@@ -107,6 +111,7 @@ export class HistoricoComponent implements OnInit {
     }
   }
 
+  // Função para extrair a nota de absenteísmo de cada avaliação e mostrar em cada card
   getAbsenteismo(avaliacao: any): string {
     if (avaliacao && avaliacao.notas) {
       const absenteismoNota = avaliacao.notas.find((nota: any) => nota.nome.includes('Absenteísmo'));
@@ -116,84 +121,101 @@ export class HistoricoComponent implements OnInit {
     }
   }
 
-  calcularPerformance(): string {
-    if (this.historicoAvaliacoes.length < 4) {
-      return 'É necessário pelo menos 4 avaliações para avaliar o nível do funcionário.';
-    }
 
-    let somaMediaIndividual = 0;
-    for (let avaliacao of this.historicoAvaliacoes) {
-      somaMediaIndividual += avaliacao.mediaIndividual;
-    }
+getNivelDesempenho(nota: number, dataFormatada: string): 'prata' | 'ouro' | 'diamante' {
+  const dataAvaliacao = new Date(dataFormatada.split('/').reverse().join('-'));
+  const dataCorte = new Date('2025-06-10');
 
-    const mediaPerformance = somaMediaIndividual / this.historicoAvaliacoes.length;
-
-    if (mediaPerformance >= 9) {
-      return 'Diamante';
-    } else if (mediaPerformance >= 8) {
-      return 'Ouro';
-    } else {
-      return 'Prata';
-    }
+  if (dataAvaliacao < dataCorte) {
+    // Regra antiga
+    if (nota >= 9) return 'diamante';
+    if (nota >= 8) return 'ouro';
+    return 'prata';
+  } else {
+    // Regra nova
+    if (nota >= 9.5) return 'diamante';
+    if (nota >= 8) return 'ouro';
+    return 'prata';
   }
-
-  verificarAptoPromocao(): void {
-    // Inicializa como false
-    this.aptoPromocao = false; 
-  
-    // Verifica se há pelo menos quatro avaliações
-    if (this.historicoAvaliacoes && this.historicoAvaliacoes.length >= 4) {
-      // Pega as quatro últimas avaliações
-      const ultimasAvaliacoes = this.historicoAvaliacoes.slice(-4);
-  
-      // Verifica se a média individual mínima é 9 nas últimas quatro avaliações
-      const mediaIndividualApta = ultimasAvaliacoes.every(avaliacao => avaliacao.mediaIndividual >= 9);
-  
-      // Atualiza aptoPromocao baseado na média
-      this.aptoPromocao = mediaIndividualApta;
-    }
-  }
-  
-
- verificarAptoBonificacao(): { apto: boolean; nivel?: string } {
-  // Verificar se há pelo menos duas avaliações
-  if (this.historicoAvaliacoes && this.historicoAvaliacoes.length >= 2) {
-    // Pegar as duas últimas avaliações
-    const ultimasAvaliacoes = this.historicoAvaliacoes.slice(-2);
-
-    // Verificar se a média individual mínima é 8 e absenteísmo mínimo é 7 nas últimas duas avaliações
-    const mediaIndividualApta = ultimasAvaliacoes.every(avaliacao => avaliacao.mediaIndividual >= 8);
-    const absenteismoApto = ultimasAvaliacoes.every(avaliacao => {
-      const absenteismoNota = avaliacao.notas.find((nota: any) => nota.nome.includes('Absenteísmo'));
-      return absenteismoNota && absenteismoNota.nota >= 7;
-    });
-
-    if (mediaIndividualApta && absenteismoApto) {
-      // Verificar nível Ouro
-      const ouro = ultimasAvaliacoes.some(avaliacao => 
-        (avaliacao.mediaIndividual >= 8 && avaliacao.mediaIndividual < 9) ||
-        avaliacao.notas.some((nota: any) => nota.nome.includes('Absenteísmo') && nota.nota < 9)
-      );
-
-      if (ouro) {
-        return { apto: true, nivel: 'Ouro' };
-      }
-
-      // Verificar nível Diamante
-      const diamante = ultimasAvaliacoes.every(avaliacao => 
-        (avaliacao.mediaIndividual >= 9 &&
-        avaliacao.notas.some((nota: any) => nota.nome.includes('Absenteísmo') && nota.nota === 10))
-      );
-
-      if (diamante) {
-        return { apto: true, nivel: 'Diamante' };
-      }
-    }
-
-    return { apto: false }; // Não apto para bonificação
-  }
-  return { apto: false }; // Não há avaliações suficientes
 }
+
+atualizarResumoAvaliacoesPositivas(): void {
+  if (!this.historicoAvaliacoes || this.historicoAvaliacoes.length < 4) {
+    this.avaliacoesPositivasResumo = 'O funcionário ainda não foi avaliado pelo menos 4 vezes';
+    this.aptoParaPromocao = 'Não';
+    return;
+  }
+
+  const ultimasAvaliacoes = this.historicoAvaliacoes.slice(-4).reverse(); // da mais recente pra mais antiga
+
+  let consecutivas = 0;
+
+  for (const av of ultimasAvaliacoes) {
+    if (av.mediaIndividual >= 8) {
+      consecutivas++;
+    } else {
+      consecutivas = 0;
+      break;
+    }
+  }
+
+  const total = ultimasAvaliacoes.length;
+  this.avaliacoesPositivasResumo = `${consecutivas}/${total} avaliações Ouro/Diamante consecutivas`;
+
+  this.aptoParaPromocao = consecutivas === 4 ? 'Sim' : 'Não';
+}
+
+
+verificarAptidaoBonificacao(): string {
+  if (!this.historicoAvaliacoes || this.historicoAvaliacoes.length < 2) {
+    this.mediaSemestralIndividual = 0;
+    this.mediaSemestralAbsenteismo = 0;
+    return 'O funcionário precisa realizar no mínimo duas avaliações para bonificação.';
+  }
+
+  const dataCorte = new Date('2025-06-10');
+
+  // Considera apenas as 2 últimas avaliações (semestre)
+  const avaliacoesSemestre = this.historicoAvaliacoes.slice(-2).reverse();
+
+  // Cálculo da média individual
+  const somaIndividuais = avaliacoesSemestre.reduce((soma, av) => soma + av.mediaIndividual, 0);
+  this.mediaSemestralIndividual = parseFloat((somaIndividuais / avaliacoesSemestre.length).toFixed(2));
+
+  // Cálculo da média de absenteísmo
+  let somaAbsenteismo = 0;
+  let contadorAbs = 0;
+
+  for (const av of avaliacoesSemestre) {
+    const absenteismoNota = av.notas?.find((nota: any) => nota.nome.includes('Absenteísmo'));
+    const valor = Number(absenteismoNota?.nota); 
+
+    if (!isNaN(valor)) {
+      somaAbsenteismo += valor;
+      contadorAbs++;
+    }
+  }
+
+  this.mediaSemestralAbsenteismo = contadorAbs > 0
+    ? parseFloat((somaAbsenteismo / contadorAbs).toFixed(2))
+    : 0;
+
+  // Verificação de aptidão com base nessas 2 avaliações
+  for (const av of avaliacoesSemestre) {
+    const data = new Date(av.dataFormatada.split('/').reverse().join('-'));
+    const notaMinima = data < dataCorte ? 9 : 9.5;
+
+    const absenteismoNota = av.notas?.find((nota: any) => nota.nome.includes('Absenteísmo'));
+    const notaAbsenteismo = absenteismoNota ? Number(absenteismoNota.avaliacao) : 0;
+
+    if (av.mediaIndividual < notaMinima || notaAbsenteismo < 7) {
+      return 'Não elegível para bonificação';
+    }
+  }
+
+  return 'Elegível para bonificação';
+}
+
 
 
   downloadRelatorio(avaliacao: any) {
@@ -383,22 +405,6 @@ doc.text('Assinatura do Avaliador', 148, posYAssinaturas + 10);
   }
 
 
-  getNivelDesempenho(nota: number, dataFormatada: string): 'prata' | 'ouro' | 'diamante' {
-  const dataAvaliacao = new Date(dataFormatada.split('/').reverse().join('-'));
-  const dataCorte = new Date('2025-06-10');
-
-  if (dataAvaliacao < dataCorte) {
-    // Regra antiga
-    if (nota >= 9) return 'diamante';
-    if (nota >= 8) return 'ouro';
-    return 'prata';
-  } else {
-    // Regra nova
-    if (nota >= 9.5) return 'diamante';
-    if (nota >= 8) return 'ouro';
-    return 'prata';
-  }
-}
 
   
 }

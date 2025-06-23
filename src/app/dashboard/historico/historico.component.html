@@ -112,3 +112,87 @@
     </div>
   </div>
 </div>
+
+<div class="wrapper-resultados">
+  <div class="resultados">
+    <div class="verificacao-promocao">
+      <div class="wrapper-esquerda-promocao">
+        <div class="svg-seta">
+          <svg width="55" height="31" viewBox="0 0 55 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M25 30L55 30" stroke="black"/>
+          <path d="M25 30V1H0.5" stroke="black"/>
+          </svg>
+        </div>
+        <div class="resposta-avaliacoes-consecutivas">
+          <p>4 avaliações Ouro/Diamante consecutivas? <span>{{ aptoParaPromocao }}</span></p>
+        </div>
+        <div class="contador-avaliacoes-consecutivas">
+          <p class="resumo-avaliacoes">{{ avaliacoesPositivasResumo }}.</p>
+        </div>
+      </div>
+      <div class="wrapper-direita-promocao">
+        <div class="resultado-final-promocao">
+          <p><span class="title-resultado">Resultado</span>
+            <span *ngIf="aptoParaPromocao === 'Sim'">Elegível para promoção.</span>
+            <span *ngIf="aptoParaPromocao !== 'Sim'">Não elegível para promoção.</span>
+          </p>
+        </div>
+      </div>
+     
+     
+    </div>
+
+    <div class="verificacao-bonificacao">
+      <div class="wrapper-esquerda-bonificacao">
+        <div class="svg-seta">
+          <svg width="52" height="62" viewBox="0 0 52 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 1H21V61H0" stroke="black"/>
+          <path d="M21 31L52 31" stroke="black"/>
+          </svg>
+        </div>
+        <div class="media-semestre">
+          <div class="resultado-semestre">
+            <p class="resumo-bonificacao">Média Performance Semestre:
+              <span *ngIf="mediaSemestralIndividual >= 9.5">Diamante</span>
+              <span *ngIf="mediaSemestralIndividual >= 8 && mediaSemestralIndividual < 9.5">Ouro</span>
+              <span *ngIf="mediaSemestralIndividual < 8">Prata</span>
+            </p>
+          </div>
+          <div class="absenteismo-semestre">
+            <p>Absenteísmo:<br>
+              <span *ngIf="mediaSemestralAbsenteismo >= 10">Muito bom</span>
+              <span *ngIf="mediaSemestralAbsenteismo >= 7 && mediaSemestralAbsenteismo < 10">Bom</span>
+              <span *ngIf="mediaSemestralAbsenteismo >= 5 && mediaSemestralAbsenteismo < 7">Regular</span>
+              <span *ngIf="mediaSemestralAbsenteismo >= 0 && mediaSemestralAbsenteismo < 5">Insatisfatório</span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="wrapper-direita-promocao">
+        <div class="resultado-final-promocao">
+          <p><span class="title-resultado">Resultado</span>
+            {{ verificarAptidaoBonificacao() }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="infos-requisitos">
+    <div class="link-requisitos">
+      <p>Confira todos os requisitos <a href="https://nairuzcombr-my.sharepoint.com/:p:/g/personal/othavio_almeida_nairuz_com_br/EeBm6FYZVbpMpn6rm9BwXkIBYaBDSwec-Nrqk47zNUUgPA?e=U10MAI" target="_blank">aqui</a><svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.3181 7.11061L0.592285 6.38479L5.56934 1.40774H1.11073V0.37085H7.33204V6.59216H6.29516V2.13356L1.3181 7.11061Z" fill="#1C1B1F"/>
+        </svg>
+      </p>
+    </div>
+    <div class="aviso-central-fluxo-caixa">
+      <p>*OBS: A promoção e a bonificação depende do fluxo de caixa da empresa. </p>
+    </div>
+    <div class="aviso-tabela">
+      <p>Confira a tabela de bonificação <a href="https://nairuzcombr-my.sharepoint.com/:p:/g/personal/othavio_almeida_nairuz_com_br/EeBm6FYZVbpMpn6rm9BwXkIBYaBDSwec-Nrqk47zNUUgPA?e=U10MAI" target="_blank">aqui</a><svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.3181 7.11061L0.592285 6.38479L5.56934 1.40774H1.11073V0.37085H7.33204V6.59216H6.29516V2.13356L1.3181 7.11061Z" fill="#1C1B1F"/>
+        </svg>
+      </p>
+    </div>
+  </div>
+</div>

@@ -455,6 +455,125 @@ p strong {
   display: none;
 }
 
+.wrapper-resultados {
+  padding-bottom: 3rem;
+  padding-top: 26px;
+  border-top: 1px solid #ECECEC;
+}
+
+.resposta-avaliacoes-consecutivas,
+.resultado-semestre,
+.absenteismo-semestre {
+  background-color: #6411C608;
+  padding: 8px 16px;
+  border: 1px dashed #6411C6;
+  border-radius: 4px;
+  max-width: 278px;
+  margin-bottom: 8px;
+}
+
+.resposta-avaliacoes-consecutivas p,
+.resultado-semestre p,
+.absenteismo-semestre p {
+  margin: 0;
+}
+
+.contador-avaliacoes-consecutivas {
+  background-color: #fff;
+  padding: 8px 16px;
+  border: 1px dashed #ECECEC;
+  border-radius: 4px;
+  max-width: 278px;
+}
+
+.contador-avaliacoes-consecutivas p {
+  margin: 0;
+}
+
+.verificacao-promocao,
+.verificacao-bonificacao {
+  display: flex;
+  align-items: center;
+  gap: 53px;
+}
+
+
+.resultado-final-promocao {
+  background-color: #00175D;
+  border-bottom-left-radius: 16px;
+  border-top-right-radius: 16px;
+  padding: 10px 30px;
+  width: 300px;
+}
+
+.resultado-final-promocao p {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+.resultado-final-promocao p span.title-resultado {
+  font-weight: 700 !important;
+  font-size: 14px;
+  color: #61DCAB;
+}
+
+.resultado-final-promocao p strong {
+  font-weight: 700;
+  color: #fff;
+}
+
+.resultado-final-promocao p span {
+  color: #fff;
+  font-weight: 400 !important;
+}
+
+.resultados {
+  margin-bottom: 39px;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.wrapper-esquerda-promocao,
+.wrapper-esquerda-bonificacao {
+  position: relative;
+}
+
+.wrapper-esquerda-promocao .svg-seta,
+.wrapper-esquerda-bonificacao .svg-seta {
+    position: absolute;
+    right: -3.3rem;
+    top: 32px;
+}
+
+.infos-requisitos {
+  display: flex;
+  justify-content: space-between;
+  background-color: #F3F3F3;
+  padding: 6px 16px;
+}
+
+.infos-requisitos p {
+  margin-bottom: 0;
+  font-weight: 400;
+  font-size: 12px;
+  color: #000;
+}
+
+.infos-requisitos p a {
+  font-weight: 700;
+  color: #000;
+  text-decoration: underline;
+}
+
+.infos-requisitos p svg {
+  position: relative;
+  left: 5px;
+  bottom: 1px;
+}
+
 @media only screen and (max-width: 1440px) {
 
   .wrapper-historico {
