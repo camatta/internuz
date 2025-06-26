@@ -209,11 +209,11 @@ verificarAptidaoBonificacao(): string {
     const notaAbsenteismo = absenteismoNota ? Number(absenteismoNota.avaliacao) : 0;
 
     if (av.mediaIndividual < notaMinima || notaAbsenteismo < 7) {
-      return 'Não elegível para bonificação';
+      return 'Não elegível para bonificação.';
     }
   }
 
-  return 'Elegível para bonificação';
+  return 'Elegível para bonificação.';
 }
 
 
