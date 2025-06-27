@@ -48,6 +48,7 @@ const userSchema = new mongoose.Schema ({
   nivel: {
     type: String,
     required: false,
+    default: 'prata',
   },
 });
 

@@ -169,6 +169,16 @@ app.get('/api/avaliacoes', async (req, res) => {
   }
 });
 
+app.get('/api/avaliacoes/count', async (req, res) => {
+  try {
+    const count = await Avaliacao.countDocuments();
+    res.status(200).json({ count });
+  } catch (error) {
+    console.error('Erro ao contar avaliações:', error);
+    res.status(500).json({ message: 'Erro ao contar avaliações' });
+  }
+});
+
 // Rota de Cadastro
 app.post('/api/auth/cadastro', async (req, res) => {
   try {
@@ -362,6 +372,7 @@ app.get('/api/autoavaliacoes', async (req, res) => {
   }
 });
 
+
 const distFolder = path.join(process.cwd(), '/dist/nairuz');
 
 app.get('*.*', express.static(distFolder, {
@@ -371,6 +382,8 @@ app.get('*.*', express.static(distFolder, {
 app.use("*", function(req, resp) {
   resp.sendFile(__dirname + '/dist/nairuz/index.html');
 });
+
+
 
 // Inicialização do servidor
 const port = process.env['PORT'] || 3000;

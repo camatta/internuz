@@ -3,20 +3,21 @@
 <div class="piramide">
   <div class="notas">
     <div class="diamante">
-      <p>6</p>
+      <p>{{ totalDiamante }}</p>
     </div>
     <div class="ouro">
-      <p>9</p>
+      <p>{{ totalOuro }}</p>
     </div>
     <div class="prata">
-      <p>15</p>
+      <p>{{ totalPrata }}</p>
     </div>
   </div>
   <img src="../../../assets/images/nairuz/piramide-de-nairuz.png" alt="Pirâmide de Nairuz">
 </div>
 
 <div class="legenda">
-  <p><strong>Diamante: </strong>igual ou maior que 9,00 - 6 Funcionairuz</p>
-  <p><strong>Ouro: </strong>entre 8,00 e 8,99 - 9 Funcionairuz</p>
-  <p><strong>Prata: </strong>de 0 até 7,99 - 15 Funcionairuz</p>
+  <p><strong>Diamante: </strong>igual ou maior que 9,5 - {{ totalDiamante }} Funcionairuz</p>
+  <p><strong>Ouro: </strong>entre 8,00 e 9,4 - {{ totalOuro }} Funcionairuz</p>
+  <p><strong>Prata: </strong>de 0 até 7,99 - {{ totalPrata }} Funcionairuz</p>
+  <p class="obs-data">A nova regra de nível foi atualizada e está vigente desde <strong>Julho de 2025</strong>.</p>
 </div>

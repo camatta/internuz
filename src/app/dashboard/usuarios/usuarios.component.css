@@ -180,3 +180,7 @@ tbody td.editar-funcionairuz {
 .form-switch .form-check-input:focus {
   box-shadow: none;
 }
+
+.nivel-funcionario {
+  text-transform: capitalize;
+}

@@ -26,11 +26,11 @@
           Função 
           <span>{{ sortField === 'funcao' && sortDirection === 'asc' ? '▲' : '▼' }}</span>
         </th>
-        <th (click)="sortUsers('accessLevel')">
+        <th *ngIf="selectedTab === 'ativos'" (click)="sortUsers('accessLevel')">
           Permissão 
           <span>{{ sortField === 'accessLevel' && sortDirection === 'asc' ? '▲' : '▼' }}</span>
         </th>
-        <th (click)="sortUsers('nivel')">
+        <th *ngIf="selectedTab === 'ativos'" (click)="sortUsers('nivel')">
           Nível Atual 
           <span>{{ sortField === 'nivel' && sortDirection === 'asc' ? '▲' : '▼' }}</span>
         </th>
@@ -44,7 +44,7 @@
           <!-- <td class="setor-funcionario">{{ user.setorTratado }}</td> -->
           <td class="funcao-funcionario">{{ user.funcao }}</td>
           <td class="permissao-funcionario">{{ user.accessLevel }}</td>
-          <td class="permissao-funcionario">Diamante</td>
+          <td class="nivel-funcionario">{{ user.nivel || 'N/A' }}</td>
           <td class="editar-funcionario">
             <span class="edit-icon" (click)="openEditUserModal(user)">
               <i class="fa-solid fa-pen"></i>
@@ -56,9 +56,8 @@
         <tr *ngFor="let user of usersInativos">
           <td class="nome-funcionario">{{ user.name }}</td>
           <td class="time-funcionario">{{ user.team }}</td>
-          <td class="setor-funcionario">{{ user.setorTratado }}</td>
+          <!-- <td class="setor-funcionario">{{ user.setorTratado }}</td> -->
           <td class="funcao-funcionario">{{ user.funcao }}</td>
-          <td class="permissao-funcionario">{{ user.accessLevel }}</td>
           <td class="editar-funcionario">
             <span class="edit-icon" (click)="openEditUserModal(user)">
               <i class="fa-solid fa-pen"></i>

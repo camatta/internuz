@@ -136,7 +136,7 @@ updateUserInList(updatedUser: any) {
   ngOnInit(): void {
     this.userService.getUsers().subscribe(
       (data) => {
-        this.users = data;
+        this.users = data.filter(user => user.name !== 'Dev Nairuz'); // Remove o usuário de teste
         this.updateUsersStatusArrays(); // Inicializa os arrays de usuários ativos e inativos
       },
       (error) => {
