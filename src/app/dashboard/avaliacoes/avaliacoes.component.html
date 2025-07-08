@@ -200,11 +200,19 @@
             </td>
             <td>
               <select [(ngModel)]="item.avaliacao" (ngModelChange)="calculateGrade(item)">
-                <option value="Muito Bom">Muito Bom</option>
-                <option value="Bom">Bom</option>
-                <option value="Regular">Regular</option>
-                <option value="Insatisfatório">Insatisfatório</option>
-                <option value="Não Consta">Não Consta</option>
+                <ng-container [ngSwitch]="item.requisito">
+                  <ng-container *ngSwitchCase="'Individual'">
+                    <option value="Satisfatório">Satisfatório</option>
+                    <option value="Insatisfatório">Insatisfatório</option>
+                  </ng-container>
+                  <ng-container *ngSwitchDefault>
+                    <option value="Muito Bom">Muito Bom</option>
+                    <option value="Bom">Bom</option>
+                    <option value="Regular">Regular</option>
+                    <option value="Insatisfatório">Insatisfatório</option>
+                    <option value="Não Consta">Não Consta</option>
+                  </ng-container>
+                </ng-container>
               </select>
             </td>
 
@@ -245,13 +253,34 @@
         <tr *ngFor="let item of items; let i = index">
           <ng-container *ngIf="item.tipo === 'individual'">
             <td class="avaliacao-nome">{{ item.nome }}</td>
-            <td name="requisito" class="hidden">{{ item.requisito }}</td>
+            <td *ngIf="item.requisito !== 'Individual'; else hiddenRequisito">
+              <select id="requisito" name="requisito" [(ngModel)]="item.requisito" (change)="calculateGrade(item)">
+                <option value="Obrigatório">Obrigatório</option>
+                <option value="Diferencial">Diferencial</option>
+                <option value="Desejado">Desejado</option>
+              </select>
+            </td>
+            <ng-template #hiddenRequisito>
+              <td name="requisito" class="hidden">{{ item.requisito }}</td>
+            </ng-template>
               <td>
                 <select [(ngModel)]="item.avaliacao" (ngModelChange)="calculateGrade(item)">
-                  <option value="Satisfatório">Satisfatório</option>
-                  <option value="Insatisfatório">Insatisfatório</option>
+                  <ng-container [ngSwitch]="item.requisito">
+                    <ng-container *ngSwitchCase="'Individual'">
+                      <option value="Satisfatório">Satisfatório</option>
+                      <option value="Insatisfatório">Insatisfatório</option>
+                    </ng-container>
+                    <ng-container *ngSwitchDefault>
+                      <option value="Muito Bom">Muito Bom</option>
+                      <option value="Bom">Bom</option>
+                      <option value="Regular">Regular</option>
+                      <option value="Insatisfatório">Insatisfatório</option>
+                      <option value="Não Consta">Não Consta</option>
+                    </ng-container>
+                  </ng-container>
                 </select>
               </td>
+
 
               <td>
                 <!-- Itera sobre cada nota dentro da array de notas da última autoavaliação -->
