@@ -1541,7 +1541,6 @@ export class AutoavaliacaoComponent implements OnInit {
       { tipo: 'individual', nome: 'Habilidade para resolver problemas de forma eficaz', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'individual', nome: 'Capacidade de influenciar e engajar equipes', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'individual', nome: 'Flexibilidade para se adaptar a mudanças e novas demandas do negócio', requisito: 'Obrigatório', peso: 'A', },
-      { tipo: 'individual', nome: 'Novo', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'time', nome: 'Churn rate - Tecnologia', requisito: 'Indispensável', peso: 'B', },
       { tipo: 'time', nome: 'NPS - Atendimento em Tecnologia', requisito: 'Indispensável', peso: 'B', },
       { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
