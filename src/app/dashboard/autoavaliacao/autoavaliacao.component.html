@@ -182,3 +182,22 @@
 <div *ngIf="!isAuthorized">
     <p>Administradores e Líderes de Equipe não precisam realizar a autoavaliação.</p>
 </div>
+
+<!-- Modal de Sucesso -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="successModalLabel">Autoavaliação Enviada</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        Sua autoavaliação foi enviada com sucesso!
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-success" (click)="fecharModal()">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+

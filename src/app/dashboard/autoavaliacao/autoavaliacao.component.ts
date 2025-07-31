@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { AutoavaliacaoService } from 'src/app/services/autoavaliacao.service';
 import { Router } from '@angular/router';
+import { Modal } from 'bootstrap';
 
 @Component({
   selector: 'app-autoavaliacao',
@@ -99,14 +100,6 @@ export class AutoavaliacaoComponent implements OnInit {
       { tipo: 'individual', nome: 'Acuracidade no registro de ponto', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Cumprimento de prazos', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'SLA Chamados', requisito: 'Individual', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Tecnologia', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Tecnologia', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'SLA Chamados', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Margem de Lucro', requisito: 'Indispensável', peso: 'C', },
     ],
     DesignUIUX: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -181,14 +174,6 @@ export class AutoavaliacaoComponent implements OnInit {
       { tipo: 'individual', nome: 'Acuracidade no registro de ponto', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Cumprimento de prazos', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'SLA Chamados', requisito: 'Individual', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Tecnologia', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Tecnologia', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'SLA Chamados', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Margem de Lucro', requisito: 'Indispensável', peso: 'C', },
     ],
     CS: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -268,18 +253,6 @@ export class AutoavaliacaoComponent implements OnInit {
       { tipo: 'individual', nome: 'Cumprimento de prazo', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'SLA de resposta interna 24h', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Aprovação de calendário', requisito: 'Individual', peso: 'A', },
-      // { tipo: 'individual', nome: 'Meta de Up Sell', requisito: 'Individual', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Aprovação de calendário', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Resposta NPS  > 70%', requisito: 'Indispensável', peso: 'B', },
-      // { tipo: 'time', nome: 'Meta de Up Sell da equipe', requisito: 'Indispensável', peso: 'B', },
-      // { tipo: 'time', nome: 'Meta de Backlinks da equipe', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Margem de Lucro', requisito: 'Indispensável', peso: 'C', },
     ],
     CSTec: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -360,14 +333,6 @@ export class AutoavaliacaoComponent implements OnInit {
       { tipo: 'individual', nome: 'Cumprimento de prazo contratual dos projetos (go-live)', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'SLA de resposta interna 24h', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Resposta NPS > 70%', requisito: 'Individual', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Tecnologia', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Tecnologia', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'SLA Chamados', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Margem de Lucro', requisito: 'Indispensável', peso: 'C', },
     ],
     Vendas: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -440,11 +405,6 @@ export class AutoavaliacaoComponent implements OnInit {
       { tipo: 'individual', nome: 'Taxa de conversão de 25%', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Acuracidade no registro de ponto', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Manter o CRM atualizado em todas as etapas do funil', requisito: 'Individual', peso: 'A', },
-      { tipo: 'time', nome: 'Meta do time de contratos fechados para as esteiras da empresa', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'SLA de resposta dos Suspects 1 dia útil para agendamento de reuniões', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Margem de Lucro', requisito: 'Indispensável', peso: 'C', },
     ],
     PreVendas: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -529,10 +489,6 @@ export class AutoavaliacaoComponent implements OnInit {
       { tipo: 'individual', nome: 'Manter o CRM atualizado nas etapas correspondentes ao Pré Vendas', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Manter a planilha de controle de OPS atualizada da entrada do suspect ao agendamento', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Dar lost  nos Suspect do canal marketing como não consegui qualificar, apenas após 5 dias úteis de tentativas e ter realizado o seguinte fluxo: 1 tentativa de ligação e 1 whatsapp depois do meio dia + 1 tentativa de contato e +1 Whatsapp', requisito: 'Individual', peso: 'A', },
-      { tipo: 'time', nome: 'Meta do time de contratos fechados para as esteiras da empresa', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Margem de Lucro', requisito: 'Indispensável', peso: 'C', },
     ],
     Redacao: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -612,15 +568,6 @@ export class AutoavaliacaoComponent implements OnInit {
       { tipo: 'individual', nome: 'Tempo de produção', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Média de aprovação', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Cumprimento de prazo', requisito: 'Individual', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Média de aprovação', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Tempo de produção', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazo', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Margem de Lucro', requisito: 'Indispensável', peso: 'C', },
     ],
     MidiasPagas: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -698,14 +645,6 @@ export class AutoavaliacaoComponent implements OnInit {
       { tipo: 'individual', nome: 'Atingimento dos objetivos da carteira', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Assertividade de projeção', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Cumprimento de prazo', requisito: 'Individual', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Atingimento dos objetivos da carteira', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Margem de Lucro', requisito: 'Indispensável', peso: 'C', },
     ],
     MidiasSociais: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -791,15 +730,6 @@ export class AutoavaliacaoComponent implements OnInit {
       { tipo: 'individual', nome: 'Tempo de produção', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Média de aprovação', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Cumprimento de prazos', requisito: 'Individual', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Média de aprovação', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Tempo de produção', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Margem de Lucro', requisito: 'Indispensável', peso: 'C', },
     ],
     InboundMarketing: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -872,16 +802,6 @@ export class AutoavaliacaoComponent implements OnInit {
       { tipo: 'individual', nome: 'Média de aprovação', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Cumprimento de prazo', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'GDR - RD Station da carteira', requisito: 'Individual', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Tempo de produção', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'time', nome: 'Média de aprovação', requisito: 'Indispensável', peso: 'A', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'GDR - RD Station - Cliente Ativos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Margem de Lucro', requisito: 'Indispensável', peso: 'C', },
     ],
     DesignPublicitario: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -960,15 +880,6 @@ export class AutoavaliacaoComponent implements OnInit {
       { tipo: 'individual', nome: 'Tempo de produção', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Média de aprovação', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Cumprimento de prazo', requisito: 'Individual', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Design', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Média de aprovação', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Tempo de produção', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Margem de Lucro', requisito: 'Indispensável', peso: 'C', },
     ],
     TeamLeaderUIUX: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -1052,14 +963,6 @@ export class AutoavaliacaoComponent implements OnInit {
       { tipo: 'individual', nome: 'Acuracidade no registro de ponto', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Cumprimento de prazos', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'SLA Chamados', requisito: 'Individual', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Tecnologia', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Tecnologia', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'SLA Chamados', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Margem de Lucro', requisito: 'Indispensável', peso: 'C', },
     ],
     TeamLeaderMarketing: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -1144,14 +1047,6 @@ export class AutoavaliacaoComponent implements OnInit {
       { tipo: 'individual', nome: 'Média de aprovação', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Cumprimento de prazo', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'GDR - RD Station', requisito: 'Individual', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazo', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'GDR - RD Station', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Margem de Lucro', requisito: 'Indispensável', peso: 'C', },
     ],
     TeamLeaderDesignPublicitario: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -1239,15 +1134,6 @@ export class AutoavaliacaoComponent implements OnInit {
       { tipo: 'individual', nome: 'Tempo de produção', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Média de aprovação', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Cumprimento de prazo', requisito: 'Individual', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Design', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Média de aprovação', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Tempo de produção', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Margem de Lucro', requisito: 'Indispensável', peso: 'C', },
     ],
     HeadMarketing: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -1338,17 +1224,6 @@ export class AutoavaliacaoComponent implements OnInit {
       { tipo: 'individual', nome: 'Utilizar dados concretos para tomar decisões que melhorem a satisfação do cliente e o sucesso da empresa', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'individual', nome: 'Assegurar que todos os processos e ferramentas estejam sendo utilizados de maneira eficiente e atualizada', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'individual', nome: 'Certificar-se de que toda a equipe tenha as habilidades necessárias para utilizar as ferramentas corretamente e de forma eficiente', requisito: 'Obrigatório', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Marketing', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazo', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Atingimento dos objetivos da carteira (metas clientes)', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Burndown - Redação', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Burndown - Inbound', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Backlinks SEO', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Margem de Lucro', requisito: 'Indispensável', peso: 'C', },
     ],
     HeadDesign: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -1440,13 +1315,6 @@ export class AutoavaliacaoComponent implements OnInit {
       { tipo: 'individual', nome: 'Aplicar as melhores práticas de design e UX/UI, incorporando inovações tecnológicas no trabalho da equipe e garantindo que a empresa se mantenha competitiva', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'individual', nome: 'Desenvolver e motivar a equipe, colaborando ativamente na gestão de talentos e no desenvolvimento do time', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'individual', nome: 'Manter um acompanhamento constante sobre o desempenho da área, promovendo ajustes contínuos nas estratégias de design', requisito: 'Obrigatório', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Design', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Design', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Margem de Lucro', requisito: 'Indispensável', peso: 'C', },
     ],
     PMO: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
@@ -1541,16 +1409,6 @@ export class AutoavaliacaoComponent implements OnInit {
       { tipo: 'individual', nome: 'Habilidade para resolver problemas de forma eficaz', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'individual', nome: 'Capacidade de influenciar e engajar equipes', requisito: 'Obrigatório', peso: 'A', },
       { tipo: 'individual', nome: 'Flexibilidade para se adaptar a mudanças e novas demandas do negócio', requisito: 'Obrigatório', peso: 'A', },
-      { tipo: 'time', nome: 'Churn rate - Tecnologia', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'NPS - Atendimento em Tecnologia', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Alocação de horas time', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazos', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'SLA Chamados', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Cumprimento de prazo contratual dos projetos (go-live)', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'time', nome: 'Resposta NPS > 70%', requisito: 'Indispensável', peso: 'B', },
-      { tipo: 'empresa', nome: 'MRR (Monthly Recurring Revenue)', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Churn Rate - Geral', requisito: 'Indispensável', peso: 'C', },
-      { tipo: 'empresa', nome: 'Margem de Lucro', requisito: 'Indispensável', peso: 'C', },
     ],
     // Outros times e seus respectivos itens
   };
@@ -1642,6 +1500,16 @@ export class AutoavaliacaoComponent implements OnInit {
             break;
         }
         break;
+        case 'Individual':
+          switch (item.avaliacao) {
+            case 'Satisfatório':
+              item.nota = 10;
+              break;
+            case 'Insatisfatório':
+              item.nota = -10;
+              break;
+          }
+        break;
     }
 
     this.updateAvaliacaoNotas();
@@ -1651,24 +1519,18 @@ export class AutoavaliacaoComponent implements OnInit {
   }
 
   enviarAutoAvaliacao(): void {
-
-
     const todosRequisitosSelecionados = this.itemsPorTime[this.setorFuncionario].every(item => item.avaliacao);
 
-    // Se algum item não tiver o requisito selecionado, exibe uma mensagem de erro e não envia a avaliação
     if (!todosRequisitosSelecionados) {
       alert('Por favor, selecione a nota para todos os itens antes de enviar a avaliação.');
       return;
     }
 
-  // Formatar data para padrão brasileiro
-  const dataAtual = new Date();
-  const dia = dataAtual.getDate();
-  const mes = dataAtual.getMonth() + 1;
-  const ano = dataAtual.getFullYear();
-
-  const dataFormatada = `${dia}/${mes}/${ano}`;
-
+    const dataAtual = new Date();
+    const dia = dataAtual.getDate();
+    const mes = dataAtual.getMonth() + 1;
+    const ano = dataAtual.getFullYear();
+    const dataFormatada = `${dia}/${mes}/${ano}`;
 
     const dadosAutoavaliacao = {
       funcionario: this.authService.getUserName(),
@@ -1684,12 +1546,32 @@ export class AutoavaliacaoComponent implements OnInit {
     this.autoavaliacaoService.enviarAutoavaliacao(dadosAutoavaliacao).subscribe(
       (response: any) => {
         console.log('Autoavaliação enviada com sucesso!');
-        alert('Avaliação Enviada com Sucesso');
-        this.router.navigate(['/dashboard']);
+
+        const modalElement = document.getElementById('successModal');
+        if (modalElement) {
+          const modalInstance = new Modal(modalElement);
+          modalInstance.show();
+        }
       },
       (error: any) => {
         console.error('Erro ao enviar autoavaliação', error);
       }
     );
+    
   }
+
+  fecharModal(): void {
+  const modalElement = document.getElementById('successModal');
+  if (modalElement) {
+    const modalInstance = Modal.getInstance(modalElement);
+    if (modalInstance) {
+      modalInstance.hide();
+    }
+  }
+
+  this.router.navigate(['/dashboard']);
+}
+
+
+
 }

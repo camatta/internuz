@@ -153,6 +153,23 @@ h1 {
     font-weight: 600;
   }
 
+  #successModal {
+  z-index: 1060 !important;
+}
+
+.modal-backdrop.show {
+  display: none !important;
+}
+
+.bg-success {
+    background-color: rgb(97 220 171) !important;
+}
+
+.modal-footer .btn-sucess {
+  background-color: rgb(97 220 171) !important;
+  border: rgb(97 220 171) !important;
+}
+
   @media only screen and (max-width: 1440px) {
 
     td {

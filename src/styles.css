@@ -57,6 +57,24 @@ p {
   font-size: 14px;
 }
 
+
+#successModal {
+  z-index: 1060 !important;
+}
+
+.modal-backdrop.show {
+  display: none !important;
+}
+
+.bg-success {
+    background-color: rgb(97 220 171) !important;
+}
+
+.modal-footer .btn-success {
+  background-color: rgb(97 220 171) !important;
+  border: rgb(97 220 171) !important;
+}
+
 .progress-bar {
   background-color: #00175d;
 }
