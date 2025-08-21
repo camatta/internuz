@@ -253,6 +253,7 @@ export class AutoavaliacaoComponent implements OnInit {
       { tipo: 'individual', nome: 'Cumprimento de prazo', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'SLA de resposta interna 24h', requisito: 'Individual', peso: 'A', },
       { tipo: 'individual', nome: 'Aprovação de calendário', requisito: 'Individual', peso: 'A', },
+      { tipo: 'individual', nome: 'Meta de Up Sell', requisito: 'Individual', peso: 'A', },
     ],
     CSTec: [
       { tipo: 'competencia', nome: 'Atualização', requisito: 'Obrigatório', peso: 'A', },
